@@ -50,11 +50,14 @@ class Module {
       format = FileFormat.mybible;
     }
 
-    opendatabase();
+    opendatabase().whenComplete(() {
+      loadDetails();
+    });
+
 //  if !connected { return nil }
   }
 
-  void opendatabase() async {
+  Future<void> opendatabase() async {
     await deleteDatabase(filePath); // always getting a fresh copy from the asset
 
     final exists = await databaseExists(filePath);
@@ -74,10 +77,10 @@ class Module {
     }
 
     database = await openDatabase(filePath, readOnly: true);
-
-    print("***************\n");
     print(filePath);
+  }
 
+  void loadDetails() async {
     final List<Map<String, dynamic>> result = await database!.query("Details");
 
     if (result.isNotEmpty) {
@@ -85,9 +88,6 @@ class Module {
       print(result[0]['Abbreviation']);
       print(result[0]['Information']);
     }
-
-    print(result.length);
-    print("~~~~~~~~~~~~~~~\n\n");
   }
 }
 
