@@ -4,8 +4,6 @@
 // Even on iOS you could write a native plugin that get the asset file path
 // and directly open it in read-only mode. Android does not have such ability.
 
-import 'dart:io';
-import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -48,38 +46,10 @@ class Module {
     if (ext == ".SQLite3") {
       format = FileFormat.mybible;
     }
-
-    opendatabase().whenComplete(() {
-      loadDetails();
-    });
-
-//  if !connected { return nil }
   }
 
   Future<void> opendatabase() async {
-    await deleteDatabase(filePath); // always getting a fresh copy from the asset
-
-    final exists = await databaseExists(filePath);
-
-    if (!exists) {
-      // Make sure the parent directory exists
-      try {
-        await Directory(dirname(filePath)).create(recursive: true);
-      } catch (_) {}
-
-      // Copy from asset
-      ByteData data = await rootBundle.load(join("assets", fileName));
-      List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-      await File(filePath).writeAsBytes(bytes, flush: true);
-    } else {
-      print("Opening existing database");
-    }
-
     database = await openDatabase(filePath, readOnly: true);
-    print(filePath);
-  }
-
-  void loadDetails() async {
     final List<Map<String, dynamic>> result = await database!.query("Details");
 
     if (result.isNotEmpty) {
@@ -87,5 +57,6 @@ class Module {
       print(result[0]['Abbreviation']);
       print(result[0]['Information']);
     }
+    connected = true;
   }
 }
