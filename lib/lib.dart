@@ -11,19 +11,16 @@ void main() async {
   await copyDefaultsFiles();
   final databasesPath = await getDatabasesPath();
   final path = join(databasesPath, fileName);
-  final m = Module(path);
-  await m.opendatabase();
-
-  final c = m.connected;
+  final module = await Module.create(path);
   print("************************");
-  print(c);
+  print(module.connected);
 }
 
 Future<void> copyDefaultsFiles() async {
   final databasesPath = await getDatabasesPath();
   final filePath = join(databasesPath, fileName);
 
-  await deleteDatabase(filePath); // always getting a fresh copy from the asset
+  // await deleteDatabase(filePath); // getting a fresh copy from the asset
   final exists = await databaseExists(filePath);
 
   if (!exists) {

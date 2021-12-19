@@ -35,7 +35,7 @@ class Module {
   bool accented = false;
   bool favorite = true;
 
-  Module(this.filePath) {
+  Module._constructor(this.filePath) {
     fileName = basename(filePath);
     final ext = extension(filePath);
     print(ext);
@@ -48,7 +48,13 @@ class Module {
     }
   }
 
-  Future<void> opendatabase() async {
+  static Future<Module> create(atPath) async {
+    final module = Module._constructor(atPath);
+    await module._opendatabase();
+    return module;
+  }
+
+  Future<void> _opendatabase() async {
     database = await openDatabase(filePath, readOnly: true);
     final List<Map<String, dynamic>> result = await database!.query("Details");
 
