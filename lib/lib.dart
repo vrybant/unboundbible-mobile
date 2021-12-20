@@ -6,21 +6,46 @@ import 'package:sqflite/sqflite.dart';
 import 'module.dart';
 
 const fileName = "en.kjv.bbl.unbound";
+//const fileName = "РБО2.SQLite3";
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await copyDefaultsFiles();
   final databasesPath = await getDatabasesPath();
   final path = join(databasesPath, fileName);
   final module = await Module.create(path);
-  print("************************");
-  print(module.connected);
+  print("********");
+  print("connected = " + module.connected.toString());
+}
+
+bool getRightToLeft(String language) {
+  return language.startsWith("he") | language.startsWith("ara") | language.startsWith("fa");
+}
+
+String removeTags(String str) {
+  String s = "";
+  bool l = true;
+
+  str.split('').forEach((c) {
+    if (c == '<') {
+      l = false;
+    }
+    if (l) {
+      s += c;
+    }
+    if (c == '>') {
+      l = true;
+    }
+  });
+
+  return s;
 }
 
 Future<void> copyDefaultsFiles() async {
   final databasesPath = await getDatabasesPath();
   final filePath = join(databasesPath, fileName);
 
-  // await deleteDatabase(filePath); // getting a fresh copy from the asset
+  await deleteDatabase(filePath); // getting a fresh copy from the asset
   final exists = await databaseExists(filePath);
 
   if (!exists) {

@@ -6,6 +6,7 @@
 
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'lib.dart';
 
 enum FileFormat { unbound, mysword, mybible }
 
@@ -48,7 +49,7 @@ class Module {
     }
   }
 
-  static Future<Module> create(atPath) async {
+  static Future<Module> create(String atPath) async {
     final module = Module._constructor(atPath);
     await module._opendatabase();
     return module;
@@ -56,13 +57,81 @@ class Module {
 
   Future<void> _opendatabase() async {
     database = await openDatabase(filePath, readOnly: true);
-    final List<Map<String, dynamic>> result = await database!.query("Details");
 
-    if (result.isNotEmpty) {
-      print(result[0]['Title']);
-      print(result[0]['Abbreviation']);
-      print(result[0]['Information']);
+    if ((format == FileFormat.unbound) | (format == FileFormat.mysword)) {
+      try {
+        final List<Map<String, dynamic>> maps = await database!.query("Details");
+
+        if (maps.isNotEmpty) {
+          info = maps[0]["Information"] ?? "";
+          info = maps[0]["Description"] ?? info;
+          name = maps[0]["Title"] ?? info;
+          abbr = maps[0]["Abbreviation"] ?? "";
+          copyright = maps[0]["Copyright"] ?? "";
+          language = maps[0]["Language"] ?? "";
+          strong = (maps[0]["Strong"] ?? 0) > 0;
+          embedded = (maps[0]["Embedded"] ?? 0) > 0;
+          default_ = (maps[0]["Default"] ?? 0) > 0;
+
+          connected = true;
+        }
+      } catch (e) {
+        print(e);
+      }
     }
-    connected = true;
+
+    if (format == FileFormat.mybible) {
+      try {
+        final List<Map<String, dynamic>> maps = await database!.query("info");
+
+        List.generate(maps.length, (i) {
+          final key = maps[i]["name"] ?? "";
+          final value = maps[i]["value"] ?? "";
+
+          switch (key) {
+            case "description":
+              name = value;
+              break;
+            case "detailed_info":
+              info = value;
+              break;
+            case "language":
+              language = value;
+              break;
+            case "strong_numbers":
+              strong = value == "true";
+              break;
+            case "is_strong":
+              strong = value == "true";
+              break;
+            case "is_footnotes":
+              footnotes = value == "true";
+              break;
+          }
+        });
+        connected = true;
+      } catch (e) {
+        print(e);
+      }
+    }
+
+    if (connected) {
+      if (name.isEmpty) {
+        name = fileName!;
+      }
+      rightToLeft = getRightToLeft(language);
+      info = removeTags(info);
+      accented = language == "ru";
+    }
+
+    print("Information = " + info);
+    print("Name = " + name);
+    print("abbr = " + abbr);
+    print("copyright = " + copyright);
+    print("language = " + language);
+    print("Strong = " + strong.toString());
+    print("Embedded = " + embedded.toString());
+    print("Default = " + default_.toString());
+    print("rightToLeft = " + rightToLeft.toString());
   }
 }
