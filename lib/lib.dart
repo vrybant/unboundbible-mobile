@@ -27,15 +27,9 @@ String removeTags(String str) {
   bool l = true;
 
   str.split('').forEach((c) {
-    if (c == '<') {
-      l = false;
-    }
-    if (l) {
-      s += c;
-    }
-    if (c == '>') {
-      l = true;
-    }
+    if (c == '<') l = false;
+    if (l) s += c;
+    if (c == '>') l = true;
   });
 
   return s;

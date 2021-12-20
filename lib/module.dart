@@ -39,14 +39,8 @@ class Module {
   Module._constructor(this.filePath) {
     fileName = basename(filePath);
     final ext = extension(filePath);
-    print(ext);
-
-    if ((ext == ".mybible") || (ext == ".bbli")) {
-      format = FileFormat.mysword;
-    }
-    if (ext == ".SQLite3") {
-      format = FileFormat.mybible;
-    }
+    if ((ext == ".mybible") || (ext == ".bbli")) format = FileFormat.mysword;
+    if (ext == ".SQLite3") format = FileFormat.mybible;
   }
 
   static Future<Module> create(String atPath) async {
@@ -116,9 +110,7 @@ class Module {
     }
 
     if (connected) {
-      if (name.isEmpty) {
-        name = fileName!;
-      }
+      if (name.isEmpty) name = fileName!;
       rightToLeft = getRightToLeft(language);
       info = removeTags(info);
       accented = language == "ru";
