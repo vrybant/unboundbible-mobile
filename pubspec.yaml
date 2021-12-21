@@ -21,3 +21,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/en.kjv.bbl.unbound
+    - assets/РБО2.SQLite3
