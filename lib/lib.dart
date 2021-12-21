@@ -23,7 +23,7 @@ bool getRightToLeft(String language) {
 }
 
 String removeTags(String str) {
-  String s = "";
+  String s = '';
   bool l = true;
 
   str.split('').forEach((c) {
@@ -35,6 +35,14 @@ String removeTags(String str) {
   return s;
 }
 
+Future<void> copyFileFromBundle(String fromPath, String toPath) async {
+  ByteData data = await rootBundle.load(fromPath);
+  List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+  await File(toPath).writeAsBytes(bytes, flush: true);
+  print(fromPath);
+  print(toPath);
+}
+
 Future<void> copyDefaultsFiles() async {
   final databasesPath = await getDatabasesPath();
   final filePath = join(databasesPath, fileName);
@@ -43,16 +51,11 @@ Future<void> copyDefaultsFiles() async {
   final exists = await databaseExists(filePath);
 
   if (!exists) {
-    // Make sure the parent directory exists
+    // make sure the parent directory exists
     try {
       await Directory(dirname(filePath)).create(recursive: true);
     } catch (_) {}
 
-    // Copy from asset
-    ByteData data = await rootBundle.load(join("assets", fileName));
-    List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-    await File(filePath).writeAsBytes(bytes, flush: true);
-  } else {
-    print("Opening existing database");
+    await copyFileFromBundle(join("assets", fileName), filePath);
   }
 }
