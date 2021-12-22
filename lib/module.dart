@@ -37,20 +37,14 @@ class Module {
   bool accented = false;
   bool favorite = true;
 
-  Module._constructor(this.filePath) {
+  Module(this.filePath) {
     fileName = basename(filePath);
     final ext = extension(filePath);
     if ((ext == ".mybible") || (ext == ".bbli")) format = FileFormat.mysword;
     if (ext == ".SQLite3") format = FileFormat.mybible;
   }
 
-  static Future<Module> create(String atPath) async {
-    final module = Module._constructor(atPath);
-    await module._opendatabase();
-    return module;
-  }
-
-  Future<void> _opendatabase() async {
+  Future<void> opendatabase() async {
     database = await openDatabase(filePath, readOnly: true);
 
     if ((format == FileFormat.unbound) | (format == FileFormat.mysword)) {
@@ -116,7 +110,9 @@ class Module {
       info = info.removeTags();
       accented = language == "ru";
     }
+  }
 
+  void prints() {
     print("Information = " + info);
     print("Name = " + name);
     print("abbr = " + abbr);
@@ -126,5 +122,6 @@ class Module {
     print("Embedded = " + embedded.toString());
     print("Default = " + default_.toString());
     print("rightToLeft = " + rightToLeft.toString());
+    print("connected = " + connected.toString());
   }
 }

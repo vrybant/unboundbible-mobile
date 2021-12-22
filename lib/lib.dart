@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'extensions.dart';
-import 'module.dart';
+import 'bible.dart';
 
 const fileName = "en.kjv.bbl.unbound";
 //const fileName = "РБО2.SQLite3";
@@ -14,9 +14,8 @@ void main() async {
   await copyDefaultsFiles();
   final databasesPath = await getDatabasesPath();
   final path = join(databasesPath, fileName);
-  final module = await Module.create(path);
-  print("********");
-  print("connected = " + module.connected.toString());
+  final bible = await Bible.create(path);
+  bible.prints();
 }
 
 bool getRightToLeft(String language) {
