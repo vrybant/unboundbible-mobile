@@ -16,6 +16,10 @@ void main() async {
   final path = join(databasesPath, fileName);
   final bible = await Bible.create(path);
   bible.prints();
+
+  List<Bible> bibles = [];
+  bibles.init();
+  await bibles.load();
 }
 
 bool getRightToLeft(String language) {
@@ -34,7 +38,7 @@ Future<void> copyDefaultsFiles() async {
   final databasesPath = await getDatabasesPath();
   final filePath = join(databasesPath, fileName);
 
-  await deleteDatabase(filePath); // getting a fresh copy from the asset
+  // await deleteDatabase(filePath); // getting a fresh copy from the asset
   final exists = await databaseExists(filePath);
 
   if (!exists) {

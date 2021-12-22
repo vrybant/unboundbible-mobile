@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'package:path/path.dart';
 import 'lib.dart';
 import 'module.dart';
@@ -26,5 +27,15 @@ class Bible extends Module {
     final bible = Bible(atPath);
     await bible.opendatabase();
     return bible;
+  }
+}
+
+extension Bibles<Bible> on List<Bible> {
+  init() {
+    print("Init Bibles Class");
+  }
+
+  Future<void> load() async {
+    print("Load Bibles Class");
   }
 }
