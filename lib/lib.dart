@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'extensions.dart';
 import 'module.dart';
 
 const fileName = "en.kjv.bbl.unbound";
@@ -19,20 +20,7 @@ void main() async {
 }
 
 bool getRightToLeft(String language) {
-  return language.startsWith("he") | language.startsWith("ara") | language.startsWith("fa");
-}
-
-String removeTags(String str) {
-  String s = '';
-  bool l = true;
-
-  str.split('').forEach((c) {
-    if (c == '<') l = false;
-    if (l) s += c;
-    if (c == '>') l = true;
-  });
-
-  return s;
+  return language.hasPrefix("he") | language.hasPrefix("ara") | language.hasPrefix("fa");
 }
 
 Future<void> copyFileFromBundle(String fromPath, String toPath) async {

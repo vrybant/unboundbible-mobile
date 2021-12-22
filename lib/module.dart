@@ -6,6 +6,7 @@
 
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'extensions.dart';
 import 'lib.dart';
 
 enum FileFormat { unbound, mysword, mybible }
@@ -112,7 +113,7 @@ class Module {
     if (connected) {
       if (name.isEmpty) name = fileName!;
       rightToLeft = getRightToLeft(language);
-      info = removeTags(info);
+      info = info.removeTags();
       accented = language == "ru";
     }
 
