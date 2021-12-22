@@ -1,6 +1,9 @@
 import 'dart:collection';
 import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 import 'lib.dart';
+import 'utils.dart';
+import 'extensions.dart';
 import 'module.dart';
 
 class Verse {
@@ -19,9 +22,7 @@ class Book {
 }
 
 class Bible extends Module {
-  Bible(String atPath) : super(atPath) {
-    print("Constructor of Bible Class");
-  }
+  Bible(String atPath) : super(atPath);
 
   static Future<Bible> create(String atPath) async {
     final bible = Bible(atPath);
@@ -30,12 +31,41 @@ class Bible extends Module {
   }
 }
 
-extension Bibles<Bible> on List<Bible> {
-  init() {
-    print("Init Bibles Class");
+class Bibles {
+  final List<Bible> _items = [];
+  String? _databasesPath;
+
+  set length(int newLength) {
+    _items.length = newLength;
   }
 
-  Future<void> load() async {
-    print("Load Bibles Class");
+  int get length => _items.length;
+
+  Bible operator [](int index) => _items[index];
+
+  void operator []=(int index, Bible value) {
+    _items[index] = value;
+  }
+
+  void add(Bible element) => _items.add(element);
+
+  static Future<Bibles> create() async {
+    final bibles = Bibles();
+    bibles._databasesPath = await getDatabasesPath();
+    await bibles._load();
+    return bibles;
+  }
+
+  Future<void> _load() async {
+    var files = databaseList;
+
+    for (var file in files) {
+      if (file.contains(".bbl.") | file.hasSuffix(".SQLite3")) {
+        final filePath = join(_databasesPath!, file);
+        var bible = await Bible.create(filePath);
+        if (bible.connected) add(bible);
+        print(file);
+      }
+    }
   }
 }

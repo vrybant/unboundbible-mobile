@@ -4,22 +4,18 @@ import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'extensions.dart';
+import 'utils.dart';
 import 'bible.dart';
-
-const fileName = "en.kjv.bbl.unbound";
-//const fileName = "РБО2.SQLite3";
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await copyDefaultsFiles();
-  final databasesPath = await getDatabasesPath();
-  final path = join(databasesPath, fileName);
-  final bible = await Bible.create(path);
-  bible.prints();
-
-  List<Bible> bibles = [];
-  bibles.init();
-  await bibles.load();
+  Bibles bibles = await Bibles.create();
+  final length = bibles.length;
+  print("~~~~~~~~~~~~~~~~");
+  for (var i = 0; i < length; i++) {
+    print(bibles[i].name);
+  }
 }
 
 bool getRightToLeft(String language) {
@@ -36,17 +32,21 @@ Future<void> copyFileFromBundle(String fromPath, String toPath) async {
 
 Future<void> copyDefaultsFiles() async {
   final databasesPath = await getDatabasesPath();
-  final filePath = join(databasesPath, fileName);
+  var files = databaseList;
 
-  // await deleteDatabase(filePath); // getting a fresh copy from the asset
-  final exists = await databaseExists(filePath);
+  for (var file in files) {
+    final path = join(databasesPath, file);
 
-  if (!exists) {
-    // make sure the parent directory exists
-    try {
-      await Directory(dirname(filePath)).create(recursive: true);
-    } catch (_) {}
+    // await deleteDatabase(filePath); // getting a fresh copy from the asset
+    final exists = await databaseExists(path);
 
-    await copyFileFromBundle(join("assets", fileName), filePath);
+    if (!exists) {
+      // make sure the parent directory exists
+      try {
+        await Directory(dirname(path)).create(recursive: true);
+      } catch (_) {}
+
+      await copyFileFromBundle(join("assets", file), path);
+    }
   }
 }

@@ -112,7 +112,7 @@ class Module {
     }
   }
 
-  void prints() {
+  prints() {
     print("Information = " + info);
     print("Name = " + name);
     print("abbr = " + abbr);
