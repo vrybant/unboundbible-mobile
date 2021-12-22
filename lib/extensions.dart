@@ -1,16 +1,12 @@
 // https://dart.dev/guides/language/extension-methods
 
 extension StringExtension on String {
-  bool iEmpty() {
-    return isEmpty;
+  bool hasPrefix(String subst) {
+    return startsWith(subst);
   }
 
-  bool hasPrefix(String substr) {
-    return startsWith(substr);
-  }
-
-  bool hasSuffix(String substr) {
-    return endsWith(substr);
+  bool hasSuffix(String subst) {
+    return endsWith(subst);
   }
 
   String removeTags() {
