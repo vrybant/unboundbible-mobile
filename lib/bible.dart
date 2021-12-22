@@ -31,35 +31,19 @@ class Bible extends Module {
   }
 }
 
-class Bibles {
-  final List<Bible> _items = [];
-  String? _databasesPath;
+extension Bibles on List<Bible> {
+  static String? _databasesPath;
 
-  set length(int newLength) {
-    _items.length = newLength;
-  }
-
-  int get length => _items.length;
-
-  Bible operator [](int index) => _items[index];
-
-  void operator []=(int index, Bible value) {
-    _items[index] = value;
-  }
-
-  void add(Bible element) => _items.add(element);
-
-  static Future<Bibles> create() async {
-    final bibles = Bibles();
-    bibles._databasesPath = await getDatabasesPath();
+  static Future<List<Bible>> create() async {
+    List<Bible> bibles = [];
     await bibles._load();
     return bibles;
   }
 
   Future<void> _load() async {
-    var files = databaseList;
+    _databasesPath = await getDatabasesPath();
 
-    for (var file in files) {
+    for (var file in databaseList) {
       if (file.contains(".bbl.") | file.hasSuffix(".SQLite3")) {
         final filePath = join(_databasesPath!, file);
         var bible = await Bible.create(filePath);

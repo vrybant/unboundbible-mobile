@@ -10,11 +10,10 @@ import 'bible.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await copyDefaultsFiles();
-  Bibles bibles = await Bibles.create();
-  final length = bibles.length;
+  List<Bible> bibles = await Bibles.create();
   print("~~~~~~~~~~~~~~~~");
-  for (var i = 0; i < length; i++) {
-    print(bibles[i].name);
+  for (var bible in bibles) {
+    print(bible.name);
   }
 }
 
