@@ -6,6 +6,7 @@
 
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:collection/collection.dart';
 import 'extensions.dart';
 import 'lib.dart';
 
@@ -36,6 +37,18 @@ class Module {
   bool default_ = false;
   bool accented = false;
   bool favorite = true;
+
+  static final _mybibleArray = [
+    010, 020, 030, 040, 050, 060, 070, 080, 090, 100, //
+    110, 120, 130, 140, 150, 160, 190, 220, 230, 240, //
+    250, 260, 290, 300, 310, 330, 340, 350, 360, 370, //
+    380, 390, 400, 410, 420, 430, 440, 450, 460, 470, //
+    480, 490, 500, 510, 520, 530, 540, 550, 560, 570, //
+    580, 590, 600, 610, 620, 630, 640, 650, 660, 670, //
+    680, 690, 700, 710, 720, 730, 000, 000, 000, 000, //
+    000, 000, 000, 000, 000, 000, 165, 468, 170, 180, //
+    462, 464, 466, 467, 270, 280, 315, 320 //
+  ];
 
   Module(this.filePath) {
     fileName = basename(filePath);
@@ -110,6 +123,26 @@ class Module {
       info = info.removeTags();
       accented = language == "ru";
     }
+  }
+
+  static int _unbound2mybible(int id) {
+    return (id > 0) && (id < _mybibleArray.length) ? _mybibleArray[id] : id;
+  }
+
+  static int _mybible2unbound(int id) {
+    return _mybibleArray.firstWhereIndexedOrNull((i, e) => i == id) ?? id;
+  }
+
+  int encodeID(int id) {
+    return format == FileFormat.mybible ? _unbound2mybible(id) : id;
+  }
+
+  int decodeID(int id) {
+    return format == FileFormat.mybible ? _mybible2unbound(id) : id;
+  }
+
+  bool isNewTestament(int n) {
+    return (n >= 40) & (n < 77);
   }
 
   prints() {
