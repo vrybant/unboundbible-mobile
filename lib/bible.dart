@@ -190,15 +190,7 @@ class Bible extends Module {
     var id = encodeID(verse.book).toString();
     var query =
         "select max(" + z.chapter + ") as count from " + z.bible + " where " + z.book + " = " + id;
-
-    try {
-      final List<Map<String, dynamic>> maps = await database!.rawQuery(query);
-      if (maps.isNotEmpty) return maps[0]["count"] ?? 0;
-    } catch (e) {
-      print(e);
-    }
-
-    return 0;
+    return Sqflite.firstIntValue(await database!.rawQuery(query)) ?? 0;
   }
 }
 
