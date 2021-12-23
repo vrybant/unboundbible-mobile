@@ -16,7 +16,7 @@ class Module {
   Database? database;
 
   String filePath;
-  String? fileName;
+  late String fileName;
   FileFormat format = FileFormat.unbound;
 
   String name = "";
@@ -118,7 +118,7 @@ class Module {
     }
 
     if (connected) {
-      if (name.isEmpty) name = fileName!;
+      if (name.isEmpty) name = fileName;
       rightToLeft = getRightToLeft(language);
       info = info.removeTags();
       accented = language == "ru";

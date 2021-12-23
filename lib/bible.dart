@@ -54,6 +54,28 @@ class MybibleAlias extends UnboundAlias {
   }
 }
 
+const titlesArray = [
+  "", "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Joshua", "Judges", //
+  "Ruth", "1 Samuel", "2 Samuel", "1 Kings", "2 Kings", "1 Chronicles", "2 Chronicles", //
+  "Ezra", "Nehemiah", "Esther", "Job", "Psalms", "Proverbs", "Ecclesiastes", "Song of Songs", //
+  "Isaiah", "Jeremiah", "Lamentations", "Ezekiel", "Daniel", "Hosea", "Joel", "Amos", //
+  "Obadiah", "Jonah", "Micah", "Nahum", "Habakkuk", "Zephaniah", "Haggai", "Zechariah",
+  "Malachi", "Matthew", "Mark", "Luke", "John", "Acts", "Romans", "1 Corinthians", //
+  "2 Corinthians", "Galatians", "Ephesians", "Philippians", "Colossians", //
+  "1 Thessalonians", "2 Thessalonians", "1 Timothy", "2 Timothy", "Titus", "Philemon", //
+  "Hebrews", "James", "1 Peter", "2 Peter", "1 John", "2 John", "3 John", "Jude", "Revelation"
+];
+
+const abbrevArray = [
+  "", "Gen.", "Ex.", "Lev.", "Num.", "Deut.", "Josh.", "Judg.", "Ruth", "1 Sam.", "2 Sam.", //
+  "1 Kin.", "2 Kin.", "1 Chr.", "2 Chr.", "Ezra", "Neh.", "Esth.", "Job", "Ps.", "Prov.", //
+  "Eccl.", "Song", "Is.", "Jer.", "Lam.", "Ezek.", "Dan.", "Hos.", "Joel", "Amos", "Obad.", //
+  "Jon.", "Mic.", "Nah.", "Hab.", "Zeph.", "Hag.", "Zech.", "Mal.", "Matt.", "Mark", "Luke", //
+  "John", "Acts", "Rom.", "1 Cor.", "2 Cor.", "Gal.", "Eph.", "Phil.", "Col.", "1 Thess.", //
+  "2 Thess.", "1 Tim.", "2 Tim.", "Titus", "Philem.", "Heb.", "James", "1 Pet.", "2 Pet.", //
+  "1 John", "2 John", "3 John", "Jude", "Rev." //
+];
+
 class Bible extends Module {
   List<Book> books = [];
   BibleAlias z = UnboundAlias();
@@ -62,7 +84,6 @@ class Bible extends Module {
 
   Future _create() async {
     await opendatabase();
-    prints;
     if (format == FileFormat.mybible) z = MybibleAlias();
 //  if (connected & !database.TableExists(z.bible)) connected = false;
     if (connected) await loadDatabase();
@@ -96,47 +117,40 @@ class Bible extends Module {
     } catch (e) {
       print(e);
     }
-    print("loadUnboundDatabase");
+    print("loadUnboundDatabase: " + fileName);
   }
 
-/*
-    Future LoadMyswordDatabase() async {
-        var query = "select distinct " + z.book + " from " + z.bible;
+  Future loadMyswordDatabase() async {
+    final query = "SELECT DISTINCT " + z.book + " FROM " + z.bible;
 
-        try {
-            var command = database.CreateCommand();
-            command.CommandText = query;
-            SQLiteDataReader reader = command.ExecuteReader();
+    try {
+      final List<Map<String, dynamic>> maps = await database!.rawQuery(query);
 
-            while (reader.Read()) {
-                var value = reader.String(z.book); 
-                if (value == null) { break; }
-                var num = value.ToInt() ?? 0;        
+      List.generate(maps.length, (i) {
+        final num = maps[0][z.book] ?? 0;
 
-                if ((num > 0) & (num <= 66)) {
-                    Book book = new Book {
-                        number = num,
-                        id = num,
-                        sorting = num,
-                        title = TitlesArray[num],
-                        abbr = AbbrevArray[num]
-                    };
-                    books.Add(book);
-                    loaded = true;
-                }
-            }
-        } catch (SQLiteException ex) {
-            Debug.WriteLine(ex.Message);
+        if ((num > 0) & (num <= 66)) {
+          final title = titlesArray[num];
+          final abbr = abbrevArray[num];
+          final book = Book(title, abbr, num, num, num);
+          books.add(book);
+          loaded = true;
         }
-        
+      });
+
+      connected = true;
+    } catch (e) {
+      print(e);
     }
-*/
-  loadDatabase() {
+    print("loadMyswordDatabase: " + fileName);
+  }
+
+  Future loadDatabase() async {
     if (loaded) return;
     if (format == FileFormat.mysword) {
-//    loadMyswordDatabase();
+      await loadMyswordDatabase();
     } else {
-      loadUnboundDatabase();
+      await loadUnboundDatabase();
     }
   }
 
@@ -190,7 +204,7 @@ extension Bibles on List<Bible> {
         final filePath = join(_databasesPath!, file);
         var bible = await Bible.create(filePath);
         if (bible.connected) add(bible);
-        print(file);
+        print(file + " has been added");
       }
     }
   }
