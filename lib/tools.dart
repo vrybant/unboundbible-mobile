@@ -8,7 +8,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await copyDefaultsFiles();
   Tools tools = await Tools.create();
+  tools.setCurrBible("*");
+  final text = await tools.get_Chapter();
   print("~~~~~~~~~~~~~");
+//for (var s in text.split("\n")) print(s);
 //for (var bible in tools.bibles) print(bible.fileName);
 }
 
@@ -31,16 +34,14 @@ class Tools {
     return tools;
   }
 
-  String get_Chapter() {
+  Future<String> get_Chapter() async {
     var result = "";
-    var text = currBible!.getChapter(currVerse);
-    var i = 1;
-/*
-        foreach (var s in text) {
-            result += /*" <l>"*/ i + /*" </l>"*/ " " + s + "\n";
-            i++;
-        }
-*/
+    final text = await currBible!.getChapter(currVerse);
+
+    for (var s in text) {
+//    result += /*" <l>"*/ i + /*" </l>"*/ " " + s + "\n";
+      result += s + "\n";
+    }
     return result;
   }
 

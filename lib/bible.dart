@@ -154,31 +154,29 @@ class Bible extends Module {
     }
   }
 
-  List<String> getChapter(Verse verse) {
+  Future<List<String>> getChapter(Verse verse) async {
     List<String> result = [];
-    int id = encodeID(verse.book);
-    bool nt = isNewTestament(verse.book);
-    /*
-        var query = "select * from " + z.bible + " where " + z.book + " = " + id + " and " + z.chapter + " = " + verse.chapter;
+    var id = encodeID(verse.book).toString();
+    var nt = isNewTestament(verse.book);
 
-        try {
-            var command = database.CreateCommand();
-            command.CommandText = query;
-            SQLiteDataReader reader = command.ExecuteReader();            
+    var query = "SELECT * FROM " + z.bible + " WHERE " + z.book + " = " + id;
+    query += " AND " + z.chapter + " = " + verse.chapter.toString();
 
-            while (reader.Read()) {
-                string line = reader.String(z.text);
-                if (line != null) {
-                    string text = line; // = preparation(line, format: format, nt: nt, purge: false)
-                    result.Add(text);
-                }
-            }
+    try {
+      final List<Map<String, dynamic>> maps = await database!.rawQuery(query);
 
-            if (!result.IsEmpty()) { return result; }
-        } catch (SQLiteException ex) {
-            Debug.WriteLine(ex.Message);
+      List.generate(maps.length, (i) {
+        final line = maps[i][z.text];
+
+        if (line != null) {
+          var text = line; // = preparation(line, format: format, nt: nt, purge: false)
+          result.add(text);
         }
-        */
+      });
+    } catch (e) {
+      print(e);
+    }
+
     return result;
   }
 }
