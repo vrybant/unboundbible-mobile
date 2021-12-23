@@ -57,7 +57,7 @@ class Module {
     if (ext == ".SQLite3") format = FileFormat.mybible;
   }
 
-  Future<void> opendatabase() async {
+  Future opendatabase() async {
     database = await openDatabase(filePath, readOnly: true);
 
     if ((format == FileFormat.unbound) | (format == FileFormat.mysword)) {

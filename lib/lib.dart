@@ -7,16 +7,6 @@ import 'extensions.dart';
 import 'utils.dart';
 import 'bible.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await copyDefaultsFiles();
-  List<Bible> bibles = await Bibles.create();
-  print("~~~~~~~~~~~~~~~~");
-  for (var bible in bibles) {
-    print(bible.name);
-  }
-}
-
 bool getRightToLeft(String language) {
   return language.hasPrefix("he") | language.hasPrefix("ara") | language.hasPrefix("fa");
 }
