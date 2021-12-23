@@ -145,6 +145,21 @@ class Module {
     return (n >= 40) & (n < 77);
   }
 
+  Future<bool> tableExists(String table) async {
+    table = table.toLowerCase();
+    var result = false;
+    try {
+      final List<Map<String, dynamic>> maps = await database!.query("sqlite_master");
+      List.generate(maps.length, (i) {
+        final name = maps[i]["name"] ?? "";
+        if (name.toLowerCase() == table) result = true;
+      });
+    } catch (e) {
+      print(e);
+    }
+    return result;
+  }
+
   prints() {
     print("Information = " + info);
     print("Name = " + name);

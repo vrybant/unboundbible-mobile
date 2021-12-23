@@ -9,15 +9,15 @@ void main() async {
   await copyDefaultsFiles();
   Tools tools = await Tools.create();
   tools.setCurrBible("*");
-  final text = await tools.get_Chapter();
+  final lines = await tools.currBible!.getTitles();
   print("~~~~~~~~~~~~~");
+//for (var s in lines) print(s);
 //for (var s in text.split("\n")) print(s);
-//for (var bible in tools.bibles) print(bible.fileName);
 }
 
 class Tools {
-  static Bible? currBible;
-  static Verse currVerse = Verse();
+  Bible? currBible;
+  Verse currVerse = Verse();
 
   List<Bible> bibles = [];
 //List<Commentaries> commentary = [];

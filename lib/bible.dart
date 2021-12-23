@@ -85,8 +85,8 @@ class Bible extends Module {
   Future _create() async {
     await opendatabase();
     if (format == FileFormat.mybible) z = MybibleAlias();
-//  if (connected & !database.TableExists(z.bible)) connected = false;
-    if (connected) await loadDatabase();
+    if (connected && !(await tableExists(z.bible))) connected = false;
+    if (connected) await loadDatabase(); // TEMP
   }
 
   static Future<Bible> create(String atPath) async {
@@ -102,9 +102,9 @@ class Bible extends Module {
       final List<Map<String, dynamic>> maps = await database!.rawQuery(query);
 
       List.generate(maps.length, (i) {
-        final id = maps[0][z.number] ?? 0;
-        final name = maps[0][z.name] ?? "";
-        final abbr = maps[0][z.abbr] ?? "";
+        final id = maps[i][z.number] ?? 0;
+        final name = maps[i][z.name] ?? "";
+        final abbr = maps[i][z.abbr] ?? "";
 
         if (id > 0) {
           final book = Book(name, abbr, decodeID(id), id, id);
@@ -127,7 +127,7 @@ class Bible extends Module {
       final List<Map<String, dynamic>> maps = await database!.rawQuery(query);
 
       List.generate(maps.length, (i) {
-        final num = maps[0][z.book] ?? 0;
+        final num = maps[i][z.book] ?? 0;
 
         if ((num > 0) & (num <= 66)) {
           final title = titlesArray[num];
@@ -179,6 +179,27 @@ class Bible extends Module {
 
     return result;
   }
+
+  List<String> getTitles() {
+    List<String> result = [];
+    for (var book in books) result.add(book.title);
+    return result;
+  }
+
+  Future chaptersCount(Verse verse) async {
+    var id = encodeID(verse.book).toString();
+    var query =
+        "select max(" + z.chapter + ") as count from " + z.bible + " where " + z.book + " = " + id;
+
+    try {
+      final List<Map<String, dynamic>> maps = await database!.rawQuery(query);
+      if (maps.isNotEmpty) return maps[0]["count"] ?? 0;
+    } catch (e) {
+      print(e);
+    }
+
+    return 0;
+  }
 }
 
 extension Bibles on List<Bible> {
@@ -202,7 +223,6 @@ extension Bibles on List<Bible> {
         final filePath = join(_databasesPath!, file);
         var bible = await Bible.create(filePath);
         if (bible.connected) add(bible);
-        print(file + " has been added");
       }
     }
   }
