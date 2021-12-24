@@ -1,6 +1,7 @@
-// ignore_for_file: non_constant_identifier_names, curly_braces_in_flow_control_structures
+// ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/widgets.dart';
+import 'extensions.dart';
 import 'lib.dart';
 import 'bible.dart';
 
@@ -9,10 +10,8 @@ void main() async {
   await copyDefaultsFiles();
   Tools tools = await Tools.create();
   tools.setCurrBible("*");
-  final lines = await tools.currBible!.getTitles();
-  print("~~~~~~~~~~~~~");
-//for (var s in lines) print(s);
-//for (var s in text.split("\n")) print(s);
+  final lines = await tools.get_Chapter();
+  for (var s in lines.split("\n")) print(s);
 }
 
 class Tools {
@@ -38,11 +37,10 @@ class Tools {
     var result = "";
     final text = await currBible!.getChapter(currVerse);
 
-    for (var s in text) {
-//    result += /*" <l>"*/ i + /*" </l>"*/ " " + s + "\n";
-      result += s + "\n";
+    for (var i = 0; i < text.length; i++) {
+      result += " <l>${i + 1}</l> ${text[i]}\n";
     }
-    return result;
+    return result.removeTags();
   }
 
   setCurrBible(String name) {
