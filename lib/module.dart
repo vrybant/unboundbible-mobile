@@ -162,15 +162,15 @@ class Module {
   }
 
   prints() {
-    print("Information = " + info);
-    print("Name = " + name);
-    print("abbr = " + abbr);
-    print("copyright = " + copyright);
-    print("language = " + language);
-    print("Strong = " + strong.toString());
-    print("Embedded = " + embedded.toString());
-    print("Default = " + default_.toString());
-    print("rightToLeft = " + rightToLeft.toString());
-    print("connected = " + connected.toString());
+    print("Information = $info");
+    print("Name = $name");
+    print("abbr = $abbr");
+    print("copyright = $copyright");
+    print("language = $language");
+    print("Strong = $strong");
+    print("Embedded = $embedded");
+    print("Default = $default_");
+    print("rightToLeft = $rightToLeft");
+    print("connected = $connected");
   }
 }

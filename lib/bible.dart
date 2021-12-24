@@ -86,7 +86,7 @@ class Bible extends Module {
     if (format == FileFormat.mybible) z = MybibleAlias();
     if (connected && !(await tableExists(z.bible))) connected = false;
     if (connected) await loadDatabase(); // TEMP
-    print(await chaptersCount(Verse()));
+//  prints();
   }
 
   static Future<Bible> create(String atPath) async {
@@ -96,7 +96,7 @@ class Bible extends Module {
   }
 
   Future loadUnboundDatabase() async {
-    final query = "SELECT * FROM " + z.books;
+    final query = "SELECT * FROM ${z.books}";
 
     try {
       final List<Map<String, dynamic>> maps = await database!.rawQuery(query);
@@ -117,11 +117,11 @@ class Bible extends Module {
     } catch (e) {
       debugPrint("$e");
     }
-    print("loadUnboundDatabase: " + fileName);
+    print("loadUnboundDatabase: $fileName");
   }
 
   Future loadMyswordDatabase() async {
-    final query = "SELECT DISTINCT " + z.book + " FROM " + z.bible;
+    final query = "SELECT DISTINCT ${z.book} FROM ${z.bible}";
 
     try {
       final List<Map<String, dynamic>> maps = await database!.rawQuery(query);
@@ -142,7 +142,7 @@ class Bible extends Module {
     } catch (e) {
       debugPrint("$e");
     }
-    print("loadMyswordDatabase: " + fileName);
+    print("loadMyswordDatabase: $fileName");
   }
 
   Future loadDatabase() async {
@@ -159,8 +159,8 @@ class Bible extends Module {
     var id = encodeID(verse.book).toString();
     var nt = isNewTestament(verse.book);
 
-    var query = "SELECT * FROM " + z.bible + " WHERE " + z.book + " = $id";
-    query += " AND " + z.chapter + " = " + verse.chapter.toString();
+    var query =
+        "SELECT * FROM ${z.bible} WHERE ${z.book} = $id AND ${z.chapter} = ${verse.chapter}";
 
     try {
       final List<Map<String, dynamic>> maps = await database!.rawQuery(query);
@@ -189,8 +189,7 @@ class Bible extends Module {
   Future chaptersCount(Verse verse) async {
     var result = 0;
     var id = encodeID(verse.book).toString();
-    var query =
-        "select max(" + z.chapter + ") as count from " + z.bible + " where " + z.book + " = $id";
+    var query = "select max(${z.chapter}) as count from ${z.bible} where ${z.book} = $id";
     try {
       result = Sqflite.firstIntValue(await database!.rawQuery(query)) ?? 0;
     } catch (e) {
