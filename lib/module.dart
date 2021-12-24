@@ -4,6 +4,7 @@
 // Even on iOS you could write a native plugin that get the asset file path
 // and directly open it in read-only mode. Android does not have such ability.
 
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:collection/collection.dart';
@@ -78,7 +79,7 @@ class Module {
           connected = true;
         }
       } catch (e) {
-        print(e);
+        debugPrint("$e");
       }
     }
 
@@ -113,7 +114,7 @@ class Module {
         });
         connected = true;
       } catch (e) {
-        print(e);
+        debugPrint("$e");
       }
     }
 
@@ -155,7 +156,7 @@ class Module {
         if (name.toLowerCase() == table) result = true;
       });
     } catch (e) {
-      print(e);
+      debugPrint("$e");
     }
     return result;
   }

@@ -1,7 +1,6 @@
-import 'dart:collection';
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'lib.dart';
 import 'utils.dart';
 import 'extensions.dart';
 import 'module.dart';
@@ -87,6 +86,7 @@ class Bible extends Module {
     if (format == FileFormat.mybible) z = MybibleAlias();
     if (connected && !(await tableExists(z.bible))) connected = false;
     if (connected) await loadDatabase(); // TEMP
+    print(await chaptersCount(Verse()));
   }
 
   static Future<Bible> create(String atPath) async {
@@ -115,7 +115,7 @@ class Bible extends Module {
 
       connected = true;
     } catch (e) {
-      print(e);
+      debugPrint("$e");
     }
     print("loadUnboundDatabase: " + fileName);
   }
@@ -140,7 +140,7 @@ class Bible extends Module {
 
       connected = true;
     } catch (e) {
-      print(e);
+      debugPrint("$e");
     }
     print("loadMyswordDatabase: " + fileName);
   }
@@ -159,7 +159,7 @@ class Bible extends Module {
     var id = encodeID(verse.book).toString();
     var nt = isNewTestament(verse.book);
 
-    var query = "SELECT * FROM " + z.bible + " WHERE " + z.book + " = " + id;
+    var query = "SELECT * FROM " + z.bible + " WHERE " + z.book + " = $id";
     query += " AND " + z.chapter + " = " + verse.chapter.toString();
 
     try {
@@ -174,7 +174,7 @@ class Bible extends Module {
         }
       });
     } catch (e) {
-      print(e);
+      debugPrint("$e");
     }
 
     return result;
@@ -187,10 +187,16 @@ class Bible extends Module {
   }
 
   Future chaptersCount(Verse verse) async {
+    var result = 0;
     var id = encodeID(verse.book).toString();
     var query =
-        "select max(" + z.chapter + ") as count from " + z.bible + " where " + z.book + " = " + id;
-    return Sqflite.firstIntValue(await database!.rawQuery(query)) ?? 0;
+        "select max(" + z.chapter + ") as count from " + z.bible + " where " + z.book + " = $id";
+    try {
+      result = Sqflite.firstIntValue(await database!.rawQuery(query)) ?? 0;
+    } catch (e) {
+      debugPrint("$e");
+    }
+    return result;
   }
 }
 
