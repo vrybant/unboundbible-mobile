@@ -1,6 +1,26 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart'; // for desktop
+import 'package:desktop_window/desktop_window.dart'; // for desktop
+import 'lib.dart';
+import "tools.dart";
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    await DesktopWindow.setMaxWindowSize(Size(400, 700));
+    sqfliteFfiInit(); // initialize FFI
+    databaseFactory = databaseFactoryFfi; // change the default factory
+  }
+
+  await copyDefaultsFiles();
+  Tools tools = await Tools.create();
+  tools.setCurrBible("*");
+//final lines = await tools.get_Chapter();
+//for (var s in lines.split("\n")) print("$s");
+
   runApp(const MyApp());
 }
 

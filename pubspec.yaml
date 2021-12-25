@@ -11,7 +11,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   path:
   sqflite:
-  sqflite_common_ffi:  
+  sqflite_common_ffi:    # for desktop
+  desktop_window: ^0.4.0 # for desktop
 
 dev_dependencies:
   flutter_test:

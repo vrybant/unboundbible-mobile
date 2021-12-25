@@ -1,11 +1,9 @@
 import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'extensions.dart';
 import 'utils.dart';
-import 'bible.dart';
 
 bool getRightToLeft(String language) {
   return language.hasPrefix("he") | language.hasPrefix("ara") | language.hasPrefix("fa");
