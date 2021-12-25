@@ -1,3 +1,5 @@
+import 'dart:io';
+
 // https://dart.dev/guides/language/extension-methods
 
 extension StringExtension on String {
@@ -20,5 +22,11 @@ extension StringExtension on String {
     });
 
     return s;
+  }
+}
+
+extension PlatformExtension on Platform {
+  bool isDesktop() {
+    return (Platform.isWindows || Platform.isLinux);
   }
 }

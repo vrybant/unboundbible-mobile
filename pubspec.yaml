@@ -9,13 +9,14 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  sqflite:
   path:
+  sqflite:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
+  sqflite_common_ffi:  
 
 flutter:
   uses-material-design: true

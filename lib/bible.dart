@@ -81,8 +81,9 @@ class Bible extends Module {
 
   Bible(String atPath) : super(atPath);
 
-  Future _create() async {
-    await opendatabase();
+  @override
+  Future init() async {
+    await super.init();
     if (format == FileFormat.mybible) z = MybibleAlias();
     if (connected && !(await tableExists(z.bible))) connected = false;
     if (connected) await loadDatabase(); // TEMP
@@ -90,9 +91,9 @@ class Bible extends Module {
   }
 
   static Future<Bible> create(String atPath) async {
-    final bible = Bible(atPath);
-    await bible._create();
-    return bible;
+    final instance = Bible(atPath);
+    await instance.init();
+    return instance;
   }
 
   Future loadUnboundDatabase() async {
@@ -202,17 +203,13 @@ class Bible extends Module {
 extension Bibles on List<Bible> {
   static String? _databasesPath;
 
-  Future _create() async {
-    await _load();
-  }
-
   static Future<List<Bible>> create() async {
-    List<Bible> bibles = [];
-    await bibles._create();
-    return bibles;
+    List<Bible> instance = [];
+    await instance._init();
+    return instance;
   }
 
-  Future _load() async {
+  Future _init() async {
     _databasesPath = await getDatabasesPath();
 
     for (var file in databaseList) {

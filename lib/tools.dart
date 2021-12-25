@@ -10,8 +10,8 @@ void main() async {
   await copyDefaultsFiles();
   Tools tools = await Tools.create();
   tools.setCurrBible("*");
-  final lines = await tools.get_Chapter();
-  for (var s in lines.split("\n")) print(s);
+//final lines = await tools.get_Chapter();
+//for (var s in lines.split("\n")) print("\u001b[30m $s");
 }
 
 class Tools {
@@ -23,14 +23,14 @@ class Tools {
 //List<Dictionaries> dictionary = [];
 //List<References> reference = [];
 
-  Future _create() async {
+  Future _init() async {
     bibles = await Bibles.create();
   }
 
   static Future<Tools> create() async {
-    final tools = Tools();
-    await tools._create();
-    return tools;
+    final instance = Tools();
+    await instance._init();
+    return instance;
   }
 
   Future<String> get_Chapter() async {
@@ -44,7 +44,7 @@ class Tools {
   }
 
   setCurrBible(String name) {
-    currBible = bibles[0];
+    if (bibles.length > 0) currBible = bibles[0];
 
     for (var bible in bibles) {
       if (bible.name == name) {
@@ -53,7 +53,7 @@ class Tools {
       }
     }
 
-    currBible!.loadDatabase();
+    //currBible!.loadDatabase();
 /*  if (!currBible!.goodLink(currVerse)) {
       currVerse = currBible!.firstVerse;
     } */
