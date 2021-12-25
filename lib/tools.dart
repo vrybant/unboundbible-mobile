@@ -1,11 +1,19 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:io';
 import 'package:flutter/widgets.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'extensions.dart';
 import 'lib.dart';
 import 'bible.dart';
 
 void main() async {
+  if (Platform.isWindows || Platform.isLinux) {
+    sqfliteFfiInit(); // initialize FFI
+    databaseFactory = databaseFactoryFfi; // change the default factory
+  }
+
   WidgetsFlutterBinding.ensureInitialized();
   await copyDefaultsFiles();
   Tools tools = await Tools.create();

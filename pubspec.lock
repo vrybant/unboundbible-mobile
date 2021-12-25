@@ -136,7 +136,7 @@ packages:
     source: hosted
     version: "2.1.0"
   sqflite_common_ffi:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: sqflite_common_ffi
       url: "https://pub.dartlang.org"

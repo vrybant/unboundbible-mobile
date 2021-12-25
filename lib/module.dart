@@ -7,23 +7,15 @@
 // https://github.com/tekartik/sqflite/blob/master/sqflite_common_ffi/doc/using_ffi_instead_of_sqflite.md
 // "In release mode, add sqlite3.dll in same folder as your executable."
 
-import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:collection/collection.dart';
 
-import 'package:sqflite_common/sqlite_api.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-
 import 'extensions.dart';
 import 'lib.dart';
 
 enum FileFormat { unbound, mysword, mybible }
-
-Future main() async {
-//  runApp(MyApp());
-}
 
 class Module {
   Database? database;
@@ -64,12 +56,6 @@ class Module {
   ];
 
   Module(this.filePath) {
-    if (Platform.isWindows || Platform.isLinux) {
-      print("\n *** DESKTOP *** \n ");
-      sqfliteFfiInit(); // initialize FFI
-//    databaseFactory = databaseFactoryFfi; // Change the default factory
-    }
-
     fileName = basename(filePath);
     final ext = extension(filePath);
     if ((ext == ".mybible") || (ext == ".bbli")) format = FileFormat.mysword;
