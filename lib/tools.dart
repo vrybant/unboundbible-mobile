@@ -22,14 +22,16 @@ class Tools {
     return instance;
   }
 
-  Future<String> get_Chapter() async {
-    var result = "";
+  Future<List<String>> get_Chapter() async {
+    List<String> result = [];
     final text = await currBible!.getChapter(currVerse);
 
     for (var i = 0; i < text.length; i++) {
-      result += " <l>${i + 1}</l> ${text[i]}\n";
+      final line = " <l>${i + 1}</l> ${text[i]}\n";
+      result.add(line.removeTags());
     }
-    return result.removeTags();
+
+    return result;
   }
 
   setCurrBible(String name) {

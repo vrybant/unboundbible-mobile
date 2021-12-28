@@ -6,6 +6,9 @@ import 'package:desktop_window/desktop_window.dart'; // for desktop
 import 'lib.dart';
 import "tools.dart";
 
+const double textSize = 24;
+List<String> lines = [];
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -18,7 +21,7 @@ void main() async {
   await copyDefaultsFiles();
   Tools tools = await Tools.create();
   tools.setCurrBible("*");
-//final lines = await tools.get_Chapter();
+  lines = await tools.get_Chapter();
 //for (var s in lines.split("\n")) print("$s");
 
   runApp(const MyApp());
@@ -47,11 +50,14 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Home',
-      style: optionStyle,
+  static const TextStyle optionStyle = TextStyle(fontSize: 20);
+
+  static final List<Widget> _widgetOptions = <Widget>[
+    ListView.builder(
+      itemCount: lines.length,
+      itemBuilder: (BuildContext context, int index) {
+        return Text(lines[index], style: optionStyle);
+      },
     ),
     Text(
       'Business',
