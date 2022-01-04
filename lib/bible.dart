@@ -158,7 +158,7 @@ class Bible extends Module {
   Future<List<String>> getChapter(Verse verse) async {
     List<String> result = [];
     var id = encodeID(verse.book).toString();
-    var nt = isNewTestament(verse.book);
+    // var nt = isNewTestament(verse.book);
 
     var query =
         "SELECT * FROM ${z.bible} WHERE ${z.book} = $id AND ${z.chapter} = ${verse.chapter}";

@@ -54,6 +54,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     ListView.builder(
+      padding: EdgeInsets.only(top: 10),
+//    padding: EdgeInsets.symmetric(horizontal: 10),
       itemCount: lines.length,
       itemBuilder: (BuildContext context, int index) {
         return Text(lines[index], style: optionStyle);
