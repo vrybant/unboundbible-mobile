@@ -5,6 +5,9 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart'; // for desktop
 import 'package:desktop_window/desktop_window.dart'; // for desktop
 import 'lib.dart';
 import "tools.dart";
+import 'tab_item.dart';
+import 'bottom_navigation.dart';
+import 'tab_navigator.dart';
 
 const double textSize = 24;
 List<String> lines = [];
@@ -30,12 +33,15 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'Flutter Code Sample';
+  static const String _title = 'Unbound Bible';
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: _title,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       home: MyStatefulWidget(),
     );
   }
@@ -49,7 +55,24 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  var _currentTab = TabItem.bible;
   int _selectedIndex = 0;
+
+  final _navigatorKeys = {
+    TabItem.bible: GlobalKey<NavigatorState>(),
+    TabItem.search: GlobalKey<NavigatorState>(),
+    TabItem.compare: GlobalKey<NavigatorState>(),
+  };
+
+  void _selectTab(TabItem tabItem) {
+    if (tabItem == _currentTab) {
+      // pop to first route
+      _navigatorKeys[tabItem]!.currentState!.popUntil((route) => route.isFirst);
+    } else {
+      setState(() => _currentTab = tabItem);
+    }
+  }
+
   static const TextStyle optionStyle = TextStyle(fontSize: 20);
 
   static final List<Widget> _widgetOptions = <Widget>[
@@ -79,31 +102,52 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
+    return WillPopScope(
+      onWillPop: () async {
+        final isFirstRouteInCurrentTab =
+            !await _navigatorKeys[_currentTab]!.currentState!.maybePop();
+        if (isFirstRouteInCurrentTab) {
+          // if not on the 'main' tab
+          if (_currentTab != TabItem.bible) {
+            // select 'main' tab
+            _selectTab(TabItem.bible);
+            // back button handled by app
+            return false;
+          }
+        }
+        // let system handle back button if we're on the first route
+        return isFirstRouteInCurrentTab;
+      },
+      child: Scaffold(
+//      appBar: AppBar(
+//        backgroundColor: Colors.blue,
+//        toolbarHeight: 20,
+//      ),
+
+//        body: Center(
+//          child: _widgetOptions.elementAt(_selectedIndex),
+//        ),
+
+        body: Stack(children: <Widget>[
+          _buildOffstageNavigator(TabItem.bible),
+          _buildOffstageNavigator(TabItem.search),
+          _buildOffstageNavigator(TabItem.compare),
+        ]),
+
+        bottomNavigationBar: BottomNavigation(
+          currentTab: _currentTab,
+          onSelectTab: _selectTab,
+        ),
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
+    );
+  }
+
+  Widget _buildOffstageNavigator(TabItem tabItem) {
+    return Offstage(
+      offstage: _currentTab != tabItem,
+      child: TabNavigator(
+        navigatorKey: _navigatorKeys[tabItem],
+        tabItem: tabItem,
       ),
     );
   }
