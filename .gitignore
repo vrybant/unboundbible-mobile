@@ -45,4 +45,13 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+# 
+android/
+ios/
+web/
+windows/
+macos/
+linux/
+
 *.SQLite3
+

@@ -1,13 +1,10 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart'; // for desktop
-import 'package:desktop_window/desktop_window.dart'; // for desktop
 import 'lib.dart';
 import "tools.dart";
 import 'tab_item.dart';
 import 'bottom_navigation.dart';
 import 'tab_navigator.dart';
+import 'bible_page.dart';
 
 const double textSize = 24;
 List<String> lines = [];
@@ -15,11 +12,11 @@ List<String> lines = [];
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    await DesktopWindow.setMaxWindowSize(Size(400, 700));
-    sqfliteFfiInit(); // initialize FFI
-    databaseFactory = databaseFactoryFfi; // change the default factory
-  }
+  // if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+  //   await DesktopWindow.setMaxWindowSize(Size(400, 700));
+  //   sqfliteFfiInit(); // initialize FFI
+  //   databaseFactory = databaseFactoryFfi; // change the default factory
+  // }
 
   await copyDefaultsFiles();
   Tools tools = await Tools.create();
@@ -56,7 +53,9 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   var _currentTab = TabItem.bible;
+  /*
   int _selectedIndex = 0;
+  */
 
   final _navigatorKeys = {
     TabItem.bible: GlobalKey<NavigatorState>(),
@@ -77,7 +76,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     ListView.builder(
-      padding: EdgeInsets.only(top: 10),
+//    padding: EdgeInsets.only(top: 10),
 //    padding: EdgeInsets.symmetric(horizontal: 10),
       itemCount: lines.length,
       itemBuilder: (BuildContext context, int index) {
@@ -94,11 +93,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     ),
   ];
 
+  /*
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
+  */
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +130,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 //        ),
 
         body: Stack(children: <Widget>[
-          _buildOffstageNavigator(TabItem.bible),
+          _widgetOptions.elementAt(0),
+//        _buildOffstageNavigator(TabItem.bible),
           _buildOffstageNavigator(TabItem.search),
           _buildOffstageNavigator(TabItem.compare),
         ]),
