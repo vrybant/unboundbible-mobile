@@ -1,3 +1,3 @@
-# unboundbible-fe
+# unboundbible-flutter
 
 Unbound Bible Flutter Edition
