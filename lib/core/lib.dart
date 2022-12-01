@@ -24,7 +24,7 @@ Future<void> copyDefaultsFiles() async {
   for (var file in files) {
     final path = join(databasesPath, file);
 
-    // await deleteDatabase(filePath); // getting a fresh copy from the asset
+    await deleteDatabase(path); // getting a fresh copy from the asset
     final exists = await databaseExists(path);
 
     if (!exists) {
