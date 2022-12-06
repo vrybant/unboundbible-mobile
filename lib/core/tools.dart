@@ -3,6 +3,9 @@
 import 'extensions.dart';
 import 'bible.dart';
 
+Tools? tools = null;
+List<String>? lines = null;
+
 class Tools {
   Bible? currBible;
   Verse currVerse = Verse();

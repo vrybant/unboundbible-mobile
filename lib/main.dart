@@ -4,7 +4,6 @@ import 'core/tools.dart';
 import 'main_page.dart';
 
 const double textSize = 10;
-List<String> lines = [];
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,9 +13,9 @@ void main() async {
   // }
 
   await copyDefaultsFiles();
-  Tools tools = await Tools.create();
-  tools.setCurrBible("*");
-  lines = await tools.get_Chapter();
+  tools = await Tools.create();
+  tools!.setCurrBible("*");
+  lines = await tools!.get_Chapter();
 
   runApp(const MyApp());
 }
@@ -34,7 +33,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyStatefulWidget(),
+      home: BasicStatefulWidget(),
     );
   }
 }

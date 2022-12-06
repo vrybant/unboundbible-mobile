@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ColorsListPage extends StatelessWidget {
-  ColorsListPage({required this.color, required this.title, this.onPush});
-  final MaterialColor color;
-  final String title;
-  final ValueChanged<int>? onPush;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            title,
+            "ColorsList",
           ),
-          backgroundColor: color,
+          backgroundColor: Colors.green,
         ),
         body: Container(
           color: Colors.white,
@@ -21,18 +16,7 @@ class ColorsListPage extends StatelessWidget {
         ));
   }
 
-  final List<int> materialIndices = [
-    900,
-    800,
-    700,
-    600,
-    500,
-    400,
-    300,
-    200,
-    100,
-    50
-  ];
+  final List<int> materialIndices = [901, 800, 700, 600, 500, 400, 300, 200, 100, 50, 25, 5];
 
   Widget _buildList() {
     return ListView.builder(
@@ -40,11 +24,11 @@ class ColorsListPage extends StatelessWidget {
         itemBuilder: (BuildContext content, int index) {
           int materialIndex = materialIndices[index];
           return Container(
-            color: color[materialIndex],
+            color: Colors.grey,
             child: ListTile(
               title: Text('$materialIndex', style: TextStyle(fontSize: 24.0)),
               trailing: Icon(Icons.chevron_right),
-              onTap: () => onPush?.call(materialIndex),
+//            onTap: () => onPush?.call(materialIndex),
             ),
           );
         });

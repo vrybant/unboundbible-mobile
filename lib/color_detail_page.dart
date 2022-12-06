@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
 
 class ColorDetailPage extends StatelessWidget {
-  ColorDetailPage(
-      {required this.color, required this.title, this.materialIndex: 500});
-  final MaterialColor color;
-  final String title;
-  final int materialIndex;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: color,
+        backgroundColor: Colors.black,
         title: Text(
-          '$title[$materialIndex]',
+          'Detail',
         ),
       ),
       body: Container(
-        color: color[materialIndex],
+        color: Colors.indigo,
       ),
     );
   }

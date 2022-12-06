@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'tab_item.dart';
-import 'bottom_navigation.dart';
-import 'tab_navigator.dart';
-import 'main.dart';
+import 'bible_page.dart';
+import 'colors_list_page.dart';
+import 'color_detail_page.dart';
 
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
+class BasicStatefulWidget extends StatefulWidget {
+  const BasicStatefulWidget({Key? key}) : super(key: key);
 
   @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+  State<BasicStatefulWidget> createState() => _BasicStatefulWidgetState();
 }
 
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class _BasicStatefulWidgetState extends State<BasicStatefulWidget> {
   var _currentTab = TabItem.bible;
-  /*
   int _selectedIndex = 0;
-  */
+
+  final screens = [
+    BiblePage(),
+    ColorsListPage(),
+    ColorDetailPage(),
+  ];
 
   final _navigatorKeys = {
     TabItem.bible: GlobalKey<NavigatorState>(),
@@ -32,34 +36,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     }
   }
 
-  static const TextStyle optionStyle = TextStyle(fontSize: 20);
-
-  static final List<Widget> _widgetOptions = <Widget>[
-    ListView.builder(
-//    padding: EdgeInsets.only(top: 10),
-//    padding: EdgeInsets.symmetric(horizontal: 10),
-      itemCount: lines.length,
-      itemBuilder: (BuildContext context, int index) {
-        return Text(lines[index], style: optionStyle);
-      },
-    ),
-    Text(
-      'Business',
-      style: optionStyle,
-    ),
-    Text(
-      'School',
-      style: optionStyle,
-    ),
-  ];
-
-  /*
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
-  */
 
   @override
   Widget build(BuildContext context) {
@@ -79,36 +60,36 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         return isFirstRouteInCurrentTab;
       },
       child: Scaffold(
-//      appBar: AppBar(
-//        backgroundColor: Colors.blue,
-//        toolbarHeight: 20,
-//      ),
-
-//        body: Center(
-//          child: _widgetOptions.elementAt(_selectedIndex),
-//        ),
-
-        body: Stack(children: <Widget>[
-          _widgetOptions.elementAt(0),
-//        _buildOffstageNavigator(TabItem.bible),
-          _buildOffstageNavigator(TabItem.search),
-          _buildOffstageNavigator(TabItem.compare),
-        ]),
-
-        bottomNavigationBar: BottomNavigation(
-          currentTab: _currentTab,
-          onSelectTab: _selectTab,
+        body: Center(
+          child: screens.elementAt(_selectedIndex),
         ),
-      ),
-    );
-  }
-
-  Widget _buildOffstageNavigator(TabItem tabItem) {
-    return Offstage(
-      offstage: _currentTab != tabItem,
-      child: TabNavigator(
-        navigatorKey: _navigatorKeys[tabItem],
-        tabItem: tabItem,
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.blue,
+          iconSize: 28,
+          selectedFontSize: 12,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.business),
+              label: 'Business',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.school),
+              label: 'School',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Settings',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.amber[800],
+          onTap: _onItemTapped,
+        ),
       ),
     );
   }
