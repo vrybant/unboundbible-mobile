@@ -118,7 +118,7 @@ class Bible extends Module {
     } catch (e) {
       debugPrint("$e");
     }
-    print("loadUnboundDatabase: $fileName");
+//  print("load database: $fileName");
   }
 
   Future loadMyswordDatabase() async {
@@ -160,8 +160,7 @@ class Bible extends Module {
     var id = encodeID(verse.book).toString();
     // var nt = isNewTestament(verse.book);
 
-    var query =
-        "SELECT * FROM ${z.bible} WHERE ${z.book} = $id AND ${z.chapter} = ${verse.chapter}";
+    var query = "SELECT * FROM ${z.bible} WHERE ${z.book} = $id AND ${z.chapter} = ${verse.chapter}";
 
     try {
       final List<Map<String, dynamic>> maps = await database!.rawQuery(query);

@@ -13,8 +13,6 @@ Future<void> copyFileFromBundle(String fromPath, String toPath) async {
   ByteData data = await rootBundle.load(fromPath);
   List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
   await File(toPath).writeAsBytes(bytes, flush: true);
-  print(fromPath);
-  print(toPath);
 }
 
 Future<void> copyDefaultsFiles() async {
