@@ -67,11 +67,17 @@ class Module {
   }
 
   Future _opendatabase() async {
-    database = await openDatabase(filePath, readOnly: true);
+    try {
+      database = await openDatabase(filePath, readOnly: true);
+    } catch (e) {
+      debugPrint("$e");
+      return;
+    }
 
     if ((format == FileFormat.unbound) | (format == FileFormat.mysword)) {
       try {
-        final List<Map<String, dynamic>> maps = await database!.query("Details");
+        final List<Map<String, dynamic>> maps =
+            await database!.query("Details");
 
         if (maps.isNotEmpty) {
           info = maps[0]["Information"] ?? "";
@@ -158,7 +164,8 @@ class Module {
     table = table.toLowerCase();
     var result = false;
     try {
-      final List<Map<String, dynamic>> maps = await database!.query("sqlite_master");
+      final List<Map<String, dynamic>> maps =
+          await database!.query("sqlite_master");
       List.generate(maps.length, (i) {
         final name = maps[i]["name"] ?? "";
         if (name.toLowerCase() == table) result = true;
