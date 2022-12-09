@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'core/lib.dart';
 import 'core/tools.dart';
@@ -12,7 +14,10 @@ void main() async {
   //   await DesktopWindow.setMaxWindowSize(Size(400, 700));
   // }
 
-  await copyDefaultsFiles();
+  if (!await Directory(await getDatabasesDirectory()).exists()) {
+    await installDatabasesFromAssets();
+  }
+
   tools = await Tools.create();
   tools!.setCurrBible("*");
   lines = await tools!.get_Chapter();

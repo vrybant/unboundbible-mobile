@@ -1,6 +1,5 @@
 import 'dart:io';
-// import 'dart:js';
-//import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -26,42 +25,18 @@ Future<String> getDatabasesDirectory() async {
   return context.join(path, 'databases');
 }
 
-Future<void> copyDefaultsFiles() async {
+Future<void> installDatabasesFromAssets() async {
   final databasesPath = await getDatabasesDirectory();
-  var files = databaseList;
+  await Directory(databasesPath).create();
 
-  print("~~~ directory ~~~");
-  print(databasesPath);
+  for (var file in databasesList) {
+    final filePath = join(databasesPath, file);
 
-  for (var file in files) {
-    final path = join(databasesPath, file);
-
-/*
-//  await deleteDatabase(path); // getting a fresh copy from the asset
+    final source = context.join('assets', 'databases', file);
     try {
-      await File(path).delete();
+      await copyFileFromBundle(source.toString(), filePath);
     } catch (e) {
       debugPrint("$e");
-    }
-*/
-
-    final exists = false; //await File(path).exists();
-
-    if (!exists) {
-      // make sure the parent directory exists
-      try {
-        await Directory(dirname(path)).create(recursive: true);
-      } catch (_) {
-        //
-      }
-
-      try {
-        final source = context.join('assets', 'databases', file);
-        await copyFileFromBundle(source.toString(), path);
-        print(source.toString() + ' ~ ' + path);
-      } catch (_) {
-        //
-      }
     }
   }
 }

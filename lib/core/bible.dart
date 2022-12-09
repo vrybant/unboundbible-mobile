@@ -229,7 +229,7 @@ extension Bibles on List<Bible> {
   Future _init() async {
     _databasesPath = await getDatabasesDirectory();
 
-    for (var file in databaseList) {
+    for (var file in databasesList) {
       if (file.contains(".bbl.") | file.hasSuffix(".SQLite3")) {
         final filePath = join(_databasesPath!, file);
         var bible = await Bible.create(filePath);
