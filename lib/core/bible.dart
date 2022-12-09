@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:sqlite3/sqlite3.dart';
 import 'utils.dart';
 import 'extensions.dart';
 import 'module.dart';
@@ -101,7 +101,7 @@ class Bible extends Module {
     await super.init();
     if (format == FileFormat.mybible) z = MybibleAlias();
     if (connected && !(await tableExists(z.bible))) connected = false;
-    if (connected) await loadDatabase(); // TEMP
+//    if (connected) await loadDatabase(); // TEMP
 //  prints();
   }
 
@@ -115,7 +115,7 @@ class Bible extends Module {
     final query = "SELECT * FROM ${z.books}";
 
     try {
-      final List<Map<String, dynamic>> maps = await database!.rawQuery(query);
+      final ResultSet maps = database!.select(query);
 
       List.generate(maps.length, (i) {
         final id = maps[i][z.number] ?? 0;
@@ -140,7 +140,7 @@ class Bible extends Module {
     final query = "SELECT DISTINCT ${z.book} FROM ${z.bible}";
 
     try {
-      final List<Map<String, dynamic>> maps = await database!.rawQuery(query);
+      final ResultSet maps = database!.select(query);
 
       List.generate(maps.length, (i) {
         final num = maps[i][z.book] ?? 0;
@@ -179,7 +179,7 @@ class Bible extends Module {
         "SELECT * FROM ${z.bible} WHERE ${z.book} = $id AND ${z.chapter} = ${verse.chapter}";
 
     try {
-      final List<Map<String, dynamic>> maps = await database!.rawQuery(query);
+      final ResultSet maps = await database!.select(query);
 
       List.generate(maps.length, (i) {
         final line = maps[i][z.text];
@@ -203,6 +203,7 @@ class Bible extends Module {
     return result;
   }
 
+  /*  
   Future chaptersCount(Verse verse) async {
     var result = 0;
     var id = encodeID(verse.book).toString();
@@ -215,6 +216,7 @@ class Bible extends Module {
     }
     return result;
   }
+  */
 }
 
 extension Bibles on List<Bible> {
@@ -232,6 +234,7 @@ extension Bibles on List<Bible> {
     for (var file in databasesList) {
       if (file.contains(".bbl.") | file.hasSuffix(".SQLite3")) {
         final filePath = join(_databasesPath!, file);
+        print(' ~ ' + filePath);
         var bible = await Bible.create(filePath);
         if (bible.connected) add(bible);
       }

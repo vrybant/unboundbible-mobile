@@ -18,6 +18,8 @@ void main() async {
     await installDatabasesFromAssets();
   }
 
+  // print(sqlite3.version);
+
   tools = await Tools.create();
   tools!.setCurrBible("*");
   lines = await tools!.get_Chapter();

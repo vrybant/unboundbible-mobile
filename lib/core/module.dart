@@ -9,7 +9,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:sqlite3/sqlite3.dart';
 import 'package:collection/collection.dart';
 
 import 'extensions.dart';
@@ -67,17 +67,11 @@ class Module {
   }
 
   Future _opendatabase() async {
-    try {
-      database = await openDatabase(filePath, readOnly: true);
-    } catch (e) {
-      debugPrint("$e");
-      return;
-    }
+    database = await sqlite3.open(filePath);
 
     if ((format == FileFormat.unbound) | (format == FileFormat.mysword)) {
       try {
-        final List<Map<String, dynamic>> maps =
-            await database!.query("Details");
+        final ResultSet maps = database!.select('SELECT * FROM Details');
 
         if (maps.isNotEmpty) {
           info = maps[0]["Information"] ?? "";
@@ -99,7 +93,7 @@ class Module {
 
     if (format == FileFormat.mybible) {
       try {
-        final List<Map<String, dynamic>> maps = await database!.query("info");
+        final ResultSet maps = database!.select('SELECT * FROM "info', []);
 
         List.generate(maps.length, (i) {
           final key = maps[i]["name"] ?? "";
@@ -164,8 +158,7 @@ class Module {
     table = table.toLowerCase();
     var result = false;
     try {
-      final List<Map<String, dynamic>> maps =
-          await database!.query("sqlite_master");
+      final ResultSet maps = database!.select('SELECT * FROM sqlite_master');
       List.generate(maps.length, (i) {
         final name = maps[i]["name"] ?? "";
         if (name.toLowerCase() == table) result = true;
