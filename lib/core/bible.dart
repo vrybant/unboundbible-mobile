@@ -55,38 +55,24 @@ class MybibleAlias extends UnboundAlias {
 }
 
 const titlesArray = [
-  "", "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Joshua",
-  "Judges", //
-  "Ruth", "1 Samuel", "2 Samuel", "1 Kings", "2 Kings", "1 Chronicles",
-  "2 Chronicles", //
-  "Ezra", "Nehemiah", "Esther", "Job", "Psalms", "Proverbs", "Ecclesiastes",
-  "Song of Songs", //
-  "Isaiah", "Jeremiah", "Lamentations", "Ezekiel", "Daniel", "Hosea", "Joel",
-  "Amos", //
-  "Obadiah", "Jonah", "Micah", "Nahum", "Habakkuk", "Zephaniah", "Haggai",
-  "Zechariah",
-  "Malachi", "Matthew", "Mark", "Luke", "John", "Acts", "Romans",
-  "1 Corinthians", //
+  "", "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Joshua", "Judges", //
+  "Ruth", "1 Samuel", "2 Samuel", "1 Kings", "2 Kings", "1 Chronicles", "2 Chronicles", //
+  "Ezra", "Nehemiah", "Esther", "Job", "Psalms", "Proverbs", "Ecclesiastes", "Song of Songs", //
+  "Isaiah", "Jeremiah", "Lamentations", "Ezekiel", "Daniel", "Hosea", "Joel", "Amos", //
+  "Obadiah", "Jonah", "Micah", "Nahum", "Habakkuk", "Zephaniah", "Haggai", "Zechariah",
+  "Malachi", "Matthew", "Mark", "Luke", "John", "Acts", "Romans", "1 Corinthians", //
   "2 Corinthians", "Galatians", "Ephesians", "Philippians", "Colossians", //
-  "1 Thessalonians", "2 Thessalonians", "1 Timothy", "2 Timothy", "Titus",
-  "Philemon", //
-  "Hebrews", "James", "1 Peter", "2 Peter", "1 John", "2 John", "3 John",
-  "Jude", "Revelation"
+  "1 Thessalonians", "2 Thessalonians", "1 Timothy", "2 Timothy", "Titus", "Philemon", //
+  "Hebrews", "James", "1 Peter", "2 Peter", "1 John", "2 John", "3 John", "Jude", "Revelation"
 ];
 
 const abbrevArray = [
-  "", "Gen.", "Ex.", "Lev.", "Num.", "Deut.", "Josh.", "Judg.", "Ruth",
-  "1 Sam.", "2 Sam.", //
-  "1 Kin.", "2 Kin.", "1 Chr.", "2 Chr.", "Ezra", "Neh.", "Esth.", "Job", "Ps.",
-  "Prov.", //
-  "Eccl.", "Song", "Is.", "Jer.", "Lam.", "Ezek.", "Dan.", "Hos.", "Joel",
-  "Amos", "Obad.", //
-  "Jon.", "Mic.", "Nah.", "Hab.", "Zeph.", "Hag.", "Zech.", "Mal.", "Matt.",
-  "Mark", "Luke", //
-  "John", "Acts", "Rom.", "1 Cor.", "2 Cor.", "Gal.", "Eph.", "Phil.", "Col.",
-  "1 Thess.", //
-  "2 Thess.", "1 Tim.", "2 Tim.", "Titus", "Philem.", "Heb.", "James", "1 Pet.",
-  "2 Pet.", //
+  "", "Gen.", "Ex.", "Lev.", "Num.", "Deut.", "Josh.", "Judg.", "Ruth", "1 Sam.", "2 Sam.", //
+  "1 Kin.", "2 Kin.", "1 Chr.", "2 Chr.", "Ezra", "Neh.", "Esth.", "Job", "Ps.", "Prov.", //
+  "Eccl.", "Song", "Is.", "Jer.", "Lam.", "Ezek.", "Dan.", "Hos.", "Joel", "Amos", "Obad.", //
+  "Jon.", "Mic.", "Nah.", "Hab.", "Zeph.", "Hag.", "Zech.", "Mal.", "Matt.", "Mark", "Luke", //
+  "John", "Acts", "Rom.", "1 Cor.", "2 Cor.", "Gal.", "Eph.", "Phil.", "Col.", "1 Thess.", //
+  "2 Thess.", "1 Tim.", "2 Tim.", "Titus", "Philem.", "Heb.", "James", "1 Pet.", "2 Pet.", //
   "1 John", "2 John", "3 John", "Jude", "Rev." //
 ];
 
@@ -185,8 +171,7 @@ class Bible extends Module {
         final line = maps[i][z.text];
 
         if (line != null) {
-          var text =
-              line; // = preparation(line, format: format, nt: nt, purge: false)
+          var text = line; // = preparation(line, format: format, nt: nt, purge: false)
           result.add(text);
         }
       });

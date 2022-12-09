@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:sqlite3/sqlite3.dart';
 import 'core/lib.dart';
 import 'core/tools.dart';
 import 'main_page.dart';
@@ -8,7 +9,13 @@ import 'main_page.dart';
 const double textSize = 10;
 
 void main() async {
+  print(sqlite3.version);
+
   WidgetsFlutterBinding.ensureInitialized();
+
+  if (Platform.isAndroid) {
+    print('***** isAndroid *****' + Platform.localeName);
+  }
 
   // if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
   //   await DesktopWindow.setMaxWindowSize(Size(400, 700));
@@ -17,8 +24,6 @@ void main() async {
   if (!await Directory(await getDatabasesDirectory()).exists()) {
     await installDatabasesFromAssets();
   }
-
-  // print(sqlite3.version);
 
   tools = await Tools.create();
   tools!.setCurrBible("*");

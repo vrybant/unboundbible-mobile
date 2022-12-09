@@ -1,12 +1,3 @@
-// https://docs.flutter.dev/cookbook/persistence/sqlite
-// https://camposha.info/flutter/ru/flutter-sqflite/#gsc.tab=0
-
-// Even on iOS you could write a native plugin that get the asset file path
-// and directly open it in read-only mode. Android does not have such ability.
-
-// https://github.com/tekartik/sqflite/blob/master/sqflite_common_ffi/doc/using_ffi_instead_of_sqflite.md
-// "In release mode, add sqlite3.dll in same folder as your executable."
-
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:sqlite3/sqlite3.dart';

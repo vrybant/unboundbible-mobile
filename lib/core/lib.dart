@@ -6,16 +6,17 @@ import 'package:path_provider/path_provider.dart';
 import 'extensions.dart';
 import 'utils.dart';
 
+String locale() {
+  return Platform.localeName; // ru_RU
+}
+
 bool getRightToLeft(String language) {
-  return language.hasPrefix("he") |
-      language.hasPrefix("ara") |
-      language.hasPrefix("fa");
+  return language.hasPrefix("he") | language.hasPrefix("ara") | language.hasPrefix("fa");
 }
 
 Future<void> copyFileFromBundle(String fromPath, String toPath) async {
   ByteData data = await rootBundle.load(fromPath);
-  List<int> bytes =
-      data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+  List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
   await File(toPath).writeAsBytes(bytes, flush: true);
 }
 
