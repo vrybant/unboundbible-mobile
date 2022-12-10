@@ -188,7 +188,7 @@ class Bible extends Module {
   Future chaptersCount(Verse verse) async {
     var result = 0;
     var id = encodeID(verse.book).toString();
-    var query = "SELECT max(${z.chapter}) as count from ${z.bible} where ${z.book} = ?";
+    var query = "SELECT max(${z.chapter}) AS count from ${z.bible} WHERE ${z.book} = ?";
     try {
       result = Sqflite.firstIntValue(await database!.rawQuery(query)) ?? 0;
     } catch (e) {
