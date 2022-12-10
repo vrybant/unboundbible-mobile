@@ -62,7 +62,7 @@ class Module {
 
     if ((format == FileFormat.unbound) | (format == FileFormat.mysword)) {
       try {
-        final ResultSet maps = database!.select('SELECT * FROM Details');
+        final maps = database!.select('SELECT * FROM Details');
 
         if (maps.isNotEmpty) {
           info = maps[0]["Information"] ?? "";
@@ -84,7 +84,7 @@ class Module {
 
     if (format == FileFormat.mybible) {
       try {
-        final ResultSet maps = database!.select('SELECT * FROM "info', []);
+        final maps = database!.select('SELECT * FROM info');
 
         List.generate(maps.length, (i) {
           final key = maps[i]["name"] ?? "";
@@ -146,14 +146,11 @@ class Module {
   }
 
   Future<bool> tableExists(String table) async {
-    table = table.toLowerCase();
     var result = false;
     try {
-      final ResultSet maps = database!.select('SELECT * FROM sqlite_master');
-      List.generate(maps.length, (i) {
-        final name = maps[i]["name"] ?? "";
-        if (name.toLowerCase() == table) result = true;
-      });
+      final query = 'SELECT * FROM sqlite_master WHERE type=? AND name=?';
+      final map = database!.select(query, ['table', table]);
+      result = map.isNotEmpty;
     } catch (e) {
       debugPrint("$e");
     }

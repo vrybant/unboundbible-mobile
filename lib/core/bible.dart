@@ -98,10 +98,9 @@ class Bible extends Module {
   }
 
   Future loadUnboundDatabase() async {
-    final query = "SELECT * FROM ${z.books}";
-
     try {
-      final ResultSet maps = database!.select(query);
+      final query = "SELECT * FROM ${z.books}";
+      final maps = database!.select(query);
 
       List.generate(maps.length, (i) {
         final id = maps[i][z.number] ?? 0;
@@ -123,10 +122,9 @@ class Bible extends Module {
   }
 
   Future loadMyswordDatabase() async {
-    final query = "SELECT DISTINCT ${z.book} FROM ${z.bible}";
-
     try {
-      final ResultSet maps = database!.select(query);
+      final query = "SELECT DISTINCT ${z.book} FROM ${z.bible}";
+      final maps = database!.select(query);
 
       List.generate(maps.length, (i) {
         final num = maps[i][z.book] ?? 0;
@@ -161,11 +159,9 @@ class Bible extends Module {
     var id = encodeID(verse.book).toString();
     // var nt = isNewTestament(verse.book);
 
-    var query =
-        "SELECT * FROM ${z.bible} WHERE ${z.book} = $id AND ${z.chapter} = ${verse.chapter}";
-
     try {
-      final ResultSet maps = await database!.select(query);
+      final query = "SELECT * FROM ${z.bible} WHERE ${z.book}=? AND ${z.chapter}=?";
+      final maps = database!.select(query, ['$id', '${verse.chapter}']);
 
       List.generate(maps.length, (i) {
         final line = maps[i][z.text];
@@ -188,12 +184,11 @@ class Bible extends Module {
     return result;
   }
 
-  /*  
+  /*
   Future chaptersCount(Verse verse) async {
     var result = 0;
     var id = encodeID(verse.book).toString();
-    var query =
-        "select max(${z.chapter}) as count from ${z.bible} where ${z.book} = $id";
+    var query = "SELECT max(${z.chapter}) as count from ${z.bible} where ${z.book} = ?";
     try {
       result = Sqflite.firstIntValue(await database!.rawQuery(query)) ?? 0;
     } catch (e) {
@@ -201,7 +196,7 @@ class Bible extends Module {
     }
     return result;
   }
-  */
+   */
 }
 
 extension Bibles on List<Bible> {
