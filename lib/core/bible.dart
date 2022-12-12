@@ -154,7 +154,7 @@ class Bible extends Module {
     }
   }
 
-  Future<List<String>> getChapter(Verse verse) async {
+  List<String> getChapter(Verse verse) {
     List<String> result = [];
     var id = encodeID(verse.book).toString();
     // var nt = isNewTestament(verse.book);
@@ -188,9 +188,9 @@ class Bible extends Module {
     var result = 0;
     final id = encodeID(verse.book);
     try {
-      final query = "SELECT MAX(${z.chapter}) AS count FROM ${z.bible} WHERE ${z.book} = ?";
+      final query = "SELECT MAX(${z.chapter}) AS Count FROM ${z.bible} WHERE ${z.book} = ?";
       final map = database!.select(query, ['$id']);
-      result = map[0]['count'] ?? 0;
+      result = map[0]['Count'] ?? 0;
     } catch (e) {
       debugPrint("$e");
     }

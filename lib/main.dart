@@ -27,7 +27,7 @@ void main() async {
 
   tools = await Tools.create();
   tools!.setCurrBible("*");
-  lines = await tools!.get_Chapter();
+  lines = tools!.get_Chapter();
 
   runApp(const MyApp());
 }
