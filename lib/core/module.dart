@@ -145,7 +145,7 @@ class Module {
     return (n >= 40) & (n < 77);
   }
 
-  Future<bool> tableExists(String table) async {
+  bool tableExists(String table) {
     var result = false;
     try {
       final query = 'SELECT * FROM sqlite_master WHERE type=? AND name=?';

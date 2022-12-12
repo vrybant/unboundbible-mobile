@@ -86,7 +86,7 @@ class Bible extends Module {
   Future init() async {
     await super.init();
     if (format == FileFormat.mybible) z = MybibleAlias();
-    if (connected && !(await tableExists(z.bible))) connected = false;
+    if (connected && !tableExists(z.bible)) connected = false;
 //    if (connected) await loadDatabase(); // TEMP
 //  prints();
   }
@@ -184,19 +184,18 @@ class Bible extends Module {
     return result;
   }
 
-  /*
-  Future chaptersCount(Verse verse) async {
+  int chaptersCount(Verse verse) {
     var result = 0;
-    var id = encodeID(verse.book).toString();
-    var query = "SELECT max(${z.chapter}) AS count from ${z.bible} WHERE ${z.book} = ?";
+    final id = encodeID(verse.book);
     try {
-      result = Sqflite.firstIntValue(await database!.rawQuery(query)) ?? 0;
+      final query = "SELECT MAX(${z.chapter}) AS count FROM ${z.bible} WHERE ${z.book} = ?";
+      final map = database!.select(query, ['$id']);
+      result = map[0]['count'] ?? 0;
     } catch (e) {
       debugPrint("$e");
     }
     return result;
   }
-   */
 }
 
 extension Bibles on List<Bible> {
