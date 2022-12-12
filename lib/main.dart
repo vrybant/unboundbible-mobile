@@ -9,13 +9,7 @@ import 'main_page.dart';
 const double textSize = 10;
 
 void main() async {
-  print(sqlite3.version);
-
   WidgetsFlutterBinding.ensureInitialized();
-
-  if (Platform.isAndroid) {
-    print('***** isAndroid *****' + Platform.localeName);
-  }
 
   // if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
   //   await DesktopWindow.setMaxWindowSize(Size(400, 700));

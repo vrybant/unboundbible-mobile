@@ -25,9 +25,9 @@ class Tools {
     return instance;
   }
 
-  Future<List<String>> get_Chapter() async {
+  List<String> get_Chapter() {
     List<String> result = [];
-    final text = await currBible!.getChapter(currVerse);
+    final text = currBible!.getChapter(currVerse);
 
     for (var i = 0; i < text.length; i++) {
       final line = " <l>${i + 1}</l> ${text[i]}\n";
