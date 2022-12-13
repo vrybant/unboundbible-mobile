@@ -13,6 +13,7 @@ dependencies:
   path_provider: ^2.0.11
   sqlite3_flutter_libs: ^0.5.12
   sqlite3: ^1.9.1
+  desktop_window: ^0.4.0
 
 dev_dependencies:
   flutter_test:

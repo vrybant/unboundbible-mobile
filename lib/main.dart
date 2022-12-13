@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:sqlite3/sqlite3.dart';
+import 'package:desktop_window/desktop_window.dart';
 import 'core/lib.dart';
 import 'core/tools.dart';
 import 'main_page.dart';
@@ -11,12 +11,14 @@ const double textSize = 10;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-  //   await DesktopWindow.setMaxWindowSize(Size(400, 700));
-  // }
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    await DesktopWindow.setWindowSize(Size(400, 700));
+  }
 
-  if (!await Directory(await getDatabasesDirectory()).exists()) {
-    await installDatabasesFromAssets();
+  if (Platform.isAndroid) {
+    if (!await Directory(await getDatabasesDirectory()).exists()) {
+      await installDatabasesFromAssets();
+    }
   }
 
   tools = await Tools.create();

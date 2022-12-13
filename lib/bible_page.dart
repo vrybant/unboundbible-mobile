@@ -19,9 +19,9 @@ class BiblePage extends StatelessWidget {
 
   Widget _buildList() {
     return ListView.builder(
-        itemCount: lines!.length,
+        itemCount: lines.length,
         itemBuilder: (BuildContext content, int index) {
-          var line = lines![index];
+          var line = lines[index];
           return Container(
             color: Colors.white,
             child: ListTile(

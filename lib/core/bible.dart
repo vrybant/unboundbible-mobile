@@ -213,7 +213,6 @@ extension Bibles on List<Bible> {
     for (var file in databasesList) {
       if (file.contains(".bbl.") | file.hasSuffix(".SQLite3")) {
         final filePath = join(_databasesPath!, file);
-        print(' ~ ' + filePath);
         var bible = await Bible.create(filePath);
         if (bible.connected) add(bible);
       }

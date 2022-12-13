@@ -21,6 +21,9 @@ Future<void> copyFileFromBundle(String fromPath, String toPath) async {
 }
 
 Future<String> getDatabasesDirectory() async {
+  if (Platform.isWindows) {
+    return r'C:\Users\Vladimir\Unbound Bible\';
+  }
   final directory = await getApplicationSupportDirectory();
   final path = directory.parent.path;
   return context.join(path, 'databases');

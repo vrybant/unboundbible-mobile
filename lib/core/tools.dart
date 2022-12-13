@@ -4,7 +4,7 @@ import 'extensions.dart';
 import 'bible.dart';
 
 Tools? tools = null;
-List<String>? lines = null;
+List<String> lines = [];
 
 class Tools {
   Bible? currBible;
