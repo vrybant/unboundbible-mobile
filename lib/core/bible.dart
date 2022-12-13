@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
-import 'package:sqlite3/sqlite3.dart';
 import 'utils.dart';
 import 'extensions.dart';
 import 'module.dart';
