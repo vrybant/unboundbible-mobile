@@ -9,14 +9,11 @@ List<String> lines = [];
 class Tools {
   Bible? currBible;
   Verse currVerse = Verse();
-
   List<Bible> bibles = [];
-//List<Commentaries> commentary = [];
-//List<Dictionaries> dictionary = [];
-//List<References> reference = [];
 
   Future _init() async {
     bibles = await Bibles.create();
+    currBible = bibles[0];
   }
 
   static Future<Tools> create() async {
@@ -26,6 +23,8 @@ class Tools {
   }
 
   List<String> get_Chapter() {
+    print('get_Chapter');
+
     List<String> result = [];
     final text = currBible!.getChapter(currVerse);
 
@@ -37,7 +36,12 @@ class Tools {
     return result;
   }
 
-  setCurrBible(String name) {
+  setCurrBible(int index) {
+    print('currBible = $index');
+    if (index < bibles.length) currBible = bibles[index];
+  }
+
+  setCurrBible_byName(String name) {
     if (bibles.length > 0) currBible = bibles[0];
 
     for (var bible in bibles) {

@@ -17,6 +17,11 @@ class ShelfPage extends StatelessWidget {
         ));
   }
 
+  void selectBible(int index) {
+    tools!.setCurrBible(index);
+    print(index);
+  }
+
   Widget _buildList() {
     return ListView.builder(
         itemCount: tools!.bibles.length,
@@ -27,7 +32,7 @@ class ShelfPage extends StatelessWidget {
             child: ListTile(
               title: Text(line, style: TextStyle(fontSize: 24.0)),
 //            trailing: Icon(Icons.chevron_right),
-//            onTap: () => onPush?.call(materialIndex),
+              onTap: () => selectBible(index),
             ),
           );
         });

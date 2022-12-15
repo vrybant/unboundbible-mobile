@@ -30,10 +30,11 @@ class _BasicStatefulWidgetState extends State<BasicStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: selectedIndex,
-        children: pages,
-      ),
+      body: pages[selectedIndex],
+      // body: IndexedStack(
+      //   index: selectedIndex,
+      //   children: pages,
+      // ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.blue,
