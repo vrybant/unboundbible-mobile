@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'bible_page.dart';
 import 'core/tools.dart';
 
-class ShelfPage extends StatelessWidget {
+class ShelfPage extends StatefulWidget {
+  @override
+  ShelfState createState() => ShelfState();
+}
+
+class ShelfState extends State<ShelfPage> with AutomaticKeepAliveClientMixin<ShelfPage> {
+  @override
+  void initState() {
+//  lines = tools!.get_Chapter();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +32,10 @@ class ShelfPage extends StatelessWidget {
   void selectBible(int index) {
     tools!.setCurrBible(index);
     print(index);
+    l = false;
   }
+
+  int current = 0;
 
   Widget _buildList() {
     return ListView.builder(
@@ -30,11 +45,23 @@ class ShelfPage extends StatelessWidget {
           return Container(
             color: Colors.white,
             child: ListTile(
+              dense: true,
               title: Text(line, style: TextStyle(fontSize: 24.0)),
-//            trailing: Icon(Icons.chevron_right),
-              onTap: () => selectBible(index),
+//            onTap: () => selectBible(index),
+              leading: Radio<int>(
+                value: index,
+                groupValue: current,
+                onChanged: (value) => setState(() {
+//              debugPrint(_dataList[value!]);
+                  current = value!;
+                  selectBible(current);
+                }),
+              ),
             ),
           );
         });
   }
+
+  @override
+  bool get wantKeepAlive => true; // l;
 }

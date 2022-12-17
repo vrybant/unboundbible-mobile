@@ -3,38 +3,59 @@ import 'package:unboundbible/shelf_page.dart';
 import 'bible_page.dart';
 import 'colors_list_page.dart';
 import 'color_detail_page.dart';
+import 'core/tools.dart';
 
-class BasicStatefulWidget extends StatefulWidget {
-  const BasicStatefulWidget({Key? key}) : super(key: key);
-
+class BasicWidget extends StatefulWidget {
+  const BasicWidget({Key? key}) : super(key: key);
   @override
-  State<BasicStatefulWidget> createState() => _BasicStatefulWidgetState();
+  BasicState createState() => BasicState();
 }
 
-class _BasicStatefulWidgetState extends State<BasicStatefulWidget> {
-  int selectedIndex = 0;
-
-  final pages = [
+class BasicState extends State<BasicWidget> {
+  var pages = [
     BiblePage(),
     ShelfPage(),
     ColorsListPage(),
     ColorDetailPage(),
   ];
+  int selectedIndex = 0;
+  late PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: selectedIndex);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   void _onItemTapped(int index) {
     setState(() {
       selectedIndex = index;
+      print(selectedIndex.toString());
+      print(l.toString());
+      lines = tools!.get_Chapter();
+      _pageController.jumpToPage(index);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[selectedIndex],
+      // body: pages[selectedIndex],
       // body: IndexedStack(
       //   index: selectedIndex,
       //   children: pages,
       // ),
+      body: PageView(
+        controller: _pageController,
+        physics: NeverScrollableScrollPhysics(),
+        children: pages,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.blue,

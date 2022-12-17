@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
 import 'core/tools.dart';
 
-class BiblePage extends StatelessWidget {
-  List<String> lines = [];
+bool l = true;
+
+class BiblePage extends StatefulWidget {
+  @override
+  BibleState createState() => BibleState();
+}
+
+class BibleState extends State<BiblePage> with AutomaticKeepAliveClientMixin<BiblePage> {
+  @override
+  void initState() {
+    lines = tools!.get_Chapter();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    lines = tools!.get_Chapter();
+    super.build(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Bible'),
@@ -19,11 +30,21 @@ class BiblePage extends StatelessWidget {
     );
   }
 
+  void _onTap() {
+    setState(() {
+      l = false;
+      print(l.toString());
+    });
+  }
+
   Widget _buildList() {
     return ListView.builder(
       itemCount: lines.length,
       itemBuilder: (BuildContext content, int index) {
-        print('_ $index');
+        print('$index');
+
+        // setState(() {
+        // });
 
         var line = lines[index];
         return Container(
@@ -31,10 +52,13 @@ class BiblePage extends StatelessWidget {
           child: ListTile(
             title: Text(line, style: TextStyle(fontSize: 24.0)),
 //            trailing: Icon(Icons.chevron_right),
-//            onTap: () => onPush?.call(materialIndex),
+            onTap: _onTap,
           ),
         );
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true; // l;
 }
