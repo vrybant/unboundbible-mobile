@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'bible_page.dart';
 import 'core/tools.dart';
 
@@ -30,7 +31,7 @@ class ShelfState extends State<ShelfPage> with AutomaticKeepAliveClientMixin<She
   }
 
   void selectBible(int index) {
-    tools!.setCurrBible(index);
+////////////////    tools!.setCurrBible(index);
     print(index);
     l = false;
   }
@@ -38,10 +39,11 @@ class ShelfState extends State<ShelfPage> with AutomaticKeepAliveClientMixin<She
   int current = 0;
 
   Widget _buildList() {
+    final length = Provider.of<Data>(context, listen: false).tools!.bibles.length;
     return ListView.builder(
-        itemCount: tools!.bibles.length,
+        itemCount: length,
         itemBuilder: (BuildContext content, int index) {
-          var line = tools!.bibles[index].name;
+          final line = Provider.of<Data>(context, listen: false).tools!.bibles[index].name;
           return Container(
             color: Colors.white,
             child: ListTile(

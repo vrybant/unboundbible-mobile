@@ -6,6 +6,8 @@ import 'package:path_provider/path_provider.dart';
 import 'extensions.dart';
 import 'utils.dart';
 
+String? globalDatabasesDirectory;
+
 String locale() {
   return Platform.localeName; // ru_RU
 }
@@ -43,4 +45,8 @@ Future<void> installDatabasesFromAssets() async {
       debugPrint("$e");
     }
   }
+}
+
+Future<void> globalInit() async {
+  globalDatabasesDirectory = await getDatabasesDirectory();
 }

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:desktop_window/desktop_window.dart';
+import 'package:provider/provider.dart';
 import 'core/lib.dart';
 import 'core/tools.dart';
 import 'main_page.dart';
@@ -21,9 +22,16 @@ void main() async {
     }
   }
 
-  tools = await Tools.create();
+  await globalInit();
 
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => Data()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

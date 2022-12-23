@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'core/tools.dart';
 
 bool l = true;
@@ -11,7 +12,7 @@ class BiblePage extends StatefulWidget {
 class BibleState extends State<BiblePage> with AutomaticKeepAliveClientMixin<BiblePage> {
   @override
   void initState() {
-    lines = tools!.get_Chapter();
+    /////////////////////    lines = tools!.get_Chapter();
     super.initState();
   }
 
@@ -38,15 +39,12 @@ class BibleState extends State<BiblePage> with AutomaticKeepAliveClientMixin<Bib
   }
 
   Widget _buildList() {
+    final lines = Provider.of<Data>(context).tools!.get_Chapter();
+
     return ListView.builder(
       itemCount: lines.length,
       itemBuilder: (BuildContext content, int index) {
-        print('$index');
-
-        // setState(() {
-        // });
-
-        var line = lines[index];
+        final line = lines[index];
         return Container(
           color: Colors.white,
           child: ListTile(
