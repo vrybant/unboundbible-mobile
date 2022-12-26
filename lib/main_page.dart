@@ -7,7 +7,6 @@ import 'core/tools.dart';
 
 class BasicWidget extends StatefulWidget {
   const BasicWidget({Key? key}) : super(key: key);
-
   @override
   BasicState createState() => BasicState();
 }
@@ -39,7 +38,7 @@ class BasicState extends State<BasicWidget> {
       selectedIndex = index;
       print(selectedIndex.toString());
       print(l.toString());
-////////////////////////      lines = tools!.get_Chapter();
+      lines = tools!.get_Chapter();
       _pageController.jumpToPage(index);
     });
   }

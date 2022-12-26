@@ -79,10 +79,21 @@ class Bible extends Module {
   List<Book> books = [];
   BibleAlias z = UnboundAlias();
 
-  Bible(String atPath) : super(atPath) {
+  Bible(String atPath) : super(atPath);
+
+  @override
+  Future init() async {
+    await super.init();
     if (format == FileFormat.mybible) z = MybibleAlias();
     if (connected && !tableExists(z.bible)) connected = false;
-//  if (connected) await loadDatabase(); // TEMP
+//    if (connected) await loadDatabase(); // TEMP
+//  prints();
+  }
+
+  static Future<Bible> create(String atPath) async {
+    final instance = Bible(atPath);
+    await instance.init();
+    return instance;
   }
 
   Future loadUnboundDatabase() async {
@@ -106,10 +117,10 @@ class Bible extends Module {
     } catch (e) {
       debugPrint("$e");
     }
-    print("load database: $fileName");
+//  print("load database: $fileName");
   }
 
-  loadMyswordDatabase() {
+  Future loadMyswordDatabase() async {
     try {
       final query = "SELECT DISTINCT ${z.book} FROM ${z.bible}";
       final maps = database!.select(query);
@@ -133,12 +144,12 @@ class Bible extends Module {
     print("loadMyswordDatabase: $fileName");
   }
 
-  loadDatabase() {
+  Future loadDatabase() async {
     if (loaded) return;
     if (format == FileFormat.mysword) {
-      loadMyswordDatabase();
+      await loadMyswordDatabase();
     } else {
-      loadUnboundDatabase();
+      await loadUnboundDatabase();
     }
   }
 
@@ -187,11 +198,21 @@ class Bible extends Module {
 }
 
 extension Bibles on List<Bible> {
-  init() {
+  static String? _databasesPath;
+
+  static Future<List<Bible>> create() async {
+    List<Bible> instance = [];
+    await instance._init();
+    return instance;
+  }
+
+  Future _init() async {
+    _databasesPath = await getDatabasesDirectory();
+
     for (var file in databasesList) {
       if (file.contains(".bbl.") | file.hasSuffix(".SQLite3")) {
-        final filePath = join(globalDatabasesDirectory!, file);
-        final bible = Bible(filePath);
+        final filePath = join(_databasesPath!, file);
+        var bible = await Bible.create(filePath);
         if (bible.connected) add(bible);
       }
     }

@@ -1,35 +1,25 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:flutter/foundation.dart';
 import 'extensions.dart';
 import 'bible.dart';
 
-class Data extends ChangeNotifier {
-  int _count = 5;
-  int get count => _count;
-  Tools? tools = null;
-
-  Data() {
-    tools = Tools();
-    print(" ~ counter ~ ");
-  }
-
-  void increment() {
-    _count++;
-    notifyListeners();
-  }
-}
+Tools? tools = null;
+List<String> lines = [];
 
 class Tools {
   Bible? currBible;
   Verse currVerse = Verse();
   List<Bible> bibles = [];
 
-  Tools() {
-    bibles.init();
-    print(" ~ tools ~ ");
-    print("${bibles.length}");
+  Future _init() async {
+    bibles = await Bibles.create();
     currBible = bibles[0];
+  }
+
+  static Future<Tools> create() async {
+    final instance = Tools();
+    await instance._init();
+    return instance;
   }
 
   List<String> get_Chapter() {
