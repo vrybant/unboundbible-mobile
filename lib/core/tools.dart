@@ -1,7 +1,10 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:io';
+
 import 'extensions.dart';
 import 'bible.dart';
+import 'lib.dart';
 
 Tools? tools = null;
 List<String> lines = [];
@@ -56,4 +59,15 @@ class Tools {
       currVerse = currBible!.firstVerse;
     } */
   }
+}
+
+Future initialization() async {
+  if (Platform.isAndroid) {
+    final directory = await getDatabasesDirectory();
+    if (!await Directory(directory).exists()) {
+      await installDatabasesFromAssets();
+    }
+  }
+
+  tools = await Tools.create();
 }

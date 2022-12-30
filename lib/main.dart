@@ -1,8 +1,6 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:desktop_window/desktop_window.dart';
-import 'core/lib.dart';
 import 'core/tools.dart';
 import 'main_page.dart';
 
@@ -11,17 +9,11 @@ const double textSize = 10;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  await initialization();
+
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await DesktopWindow.setWindowSize(Size(400, 700));
   }
-
-  if (Platform.isAndroid) {
-    if (!await Directory(await getDatabasesDirectory()).exists()) {
-      await installDatabasesFromAssets();
-    }
-  }
-
-  tools = await Tools.create();
 
   runApp(const MyApp());
 }

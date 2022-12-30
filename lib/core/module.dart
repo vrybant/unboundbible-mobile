@@ -51,14 +51,11 @@ class Module {
     final ext = extension(filePath);
     if ((ext == ".mybible") || (ext == ".bbli")) format = FileFormat.mysword;
     if (ext == ".SQLite3") format = FileFormat.mybible;
+    _opendatabase();
   }
 
-  Future init() async {
-    await _opendatabase();
-  }
-
-  Future _opendatabase() async {
-    database = await sqlite3.open(filePath);
+  _opendatabase() {
+    database = sqlite3.open(filePath);
 
     if ((format == FileFormat.unbound) | (format == FileFormat.mysword)) {
       try {
