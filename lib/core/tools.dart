@@ -36,8 +36,17 @@ class Tools {
     return result;
   }
 
+  List<String> get_Shelf() {
+    List<String> result = [];
+
+    for (var bible in bibles) {
+      result.add(bible.name);
+    }
+
+    return result;
+  }
+
   setCurrBible(int index) {
-    print('currBible = $index');
     if (index < bibles.length) currBible = bibles[index];
   }
 
@@ -50,12 +59,20 @@ class Tools {
         break;
       }
     }
+  }
 
-    //currBible!.loadDatabase();
+  int getCurrBibleIndex() {
+    for (var i = 0; i < bibles.length; i++) {
+      if (bibles[i] == currBible) return i;
+    }
+    return 0;
+  }
+
+  //currBible!.loadDatabase();
 /*  if (!currBible!.goodLink(currVerse)) {
       currVerse = currBible!.firstVerse;
     } */
-  }
+
 }
 
 Future initialization() async {

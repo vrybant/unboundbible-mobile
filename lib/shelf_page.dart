@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:unboundbible/providers.dart';
-import 'core/tools.dart';
 
 class ShelfPage extends ConsumerStatefulWidget {
   @override
@@ -9,15 +8,12 @@ class ShelfPage extends ConsumerStatefulWidget {
 }
 
 class ShelfState extends ConsumerState<ShelfPage> with AutomaticKeepAliveClientMixin<ShelfPage> {
-  int current = 0;
-
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
         appBar: AppBar(
-          title: Text(
-            "Bible",
-          ),
+          title: Text("Bible"),
           backgroundColor: Colors.blueAccent,
         ),
         body: Container(
@@ -27,17 +23,17 @@ class ShelfState extends ConsumerState<ShelfPage> with AutomaticKeepAliveClientM
   }
 
   void _onChanged(int index) {
-    tools!.setCurrBible(index);
-    ref.watch(chapterProvider.notifier).update();
-    current = index;
-    setState(() {});
+    ref.read(shelfIndexProvider.notifier).update(index);
+    ref.read(chapterProvider.notifier).update();
   }
 
   Widget _buildList() {
+    final lines = ref.read(shelfProvider);
+    final int current = ref.watch(shelfIndexProvider);
     return ListView.builder(
-        itemCount: tools!.bibles.length,
+        itemCount: lines.length,
         itemBuilder: (BuildContext content, int index) {
-          var line = tools!.bibles[index].name;
+          var line = lines[index];
           return Container(
             color: Colors.white,
             child: ListTile(
