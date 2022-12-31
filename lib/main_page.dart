@@ -3,7 +3,6 @@ import 'package:unboundbible/shelf_page.dart';
 import 'bible_page.dart';
 import 'colors_list_page.dart';
 import 'color_detail_page.dart';
-import 'core/tools.dart';
 
 class BasicWidget extends StatefulWidget {
   const BasicWidget({Key? key}) : super(key: key);
@@ -37,8 +36,6 @@ class BasicState extends State<BasicWidget> {
     setState(() {
       selectedIndex = index;
       print(selectedIndex.toString());
-      print(l.toString());
-      lines = tools!.get_Chapter();
       _pageController.jumpToPage(index);
     });
   }

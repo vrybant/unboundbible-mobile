@@ -1,10 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'core/tools.dart';
 import 'main_page.dart';
-
-const double textSize = 10;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +14,9 @@ void main() async {
     await DesktopWindow.setWindowSize(Size(400, 700));
   }
 
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(child: MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {

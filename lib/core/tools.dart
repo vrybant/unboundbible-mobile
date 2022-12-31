@@ -7,7 +7,6 @@ import 'bible.dart';
 import 'lib.dart';
 
 Tools? tools = null;
-List<String> lines = [];
 
 class Tools {
   Bible? currBible;
@@ -26,8 +25,6 @@ class Tools {
   }
 
   List<String> get_Chapter() {
-    print('get_Chapter');
-
     List<String> result = [];
     final text = currBible!.getChapter(currVerse);
 

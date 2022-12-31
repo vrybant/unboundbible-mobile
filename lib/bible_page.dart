@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
-import 'core/tools.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:unboundbible/providers.dart';
 
-bool l = true;
-
-class BiblePage extends StatefulWidget {
+class BiblePage extends ConsumerStatefulWidget {
   @override
   BibleState createState() => BibleState();
 }
 
-class BibleState extends State<BiblePage> with AutomaticKeepAliveClientMixin<BiblePage> {
-  @override
-  void initState() {
-    lines = tools!.get_Chapter();
-    super.initState();
-  }
-
+class BibleState extends ConsumerState<BiblePage> with AutomaticKeepAliveClientMixin<BiblePage> {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -31,21 +24,14 @@ class BibleState extends State<BiblePage> with AutomaticKeepAliveClientMixin<Bib
   }
 
   void _onTap() {
-    setState(() {
-      l = false;
-      print(l.toString());
-    });
+    ref.watch(chapterProvider.notifier).update();
   }
 
   Widget _buildList() {
+    final lines = ref.watch(chapterProvider);
     return ListView.builder(
       itemCount: lines.length,
       itemBuilder: (BuildContext content, int index) {
-        print('$index');
-
-        // setState(() {
-        // });
-
         var line = lines[index];
         return Container(
           color: Colors.white,

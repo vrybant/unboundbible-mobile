@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-import 'bible_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:unboundbible/providers.dart';
 import 'core/tools.dart';
 
-class ShelfPage extends StatefulWidget {
+class ShelfPage extends ConsumerStatefulWidget {
   @override
   ShelfState createState() => ShelfState();
 }
 
-class ShelfState extends State<ShelfPage> with AutomaticKeepAliveClientMixin<ShelfPage> {
-  @override
-  void initState() {
-//  lines = tools!.get_Chapter();
-    super.initState();
-  }
+class ShelfState extends ConsumerState<ShelfPage> with AutomaticKeepAliveClientMixin<ShelfPage> {
+  int current = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +26,12 @@ class ShelfState extends State<ShelfPage> with AutomaticKeepAliveClientMixin<She
         ));
   }
 
-  void selectBible(int index) {
+  void _onChanged(int index) {
     tools!.setCurrBible(index);
-    print(index);
-    l = false;
+    ref.watch(chapterProvider.notifier).update();
+    current = index;
+    setState(() {});
   }
-
-  int current = 0;
 
   Widget _buildList() {
     return ListView.builder(
@@ -51,11 +47,7 @@ class ShelfState extends State<ShelfPage> with AutomaticKeepAliveClientMixin<She
               leading: Radio<int>(
                 value: index,
                 groupValue: current,
-                onChanged: (value) => setState(() {
-//              debugPrint(_dataList[value!]);
-                  current = value!;
-                  selectBible(current);
-                }),
+                onChanged: (value) => _onChanged(value!),
               ),
             ),
           );
@@ -63,5 +55,5 @@ class ShelfState extends State<ShelfPage> with AutomaticKeepAliveClientMixin<She
   }
 
   @override
-  bool get wantKeepAlive => true; // l;
+  bool get wantKeepAlive => true;
 }
