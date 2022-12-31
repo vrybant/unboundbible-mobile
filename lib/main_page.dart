@@ -35,7 +35,6 @@ class BasicState extends State<BasicWidget> {
   void _onItemTapped(int index) {
     setState(() {
       selectedIndex = index;
-      print(selectedIndex.toString());
       _pageController.jumpToPage(index);
     });
   }
