@@ -76,9 +76,10 @@ class Tools {
 }
 
 Future initialization() async {
+  await initVariables();
+
   if (Platform.isAndroid) {
-    final directory = await getDatabasesDirectory();
-    if (!await Directory(directory).exists()) {
+    if (!await Directory(databasesPath!).exists()) {
       await installDatabasesFromAssets();
     }
   }

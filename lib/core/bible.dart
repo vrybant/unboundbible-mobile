@@ -86,11 +86,6 @@ class Bible extends Module {
 //  prints();
   }
 
-  // static Future<Bible> create(String atPath) async {
-  //   final instance = Bible(atPath);
-  //   return instance;
-  // }
-
   loadUnboundDatabase() {
     try {
       final query = "SELECT * FROM ${z.books}";
@@ -193,20 +188,16 @@ class Bible extends Module {
 }
 
 extension Bibles on List<Bible> {
-  static String? _databasesPath;
-
-  static Future<List<Bible>> create() async {
+  static List<Bible> create() {
     List<Bible> instance = [];
-    await instance._init();
+    instance._init();
     return instance;
   }
 
   Future _init() async {
-    _databasesPath = await getDatabasesDirectory();
-
     for (var file in databasesList) {
       if (file.contains(".bbl.") | file.hasSuffix(".SQLite3")) {
-        final filePath = join(_databasesPath!, file);
+        final filePath = join(databasesPath!, file);
         final bible = Bible(filePath);
         if (bible.connected) add(bible);
       }
