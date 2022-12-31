@@ -194,7 +194,7 @@ extension Bibles on List<Bible> {
     return instance;
   }
 
-  Future _init() async {
+  void _init() {
     for (var file in databasesList) {
       if (file.contains(".bbl.") | file.hasSuffix(".SQLite3")) {
         final filePath = join(databasesPath!, file);

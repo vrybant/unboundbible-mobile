@@ -13,15 +13,9 @@ class Tools {
   Verse currVerse = Verse();
   List<Bible> bibles = [];
 
-  Future _init() async {
-    bibles = await Bibles.create();
+  Tools() {
+    bibles = Bibles.create();
     currBible = bibles[0];
-  }
-
-  static Future<Tools> create() async {
-    final instance = Tools();
-    await instance._init();
-    return instance;
   }
 
   List<String> get_Chapter() {
@@ -84,5 +78,5 @@ Future initialization() async {
     }
   }
 
-  tools = await Tools.create();
+  tools = Tools();
 }
