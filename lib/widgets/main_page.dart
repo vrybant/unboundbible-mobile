@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:unboundbible/shelf_page.dart';
+import 'shelf_page.dart';
 import 'bible_page.dart';
 import 'colors_list_page.dart';
 import 'color_detail_page.dart';
