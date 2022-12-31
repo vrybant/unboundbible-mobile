@@ -19,14 +19,17 @@ class ChapterNotifier extends StateNotifier<List<String>> {
 final shelfProvider = StateNotifierProvider<ShelfNotifier, List<String>>((_) => ShelfNotifier());
 
 class ShelfNotifier extends StateNotifier<List<String>> {
-  ShelfNotifier() : super(tools!.get_Shelf()) {}
+  ShelfNotifier() : super([]) {
+    state = tools!.get_Shelf();
+  }
 }
 
 final shelfIndexProvider =
     StateNotifierProvider<ShelfIndexNotifier, int>((_) => ShelfIndexNotifier());
 
 class ShelfIndexNotifier extends StateNotifier<int> {
-  ShelfIndexNotifier() : super(tools!.getCurrBibleIndex()) {}
+  ShelfIndexNotifier() : super(_initValue);
+  static final _initValue = tools!.getCurrBibleIndex();
 
   update(int value) {
     tools!.setCurrBible(value);
