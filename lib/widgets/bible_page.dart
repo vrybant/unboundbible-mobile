@@ -13,7 +13,18 @@ class BibleState extends ConsumerState<BiblePage> with AutomaticKeepAliveClientM
     super.build(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bible'),
+        title: Center(
+          child: TextButton(
+            style: TextButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 20),
+              foregroundColor: Colors.white,
+            ),
+            onPressed: () {
+              print('pressed');
+            },
+            child: const Text('Button'),
+          ),
+        ),
         backgroundColor: Colors.blueAccent,
       ),
       body: Container(
