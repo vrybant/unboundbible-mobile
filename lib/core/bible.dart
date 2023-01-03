@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'utils.dart';
@@ -82,7 +83,7 @@ class Bible extends Module {
   Bible(String atPath) : super(atPath) {
     if (format == FileFormat.mybible) z = MybibleAlias();
     if (connected && !tableExists(z.bible)) connected = false;
-//  if (connected) loadDatabase(); // TEMP
+    if (connected) loadDatabase();
 //  prints();
   }
 
@@ -183,6 +184,26 @@ class Bible extends Module {
     } catch (e) {
       debugPrint("$e");
     }
+    return result;
+  }
+
+  Book? bookByNum(int n) {
+    for (var book in books) if (book.number == n) return book;
+    return null;
+  }
+
+  String verseToStr(Verse verse, bool full) {
+    var book = bookByNum(verse.number);
+    if (book == null) return '';
+
+    final title = full ? book.title : book.abbr;
+    final space = title.contains('.') ? '' : ' ';
+
+    var result = '${title}${space}${verse.chapter}:${verse.number}';
+    if ((verse.number != 0) && (verse.count > 1)) {
+      result += '- ${verse.number + verse.count - 1}';
+    }
+
     return result;
   }
 }
