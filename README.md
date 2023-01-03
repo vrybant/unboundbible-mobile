@@ -1,3 +1,1 @@
-# unboundbible-flutter
-
-Unbound Bible Flutter Edition
+Unbound Bible for mobile phones
