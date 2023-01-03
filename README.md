@@ -1,1 +1,1 @@
-Unbound Bible for mobile phones
+Unbound Bible for Mobile Phones
