@@ -62,6 +62,10 @@ class Tools {
     return 0;
   }
 
+  String getCurrInfo() {
+    return currBible!.verseToStr(currVerse, true);
+  }
+
   //currBible!.loadDatabase();
 /*  if (!currBible!.goodLink(currVerse)) {
       currVerse = currBible!.firstVerse;

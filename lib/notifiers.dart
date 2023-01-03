@@ -11,6 +11,16 @@ class ChapterNotifier extends StateNotifier<List<String>> {
   }
 }
 
+class CurrentNotifier extends StateNotifier<String> {
+  CurrentNotifier() : super('') {
+    update();
+  }
+
+  update() {
+    state = tools!.getCurrInfo();
+  }
+}
+
 class ShelfIndexNotifier extends StateNotifier<int> {
   ShelfIndexNotifier() : super(_initValue);
   static final _initValue = tools!.getCurrBibleIndex();

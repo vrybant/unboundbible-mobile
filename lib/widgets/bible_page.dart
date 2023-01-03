@@ -11,6 +11,7 @@ class BibleState extends ConsumerState<BiblePage> with AutomaticKeepAliveClientM
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    final text = ref.watch(currentProvider);
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -22,7 +23,7 @@ class BibleState extends ConsumerState<BiblePage> with AutomaticKeepAliveClientM
             onPressed: () {
               print('pressed');
             },
-            child: const Text('Button'),
+            child: Text(text),
           ),
         ),
         backgroundColor: Colors.blueAccent,

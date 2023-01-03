@@ -25,6 +25,7 @@ class ShelfState extends ConsumerState<ShelfPage> with AutomaticKeepAliveClientM
   void _onChanged(int index) {
     ref.read(shelfIndexProvider.notifier).update(index);
     ref.read(chapterProvider.notifier).update();
+    ref.read(currentProvider.notifier).update();
   }
 
   Widget _buildList() {
