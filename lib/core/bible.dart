@@ -192,17 +192,18 @@ class Bible extends Module {
     return null;
   }
 
-  String verseToStr(Verse verse, bool full) {
+  String verseToStr(Verse verse, {bool full = true, bool truncated = false}) {
     var book = bookByNum(verse.number);
     if (book == null) return '';
 
     final title = full ? book.title : book.abbr;
     final space = title.contains('.') ? '' : ' ';
 
-    var result = '${title}${space}${verse.chapter}:${verse.number}';
-    if ((verse.number != 0) && (verse.count > 1)) {
-      result += '- ${verse.number + verse.count - 1}';
-    }
+    var result = '${title}${space}${verse.chapter}';
+    if ((truncated) || (verse.number != 0)) return result;
+
+    result += ':${verse.number}';
+    if (verse.count > 1) result += '- ${verse.number + verse.count - 1}';
 
     return result;
   }

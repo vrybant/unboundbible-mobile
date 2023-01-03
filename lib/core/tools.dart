@@ -63,7 +63,7 @@ class Tools {
   }
 
   String getCurrInfo() {
-    return currBible!.verseToStr(currVerse, true);
+    return currBible!.verseToStr(currVerse, truncated: true);
   }
 
   //currBible!.loadDatabase();
