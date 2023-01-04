@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'shelf_page.dart';
-import 'bible_page.dart';
-import 'colors_list_page.dart';
-import 'color_detail_page.dart';
+import 'package:unboundbible/widgets/bible_page.dart';
+import 'package:unboundbible/widgets/titles_page.dart';
+import 'package:unboundbible/widgets/shelf_page.dart';
+import 'package:unboundbible/widgets/colors_list_page.dart';
 
 class BasicWidget extends StatefulWidget {
   const BasicWidget({Key? key}) : super(key: key);
@@ -13,9 +13,9 @@ class BasicWidget extends StatefulWidget {
 class BasicState extends State<BasicWidget> {
   var pages = [
     BiblePage(),
+    TitlesPage(),
     ShelfPage(),
     ColorsListPage(),
-    ColorDetailPage(),
   ];
   int selectedIndex = 0;
   late PageController _pageController;

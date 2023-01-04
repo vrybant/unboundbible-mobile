@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:unboundbible/providers.dart';
 
-class ShelfPage extends ConsumerStatefulWidget {
+class TitlesPage extends ConsumerStatefulWidget {
   @override
-  ShelfState createState() => ShelfState();
+  TitlesState createState() => TitlesState();
 }
 
-class ShelfState extends ConsumerState<ShelfPage> with AutomaticKeepAliveClientMixin<ShelfPage> {
+class TitlesState extends ConsumerState<TitlesPage> with AutomaticKeepAliveClientMixin<TitlesPage> {
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
         appBar: AppBar(
           title: Center(
-            child: Text("Shelf"),
+            child: Text("Titles"),
           ),
           backgroundColor: Colors.blueAccent,
         ),
