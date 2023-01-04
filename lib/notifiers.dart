@@ -46,3 +46,12 @@ class TitlesNotifier extends StateNotifier<List<String>> {
     state = currBible!.getTitles();
   }
 }
+
+class TitlesIndexNotifier extends StateNotifier<int> {
+  TitlesIndexNotifier() : super(0);
+
+  update(int value) {
+    currVerse.book = value + 1;
+    state = value;
+  }
+}

@@ -193,7 +193,7 @@ class Bible extends Module {
   }
 
   String verseToStr(Verse verse, {bool full = true, bool truncated = false}) {
-    var book = bookByNum(verse.number);
+    var book = bookByNum(verse.book);
     if (book == null) return '';
 
     final title = full ? book.title : book.abbr;

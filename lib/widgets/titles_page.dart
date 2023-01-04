@@ -25,14 +25,14 @@ class TitlesState extends ConsumerState<TitlesPage> with AutomaticKeepAliveClien
   }
 
   void _onChanged(int index) {
-    // ref.read(shelfIndexProvider.notifier).update(index);
-    // ref.read(chapterProvider.notifier).update();
-    // ref.read(currentProvider.notifier).update();
+    ref.read(titlesIndexProvider.notifier).update(index);
+    ref.read(currentProvider.notifier).update();
+    ref.read(chapterProvider.notifier).update();
   }
 
   Widget _buildList() {
     final lines = ref.read(titlesProvider);
-    final int current = ref.watch(shelfIndexProvider);
+    final int groupIndex = ref.watch(titlesIndexProvider);
     return ListView.builder(
         itemCount: lines.length,
         itemBuilder: (BuildContext content, int index) {
@@ -42,10 +42,10 @@ class TitlesState extends ConsumerState<TitlesPage> with AutomaticKeepAliveClien
             child: ListTile(
               dense: true,
               title: Text(line, style: TextStyle(fontSize: 24.0)),
-//            onTap: () => selectBible(index),
+              //          onTap: () => selectBible(index),
               leading: Radio<int>(
                 value: index,
-                groupValue: current,
+                groupValue: groupIndex,
                 onChanged: (value) => _onChanged(value!),
               ),
             ),

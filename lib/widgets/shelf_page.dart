@@ -32,7 +32,7 @@ class ShelfState extends ConsumerState<ShelfPage> with AutomaticKeepAliveClientM
 
   Widget _buildList() {
     final lines = ref.read(shelfProvider);
-    final int current = ref.watch(shelfIndexProvider);
+    final int groupIndex = ref.watch(shelfIndexProvider);
     return ListView.builder(
         itemCount: lines.length,
         itemBuilder: (BuildContext content, int index) {
@@ -45,7 +45,7 @@ class ShelfState extends ConsumerState<ShelfPage> with AutomaticKeepAliveClientM
 //            onTap: () => selectBible(index),
               leading: Radio<int>(
                 value: index,
-                groupValue: current,
+                groupValue: groupIndex,
                 onChanged: (value) => _onChanged(value!),
               ),
             ),
