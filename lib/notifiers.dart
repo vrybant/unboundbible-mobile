@@ -36,3 +36,13 @@ class ShelfNotifier extends StateNotifier<List<String>> {
     state = tools!.get_Shelf();
   }
 }
+
+class TitlesNotifier extends StateNotifier<List<String>> {
+  TitlesNotifier() : super([]) {
+    update();
+  }
+
+  update() {
+    state = tools!.get_Titles();
+  }
+}

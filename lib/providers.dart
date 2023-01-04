@@ -10,3 +10,5 @@ final shelfIndexProvider =
     StateNotifierProvider<ShelfIndexNotifier, int>((_) => ShelfIndexNotifier());
 
 final shelfProvider = StateNotifierProvider<ShelfNotifier, List<String>>((_) => ShelfNotifier());
+
+final titlesProvider = StateNotifierProvider<TitlesNotifier, List<String>>((_) => TitlesNotifier());

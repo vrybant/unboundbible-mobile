@@ -25,13 +25,13 @@ class TitlesState extends ConsumerState<TitlesPage> with AutomaticKeepAliveClien
   }
 
   void _onChanged(int index) {
-    ref.read(shelfIndexProvider.notifier).update(index);
-    ref.read(chapterProvider.notifier).update();
-    ref.read(currentProvider.notifier).update();
+    // ref.read(shelfIndexProvider.notifier).update(index);
+    // ref.read(chapterProvider.notifier).update();
+    // ref.read(currentProvider.notifier).update();
   }
 
   Widget _buildList() {
-    final lines = ref.read(shelfProvider);
+    final lines = ref.read(titlesProvider);
     final int current = ref.watch(shelfIndexProvider);
     return ListView.builder(
         itemCount: lines.length,

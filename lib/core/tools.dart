@@ -30,6 +30,10 @@ class Tools {
     return result;
   }
 
+  List<String> get_Titles() {
+    return currBible!.getTitles();
+  }
+
   List<String> get_Shelf() {
     List<String> result = [];
 
