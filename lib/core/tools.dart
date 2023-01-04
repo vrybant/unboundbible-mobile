@@ -1,16 +1,15 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:io';
-
 import 'extensions.dart';
 import 'bible.dart';
 import 'lib.dart';
 
 Tools? tools = null;
+Bible? currBible;
+Verse currVerse = Verse();
 
 class Tools {
-  Bible? currBible;
-  Verse currVerse = Verse();
   List<Bible> bibles = [];
 
   Tools() {
@@ -28,10 +27,6 @@ class Tools {
     }
 
     return result;
-  }
-
-  List<String> get_Titles() {
-    return currBible!.getTitles();
   }
 
   List<String> get_Shelf() {

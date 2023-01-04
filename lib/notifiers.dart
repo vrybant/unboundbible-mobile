@@ -43,6 +43,6 @@ class TitlesNotifier extends StateNotifier<List<String>> {
   }
 
   update() {
-    state = tools!.get_Titles();
+    state = currBible!.getTitles();
   }
 }
