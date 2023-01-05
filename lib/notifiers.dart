@@ -11,6 +11,15 @@ class ChapterNotifier extends StateNotifier<List<String>> {
   }
 }
 
+class ChaptersIndexNotifier extends StateNotifier<int> {
+  ChaptersIndexNotifier() : super(0);
+
+  update(int value) {
+    currVerse.chapter = value + 1;
+    state = value;
+  }
+}
+
 class CurrentNotifier extends StateNotifier<String> {
   CurrentNotifier() : super('') {
     update();

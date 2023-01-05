@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:unboundbible/widgets/bible_page.dart';
+import 'package:unboundbible/widgets/chapters_page.dart';
 import 'package:unboundbible/widgets/titles_page.dart';
 import 'package:unboundbible/widgets/shelf_page.dart';
-import 'package:unboundbible/widgets/colors_list_page.dart';
 
 class BasicWidget extends StatefulWidget {
   const BasicWidget({Key? key}) : super(key: key);
@@ -14,8 +14,8 @@ class BasicState extends State<BasicWidget> {
   var pages = [
     BiblePage(),
     TitlesPage(),
+    ChaptersPage(),
     ShelfPage(),
-    ColorsListPage(),
   ];
   int selectedIndex = 0;
   late PageController _pageController;
@@ -60,19 +60,19 @@ class BasicState extends State<BasicWidget> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Bible',
+            label: 'Библия',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
-            label: 'Titles',
+            label: 'Книга',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
-            label: 'Shelf',
+            label: 'Глава',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: 'Settings',
+            label: 'Перевод',
           ),
         ],
         currentIndex: selectedIndex,

@@ -4,6 +4,9 @@ import 'package:unboundbible/notifiers.dart';
 final chapterProvider =
     StateNotifierProvider<ChapterNotifier, List<String>>((_) => ChapterNotifier());
 
+final chaptersIndexProvider =
+    StateNotifierProvider<ChaptersIndexNotifier, int>((_) => ChaptersIndexNotifier());
+
 final currentProvider = StateNotifierProvider<CurrentNotifier, String>((_) => CurrentNotifier());
 
 final shelfIndexProvider =

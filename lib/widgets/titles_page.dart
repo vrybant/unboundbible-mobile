@@ -14,7 +14,7 @@ class TitlesState extends ConsumerState<TitlesPage> with AutomaticKeepAliveClien
     return Scaffold(
         appBar: AppBar(
           title: Center(
-            child: Text("Titles"),
+            child: Text("Книга"),
           ),
           backgroundColor: Colors.blueAccent,
         ),
@@ -31,7 +31,7 @@ class TitlesState extends ConsumerState<TitlesPage> with AutomaticKeepAliveClien
   }
 
   Widget _buildList() {
-    final lines = ref.read(titlesProvider);
+    final lines = ref.watch(titlesProvider);
     final int groupIndex = ref.watch(titlesIndexProvider);
     return ListView.builder(
         itemCount: lines.length,
@@ -42,7 +42,7 @@ class TitlesState extends ConsumerState<TitlesPage> with AutomaticKeepAliveClien
             child: ListTile(
               dense: true,
               title: Text(line, style: TextStyle(fontSize: 24.0)),
-              //          onTap: () => selectBible(index),
+              // onTap: () => select(index),
               leading: Radio<int>(
                 value: index,
                 groupValue: groupIndex,
