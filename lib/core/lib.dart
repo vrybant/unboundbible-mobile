@@ -27,7 +27,7 @@ Future<String> _getDatabasesDirectory() async {
     return r'C:\Users\Vladimir\Unbound Bible\';
   }
   final directory = await getApplicationSupportDirectory();
-  final path = directory.parent.path;
+  final path = directory.path;
   return context.join(path, 'databases');
 }
 

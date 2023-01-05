@@ -55,9 +55,9 @@ class Module {
   }
 
   _opendatabase() {
-    database = sqlite3.open(filePath);
+    database = sqlite3.open(filePath, mode: OpenMode.readOnly);
 
-    if ((format == FileFormat.unbound) | (format == FileFormat.mysword)) {
+    if ((format == FileFormat.unbound) || (format == FileFormat.mysword)) {
       try {
         final maps = database!.select('SELECT * FROM Details');
 
