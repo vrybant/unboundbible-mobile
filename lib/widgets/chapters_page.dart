@@ -3,16 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:unboundbible/core/tools.dart';
 import 'package:unboundbible/providers.dart';
 
-class ChaptersPage extends ConsumerStatefulWidget {
+class ChaptersPage extends ConsumerWidget {
   @override
-  ChaptersState createState() => ChaptersState();
-}
-
-class ChaptersState extends ConsumerState<ChaptersPage>
-    with AutomaticKeepAliveClientMixin<ChaptersPage> {
-  @override
-  Widget build(BuildContext context) {
-    super.build(context);
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
         appBar: AppBar(
           title: Center(
@@ -22,17 +15,17 @@ class ChaptersState extends ConsumerState<ChaptersPage>
         ),
         body: Container(
           color: Colors.white,
-          child: _buildList(),
+          child: _buildList(ref),
         ));
   }
 
-  void _onChanged(int index) {
+  void _onChanged(WidgetRef ref, int index) {
     ref.read(chaptersIndexProvider.notifier).update(index);
     ref.read(currentProvider.notifier).update();
     ref.read(chapterProvider.notifier).update();
   }
 
-  Widget _buildList() {
+  Widget _buildList(WidgetRef ref) {
     final count = currBible!.chaptersCount(currVerse);
     final int groupIndex = ref.watch(chaptersIndexProvider);
     return ListView.builder(
@@ -47,7 +40,7 @@ class ChaptersState extends ConsumerState<ChaptersPage>
               leading: Radio<int>(
                 value: index,
                 groupValue: groupIndex,
-                onChanged: (value) => _onChanged(value!),
+                onChanged: (value) => _onChanged(ref, value!),
               ),
             ),
           );

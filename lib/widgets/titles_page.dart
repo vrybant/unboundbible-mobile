@@ -2,15 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:unboundbible/providers.dart';
 
-class TitlesPage extends ConsumerStatefulWidget {
+class TitlesPage extends ConsumerWidget {
   @override
-  TitlesState createState() => TitlesState();
-}
-
-class TitlesState extends ConsumerState<TitlesPage> with AutomaticKeepAliveClientMixin<TitlesPage> {
-  @override
-  Widget build(BuildContext context) {
-    super.build(context);
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
         appBar: AppBar(
           title: Center(
@@ -20,17 +14,17 @@ class TitlesState extends ConsumerState<TitlesPage> with AutomaticKeepAliveClien
         ),
         body: Container(
           color: Colors.white,
-          child: _buildList(),
+          child: _buildList(ref),
         ));
   }
 
-  void _onChanged(int index) {
+  void _onChanged(WidgetRef ref, int index) {
     ref.read(titlesIndexProvider.notifier).update(index);
     ref.read(currentProvider.notifier).update();
     ref.read(chapterProvider.notifier).update();
   }
 
-  Widget _buildList() {
+  Widget _buildList(WidgetRef ref) {
     final lines = ref.watch(titlesProvider);
     final int groupIndex = ref.watch(titlesIndexProvider);
     return ListView.builder(
@@ -46,13 +40,10 @@ class TitlesState extends ConsumerState<TitlesPage> with AutomaticKeepAliveClien
               leading: Radio<int>(
                 value: index,
                 groupValue: groupIndex,
-                onChanged: (value) => _onChanged(value!),
+                onChanged: (value) => _onChanged(ref, value!),
               ),
             ),
           );
         });
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

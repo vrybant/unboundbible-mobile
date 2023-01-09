@@ -2,15 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:unboundbible/providers.dart';
 
-class ShelfPage extends ConsumerStatefulWidget {
+class ShelfPage extends ConsumerWidget {
   @override
-  ShelfState createState() => ShelfState();
-}
-
-class ShelfState extends ConsumerState<ShelfPage> with AutomaticKeepAliveClientMixin<ShelfPage> {
-  @override
-  Widget build(BuildContext context) {
-    super.build(context);
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
         appBar: AppBar(
           title: Center(
@@ -20,18 +14,18 @@ class ShelfState extends ConsumerState<ShelfPage> with AutomaticKeepAliveClientM
         ),
         body: Container(
           color: Colors.white,
-          child: _buildList(),
+          child: _buildList(ref),
         ));
   }
 
-  void _onChanged(int index) {
+  void _onChanged(WidgetRef ref, int index) {
     ref.read(shelfIndexProvider.notifier).update(index);
     ref.read(titlesProvider.notifier).update();
     ref.read(chapterProvider.notifier).update();
     ref.read(currentProvider.notifier).update();
   }
 
-  Widget _buildList() {
+  Widget _buildList(WidgetRef ref) {
     final lines = ref.read(shelfProvider);
     final int groupIndex = ref.watch(shelfIndexProvider);
     return ListView.builder(
@@ -47,13 +41,10 @@ class ShelfState extends ConsumerState<ShelfPage> with AutomaticKeepAliveClientM
               leading: Radio<int>(
                 value: index,
                 groupValue: groupIndex,
-                onChanged: (value) => _onChanged(value!),
+                onChanged: (value) => _onChanged(ref, value!),
               ),
             ),
           );
         });
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }
