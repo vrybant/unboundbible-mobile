@@ -9,6 +9,9 @@ final chaptersIndexProvider =
 
 final currentProvider = StateNotifierProvider<CurrentNotifier, String>((_) => CurrentNotifier());
 
+final navigationIndexProvider =
+    StateNotifierProvider<NavigationIndexProvider, int>((_) => NavigationIndexProvider());
+
 final shelfIndexProvider =
     StateNotifierProvider<ShelfIndexNotifier, int>((_) => ShelfIndexNotifier());
 

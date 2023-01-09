@@ -4,16 +4,17 @@ class ColorsListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "ColorsList",
-          ),
-          backgroundColor: Colors.green,
+      appBar: AppBar(
+        title: Text(
+          "ColorsList",
         ),
-        body: Container(
-          color: Colors.white,
-          child: _buildList(),
-        ));
+        backgroundColor: Colors.green,
+      ),
+      body: Container(
+        color: Colors.white,
+        child: _buildList(),
+      ),
+    );
   }
 
   final List<int> materialIndices = [901, 800, 700, 600, 500, 400, 300, 200, 100, 50, 25, 5];
