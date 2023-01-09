@@ -2,15 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:unboundbible/providers.dart';
 
-class BiblePage extends ConsumerStatefulWidget {
+class BiblePage extends ConsumerWidget {
   @override
-  BibleState createState() => BibleState();
-}
-
-class BibleState extends ConsumerState<BiblePage> with AutomaticKeepAliveClientMixin<BiblePage> {
-  @override
-  Widget build(BuildContext context) {
-    super.build(context);
+  Widget build(BuildContext context, WidgetRef ref) {
     final text = ref.watch(currentProvider);
     return Scaffold(
       appBar: AppBar(
@@ -30,16 +24,12 @@ class BibleState extends ConsumerState<BiblePage> with AutomaticKeepAliveClientM
       ),
       body: Container(
         color: Colors.white,
-        child: _buildList(),
+        child: _buildList(ref),
       ),
     );
   }
 
-  void _onTap() {
-    ref.watch(chapterProvider.notifier).update();
-  }
-
-  Widget _buildList() {
+  Widget _buildList(WidgetRef ref) {
     final lines = ref.watch(chapterProvider);
     return ListView.builder(
       itemCount: lines.length,
@@ -48,15 +38,12 @@ class BibleState extends ConsumerState<BiblePage> with AutomaticKeepAliveClientM
         return Container(
           color: Colors.white,
           child: ListTile(
-            title: Text(line, style: TextStyle(fontSize: 24.0)),
-//            trailing: Icon(Icons.chevron_right),
-            onTap: _onTap,
-          ),
+              title: Text(line, style: TextStyle(fontSize: 24.0)),
+              onTap: () {
+                print('tapped');
+              }),
         );
       },
     );
   }
-
-  @override
-  bool get wantKeepAlive => true; // l;
 }
