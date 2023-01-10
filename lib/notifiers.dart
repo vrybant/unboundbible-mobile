@@ -71,6 +71,7 @@ class TitlesIndexNotifier extends StateNotifier<int> {
 
   update(int value) {
     currVerse.book = value + 1;
+    currVerse.chapter = 1;
     state = value;
   }
 }
