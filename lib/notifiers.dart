@@ -11,6 +11,16 @@ class ChapterNotifier extends StateNotifier<List<String>> {
   }
 }
 
+class ChaptersCountNotifier extends StateNotifier<int> {
+  ChaptersCountNotifier() : super(0) {
+    update();
+  }
+
+  update() {
+    state = currBible!.chaptersCount(currVerse);
+  }
+}
+
 class ChaptersIndexNotifier extends StateNotifier<int> {
   ChaptersIndexNotifier() : super(0);
 

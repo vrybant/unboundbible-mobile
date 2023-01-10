@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:unboundbible/core/tools.dart';
 import 'package:unboundbible/providers.dart';
 
 class ChaptersPage extends ConsumerWidget {
@@ -19,15 +18,15 @@ class ChaptersPage extends ConsumerWidget {
         ));
   }
 
-  void _onChanged(WidgetRef ref, int index) {
+  void _onTap(WidgetRef ref, int index) {
     ref.read(chaptersIndexProvider.notifier).update(index);
     ref.read(currentProvider.notifier).update();
     ref.read(chapterProvider.notifier).update();
+    ref.read(navigationIndexProvider.notifier).update(0);
   }
 
   Widget _buildList(WidgetRef ref) {
-    final count = currBible!.chaptersCount(currVerse);
-    final int groupIndex = ref.watch(chaptersIndexProvider);
+    final count = ref.watch(chaptersCountProvider);
     return ListView.builder(
         itemCount: count,
         itemBuilder: (BuildContext content, int index) {
@@ -36,17 +35,9 @@ class ChaptersPage extends ConsumerWidget {
             child: ListTile(
               dense: true,
               title: Text(' ${index + 1}', style: TextStyle(fontSize: 24.0)),
-//            onTap: () => onTap(index),
-              leading: Radio<int>(
-                value: index,
-                groupValue: groupIndex,
-                onChanged: (value) => _onChanged(ref, value!),
-              ),
+              onTap: () => _onTap(ref, index),
             ),
           );
         });
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

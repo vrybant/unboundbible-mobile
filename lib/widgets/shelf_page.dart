@@ -22,6 +22,7 @@ class ShelfPage extends ConsumerWidget {
     ref.read(shelfIndexProvider.notifier).update(index);
     ref.read(titlesProvider.notifier).update();
     ref.read(chapterProvider.notifier).update();
+    ref.read(chaptersCountProvider.notifier).update();
     ref.read(currentProvider.notifier).update();
   }
 

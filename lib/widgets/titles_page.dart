@@ -22,6 +22,7 @@ class TitlesPage extends ConsumerWidget {
     ref.read(titlesIndexProvider.notifier).update(index);
     ref.read(currentProvider.notifier).update();
     ref.read(chapterProvider.notifier).update();
+    ref.read(chaptersCountProvider.notifier).update();
   }
 
   Widget _buildList(WidgetRef ref) {
