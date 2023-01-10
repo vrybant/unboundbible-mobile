@@ -22,7 +22,7 @@ class ChaptersPage extends ConsumerWidget {
     ref.read(chaptersIndexProvider.notifier).update(index);
     ref.read(currentProvider.notifier).update();
     ref.read(chapterProvider.notifier).update();
-    ref.read(navigationIndexProvider.notifier).update(0);
+    ref.read(navigationIndexProvider.notifier).state = 0;
   }
 
   Widget _buildList(WidgetRef ref) {

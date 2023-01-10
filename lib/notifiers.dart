@@ -40,14 +40,6 @@ class CurrentNotifier extends StateNotifier<String> {
   }
 }
 
-class NavigationIndexProvider extends StateNotifier<int> {
-  NavigationIndexProvider() : super(0);
-
-  update(int value) {
-    state = value;
-  }
-}
-
 class ShelfIndexNotifier extends StateNotifier<int> {
   ShelfIndexNotifier() : super(_initValue);
   static final _initValue = tools!.getCurrBibleIndex();

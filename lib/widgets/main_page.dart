@@ -23,7 +23,7 @@ class BasicWidget extends ConsumerWidget {
         backgroundColor: Colors.blue,
         iconSize: 28,
         selectedFontSize: 12,
-        onTap: (value) => ref.read(navigationIndexProvider.notifier).update(value),
+        onTap: (value) => ref.read(navigationIndexProvider.notifier).state = value,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
