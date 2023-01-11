@@ -5,7 +5,7 @@ import 'package:unboundbible/providers.dart';
 class BiblePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final text = ref.watch(currentProvider);
+    final text = ref.watch(currInfoProvider);
     return Scaffold(
       appBar: AppBar(
         title: Center(

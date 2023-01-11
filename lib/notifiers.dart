@@ -21,9 +21,10 @@ class CurrVerseNotifier extends StateNotifier<Verse> {
   }
 }
 
-class ShelfIndexNotifier extends StateNotifier<int> {
-  ShelfIndexNotifier() : super(_initValue);
-  static final _initValue = tools!.getCurrBibleIndex();
+class CurrBibleNotifier extends StateNotifier<int> {
+  CurrBibleNotifier() : super(0) {
+    state = tools!.getCurrBibleIndex();
+  }
 
   update(int value) {
     tools!.setCurrBible(value);
