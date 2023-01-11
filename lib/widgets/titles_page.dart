@@ -18,16 +18,10 @@ class TitlesPage extends ConsumerWidget {
         ));
   }
 
-  void _onChanged(WidgetRef ref, int index) {
-    ref.read(titlesIndexProvider.notifier).update(index);
-    ref.read(currentProvider.notifier).update();
-    ref.read(chapterProvider.notifier).update();
-    ref.read(chaptersCountProvider.notifier).update();
-  }
-
   Widget _buildList(WidgetRef ref) {
     final lines = ref.watch(titlesProvider);
-    final int groupIndex = ref.watch(titlesIndexProvider);
+    final currBook = ref.watch(currVerseProvider).book;
+    final groupIndex = currBook - 1;
     return ListView.builder(
         itemCount: lines.length,
         itemBuilder: (BuildContext content, int index) {
@@ -39,10 +33,11 @@ class TitlesPage extends ConsumerWidget {
               title: Text(line, style: TextStyle(fontSize: 24.0)),
               // onTap: () => select(index),
               leading: Radio<int>(
-                value: index,
-                groupValue: groupIndex,
-                onChanged: (value) => _onChanged(ref, value!),
-              ),
+                  value: index,
+                  groupValue: groupIndex,
+                  onChanged: (value) {
+                    ref.watch(currVerseProvider.notifier).updateBook(value! + 1);
+                  }),
             ),
           );
         });

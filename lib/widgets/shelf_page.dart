@@ -18,16 +18,8 @@ class ShelfPage extends ConsumerWidget {
         ));
   }
 
-  void _onChanged(WidgetRef ref, int index) {
-    ref.read(shelfIndexProvider.notifier).update(index);
-    ref.read(titlesProvider.notifier).update();
-    ref.read(chapterProvider.notifier).update();
-    ref.read(chaptersCountProvider.notifier).update();
-    ref.read(currentProvider.notifier).update();
-  }
-
   Widget _buildList(WidgetRef ref) {
-    final lines = ref.read(shelfProvider);
+    final lines = ref.watch(shelfProvider);
     final int groupIndex = ref.watch(shelfIndexProvider);
     return ListView.builder(
         itemCount: lines.length,
@@ -42,7 +34,9 @@ class ShelfPage extends ConsumerWidget {
               leading: Radio<int>(
                 value: index,
                 groupValue: groupIndex,
-                onChanged: (value) => _onChanged(ref, value!),
+                onChanged: (value) {
+                  ref.watch(shelfIndexProvider.notifier).update(index);
+                },
               ),
             ),
           );
