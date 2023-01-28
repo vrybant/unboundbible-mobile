@@ -19,8 +19,8 @@ class ShelfPage extends ConsumerWidget {
   }
 
   Widget _buildList(WidgetRef ref) {
-    final lines = ref.watch(shelfProvider.notifier).list;
-    final groupIndex = ref.watch(shelfProvider);
+    final lines = ref.watch(shelfProvider);
+    final groupIndex = ref.watch(currBibleProvider);
     return ListView.builder(
         itemCount: lines.length,
         itemBuilder: (BuildContext content, int index) {
@@ -35,7 +35,7 @@ class ShelfPage extends ConsumerWidget {
                 value: index,
                 groupValue: groupIndex,
                 onChanged: (value) {
-                  ref.watch(shelfProvider.notifier).update(index);
+                  ref.watch(currBibleProvider.notifier).update(index);
                 },
               ),
             ),
