@@ -32,6 +32,7 @@ class BiblePage extends ConsumerWidget {
   Widget _buildList(WidgetRef ref) {
     final lines = ref.watch(bibleProvider).content;
     return ListView.builder(
+      key: ObjectKey(lines.hashCode),
       itemCount: lines.length,
       itemBuilder: (BuildContext content, int index) {
         var line = lines[index];
