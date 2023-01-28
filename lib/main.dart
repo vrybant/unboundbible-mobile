@@ -32,7 +32,7 @@ class UnboundBible extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: BasicWidget(),
+      home: MainPage(),
     );
   }
 }

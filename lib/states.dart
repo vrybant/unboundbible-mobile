@@ -15,6 +15,10 @@ class BibleState {
     return tools!.get_Chapter;
   }
 
+  List<String> get titles {
+    return currBible!.getTitles();
+  }
+
   String get infoString {
     return tools!.getCurrInfo;
   }
