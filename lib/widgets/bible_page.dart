@@ -34,7 +34,7 @@ class BiblePage extends ConsumerWidget {
     return ListView.builder(
       itemCount: lines.length,
       itemBuilder: (BuildContext content, int index) {
-        var line = lines[index];
+        final line = lines[index];
         return Container(
           color: Colors.white,
           child: ListTile(

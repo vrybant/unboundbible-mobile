@@ -6,7 +6,7 @@ import 'package:unboundbible/widgets/chapters_page.dart';
 import 'package:unboundbible/widgets/titles_page.dart';
 import 'package:unboundbible/widgets/shelf_page.dart';
 
-class BasicWidget extends ConsumerWidget {
+class MainPage extends ConsumerWidget {
   final List<Widget> pages = [
     BiblePage(),
     TitlesPage(),
