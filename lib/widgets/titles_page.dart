@@ -19,7 +19,7 @@ class TitlesPage extends ConsumerWidget {
   }
 
   Widget _buildList(WidgetRef ref) {
-    final lines = ref.watch(bibleProvider).titles;
+    final lines = ref.watch(titlesProvider);
     final currBook = ref.watch(bibleProvider).book;
     final groupIndex = currBook - 1;
     return ListView.builder(

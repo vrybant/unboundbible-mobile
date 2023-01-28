@@ -34,17 +34,13 @@ class BibleEngine extends StateNotifier<BibleState> {
   }
 }
 
-class ShelfNotifier extends StateNotifier<int> {
-  ShelfNotifier() : super(0) {
+class CurrBibleNotifier extends StateNotifier<int> {
+  CurrBibleNotifier() : super(0) {
     state = tools!.getCurrBibleIndex();
   }
 
   update(int value) {
     tools!.setCurrBible(value);
     state = value;
-  }
-
-  List<String> get list {
-    return tools!.get_Shelf();
   }
 }
