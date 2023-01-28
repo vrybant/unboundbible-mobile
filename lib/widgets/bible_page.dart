@@ -30,7 +30,7 @@ class BiblePage extends ConsumerWidget {
   }
 
   Widget _buildList(WidgetRef ref) {
-    final lines = ref.watch(chapterProvider);
+    final lines = ref.watch(bibleProvider.notifier).getChapter;
     return ListView.builder(
       itemCount: lines.length,
       itemBuilder: (BuildContext content, int index) {

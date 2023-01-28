@@ -32,6 +32,14 @@ class BibleEngine extends StateNotifier<BibleState> {
     currVerse.book = state.book;
     currVerse.chapter = state.chapter;
   }
+
+  List<String> get getChapter {
+    return tools!.get_Chapter();
+  }
+
+  int get chaptersCount {
+    return currBible!.chaptersCount(currVerse);
+  }
 }
 
 class CurrBibleNotifier extends StateNotifier<int> {

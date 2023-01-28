@@ -4,19 +4,12 @@ import 'package:unboundbible/notifiers.dart';
 import 'package:unboundbible/states.dart';
 
 final currBibleProvider = StateNotifierProvider<CurrBibleNotifier, int>((ref) {
+  ref.watch(bibleProvider);
   return CurrBibleNotifier();
 });
 
 final bibleProvider = StateNotifierProvider<BibleEngine, BibleState>((ref) {
   return BibleEngine();
-});
-
-final chapterProvider = StateProvider<List<String>>((ref) {
-  ref.watch(currBibleProvider);
-  ref.watch(bibleProvider);
-  ref.watch(chaptersCountProvider);
-  ref.watch(shelfProvider);
-  return tools!.get_Chapter();
 });
 
 final chaptersCountProvider = StateProvider<int>((ref) {
