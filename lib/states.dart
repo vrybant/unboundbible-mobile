@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unboundbible/core/tools.dart';
 
 @immutable
 class BibleState {
@@ -9,6 +10,18 @@ class BibleState {
 
   final int book;
   final int chapter;
+
+  List<String> get content {
+    return tools!.get_Chapter;
+  }
+
+  String get infoString {
+    return tools!.getCurrInfo;
+  }
+
+  int get chaptersCount {
+    return currBible!.chaptersCount(currVerse);
+  }
 
   BibleState copyWith({
     int? book,

@@ -17,7 +17,7 @@ class Tools {
     currBible = bibles[0];
   }
 
-  List<String> get_Chapter() {
+  List<String> get get_Chapter {
     List<String> result = [];
     final text = currBible!.getChapter(currVerse);
 
@@ -61,7 +61,7 @@ class Tools {
     return 0;
   }
 
-  String getCurrInfo() {
+  String get getCurrInfo {
     return currBible!.verseToStr(currVerse, truncated: true);
   }
 

@@ -19,7 +19,7 @@ class ChaptersPage extends ConsumerWidget {
   }
 
   Widget _buildList(WidgetRef ref) {
-    final count = ref.watch(chaptersCountProvider);
+    final count = ref.watch(bibleProvider).chaptersCount;
     return ListView.builder(
         itemCount: count,
         itemBuilder: (BuildContext content, int index) {

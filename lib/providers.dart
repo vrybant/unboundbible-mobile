@@ -12,17 +12,6 @@ final bibleProvider = StateNotifierProvider<BibleEngine, BibleState>((ref) {
   return BibleEngine();
 });
 
-final chaptersCountProvider = StateProvider<int>((ref) {
-  ref.watch(bibleProvider);
-  return currBible!.chaptersCount(currVerse);
-});
-
-final currInfoProvider = StateProvider<String>((ref) {
-  ref.watch(currBibleProvider);
-  ref.watch(bibleProvider);
-  return tools!.getCurrInfo();
-});
-
 final navigationIndexProvider = StateProvider<int>((_) => 0);
 
 final shelfProvider = StateProvider<List<String>>((_) => tools!.get_Shelf());

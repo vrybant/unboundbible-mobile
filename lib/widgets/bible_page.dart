@@ -5,7 +5,7 @@ import 'package:unboundbible/providers.dart';
 class BiblePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final text = ref.watch(currInfoProvider);
+    final info = ref.watch(bibleProvider).infoString;
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -17,7 +17,7 @@ class BiblePage extends ConsumerWidget {
             onPressed: () {
               print('pressed');
             },
-            child: Text(text),
+            child: Text(info),
           ),
         ),
         backgroundColor: Colors.blueAccent,
@@ -30,7 +30,7 @@ class BiblePage extends ConsumerWidget {
   }
 
   Widget _buildList(WidgetRef ref) {
-    final lines = ref.watch(bibleProvider.notifier).getChapter;
+    final lines = ref.watch(bibleProvider).content;
     return ListView.builder(
       itemCount: lines.length,
       itemBuilder: (BuildContext content, int index) {
