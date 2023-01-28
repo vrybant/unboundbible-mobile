@@ -30,7 +30,7 @@ class ChaptersPage extends ConsumerWidget {
               dense: true,
               title: Text(' $number', style: TextStyle(fontSize: 24.0)),
               onTap: () {
-                ref.watch(currVerseProvider.notifier).updateChapter(number);
+                ref.watch(bibleProvider.notifier).updateChapter(number);
                 ref.watch(navigationIndexProvider.notifier).state = 0;
               },
             ),

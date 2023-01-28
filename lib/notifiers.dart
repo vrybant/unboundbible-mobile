@@ -1,23 +1,36 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:unboundbible/core/tools.dart';
 import 'package:unboundbible/core/bible.dart';
+import 'package:unboundbible/states.dart';
 
-class CurrVerseNotifier extends StateNotifier<Verse> {
-  CurrVerseNotifier() : super(Verse()) {
-    state = currVerse;
+class BibleEngine extends StateNotifier<BibleState> {
+  BibleEngine()
+      : super(
+          BibleState(
+            book: currVerse.book,
+            chapter: currVerse.chapter,
+          ),
+        );
+
+  void updateBook(int book) {
+    state = state.copyWith(
+      book: book,
+      chapter: 1,
+    );
+    setCurrVerse();
   }
 
-  updateBook(int value) {
-    currVerse = Verse();
-    currVerse.book = value;
-    state = currVerse;
+  void updateChapter(int chapter) {
+    state = state.copyWith(
+      chapter: chapter,
+    );
+    setCurrVerse();
   }
 
-  updateChapter(int value) {
+  void setCurrVerse() {
     currVerse = Verse();
     currVerse.book = state.book;
-    currVerse.chapter = value;
-    state = currVerse;
+    currVerse.chapter = state.chapter;
   }
 }
 

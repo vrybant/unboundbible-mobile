@@ -20,7 +20,7 @@ class TitlesPage extends ConsumerWidget {
 
   Widget _buildList(WidgetRef ref) {
     final lines = ref.watch(titlesProvider);
-    final currBook = ref.watch(currVerseProvider).book;
+    final currBook = ref.watch(bibleProvider).book;
     final groupIndex = currBook - 1;
     return ListView.builder(
         itemCount: lines.length,
@@ -36,7 +36,7 @@ class TitlesPage extends ConsumerWidget {
                   value: index,
                   groupValue: groupIndex,
                   onChanged: (value) {
-                    ref.watch(currVerseProvider.notifier).updateBook(value! + 1);
+                    ref.watch(bibleProvider.notifier).updateBook(value! + 1);
                   }),
             ),
           );

@@ -1,33 +1,32 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:unboundbible/core/bible.dart';
 import 'package:unboundbible/core/tools.dart';
 import 'package:unboundbible/notifiers.dart';
+import 'package:unboundbible/states.dart';
 
 final currBibleProvider = StateNotifierProvider<CurrBibleNotifier, int>((ref) {
   return CurrBibleNotifier();
 });
 
-final currVerseProvider = StateNotifierProvider<CurrVerseNotifier, Verse>((ref) {
-  ref.watch(currBibleProvider);
-  return CurrVerseNotifier();
+final bibleProvider = StateNotifierProvider<BibleEngine, BibleState>((ref) {
+  return BibleEngine();
 });
 
 final chapterProvider = StateProvider<List<String>>((ref) {
   ref.watch(currBibleProvider);
-  ref.watch(currVerseProvider);
+  ref.watch(bibleProvider);
   ref.watch(chaptersCountProvider);
   ref.watch(shelfProvider);
   return tools!.get_Chapter();
 });
 
 final chaptersCountProvider = StateProvider<int>((ref) {
-  ref.watch(currVerseProvider);
+  ref.watch(bibleProvider);
   return currBible!.chaptersCount(currVerse);
 });
 
 final currInfoProvider = StateProvider<String>((ref) {
   ref.watch(currBibleProvider);
-  ref.watch(currVerseProvider);
+  ref.watch(bibleProvider);
   return tools!.getCurrInfo();
 });
 

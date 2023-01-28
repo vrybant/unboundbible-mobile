@@ -15,12 +15,12 @@ void main() async {
   }
 
   runApp(
-    const ProviderScope(child: MyApp()),
+    const ProviderScope(child: UnboundBible()),
   );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class UnboundBible extends StatelessWidget {
+  const UnboundBible({Key? key}) : super(key: key);
 
   static const String _title = 'Unbound Bible';
 
