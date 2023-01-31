@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:unboundbible/core/tools.dart';
+import 'package:unboundbible/widgets/details_page.dart';
 import 'package:unboundbible/widgets/main_page.dart';
 
 void main() async {
@@ -19,6 +21,21 @@ void main() async {
   );
 }
 
+final GoRouter _router = GoRouter(
+  routes: [
+    GoRoute(
+      path: '/',
+      builder: (BuildContext context, GoRouterState state) => MainPage(),
+      routes: [
+        GoRoute(
+          path: 'details',
+          builder: (BuildContext context, GoRouterState state) => DetailsScreen(),
+        ),
+      ],
+    ),
+  ],
+);
+
 class UnboundBible extends StatelessWidget {
   const UnboundBible({Key? key}) : super(key: key);
 
@@ -26,13 +43,13 @@ class UnboundBible extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
+    return MaterialApp.router(
+      routerConfig: _router,
       title: _title,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainPage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

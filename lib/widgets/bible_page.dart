@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:unboundbible/providers.dart';
 
 class BiblePage extends ConsumerWidget {
@@ -14,10 +15,10 @@ class BiblePage extends ConsumerWidget {
               textStyle: const TextStyle(fontSize: 20),
               foregroundColor: Colors.white,
             ),
-            onPressed: () {
-              print('pressed');
-            },
             child: Text(info),
+            onPressed: () {
+              context.go('/details');
+            },
           ),
         ),
         backgroundColor: Colors.blueAccent,
@@ -41,7 +42,8 @@ class BiblePage extends ConsumerWidget {
           child: ListTile(
               title: Text(line, style: TextStyle(fontSize: 24.0)),
               onTap: () {
-                print('tapped');
+//              ref.context.go('/details');
+                ref.context.push('/details');
               }),
         );
       },
