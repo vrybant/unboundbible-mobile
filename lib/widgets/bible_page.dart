@@ -17,7 +17,7 @@ class BiblePage extends ConsumerWidget {
             ),
             child: Text(info),
             onPressed: () {
-              context.go('/details');
+              context.go('/titles');
             },
           ),
         ),
@@ -42,8 +42,7 @@ class BiblePage extends ConsumerWidget {
           child: ListTile(
               title: Text(line, style: TextStyle(fontSize: 24.0)),
               onTap: () {
-//              ref.context.go('/details');
-                ref.context.push('/details');
+//              ref.context.push('/details');
               }),
         );
       },

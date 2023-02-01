@@ -4,8 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:unboundbible/core/tools.dart';
-import 'package:unboundbible/widgets/details_page.dart';
+import 'package:unboundbible/widgets/chapters_page.dart';
 import 'package:unboundbible/widgets/main_page.dart';
+import 'package:unboundbible/widgets/titles_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,8 +29,12 @@ final GoRouter _router = GoRouter(
       builder: (BuildContext context, GoRouterState state) => MainPage(),
       routes: [
         GoRoute(
-          path: 'details',
-          builder: (BuildContext context, GoRouterState state) => DetailsScreen(),
+          path: 'titles',
+          builder: (_, state) => TitlesPage(),
+        ),
+        GoRoute(
+          path: 'chapters',
+          builder: (_, state) => ChaptersPage(),
         ),
       ],
     ),

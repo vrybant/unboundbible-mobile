@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:unboundbible/providers.dart';
 
 class ChaptersPage extends ConsumerWidget {
@@ -31,7 +32,7 @@ class ChaptersPage extends ConsumerWidget {
               title: Text(' $number', style: TextStyle(fontSize: 24.0)),
               onTap: () {
                 ref.watch(bibleProvider.notifier).updateChapter(number);
-                ref.watch(navigationIndexProvider.notifier).state = 0;
+                ref.context.go('/');
               },
             ),
           );

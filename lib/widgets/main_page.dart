@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:unboundbible/providers.dart';
 import 'package:unboundbible/widgets/bible_page.dart';
-import 'package:unboundbible/widgets/chapters_page.dart';
-import 'package:unboundbible/widgets/titles_page.dart';
+import 'package:unboundbible/widgets/search.dart';
 import 'package:unboundbible/widgets/shelf_page.dart';
 
 class MainPage extends ConsumerWidget {
   final List<Widget> pages = [
     BiblePage(),
-    TitlesPage(),
-    ChaptersPage(),
+    SearchPage(),
+    SearchPage(),
     ShelfPage(),
   ];
 
