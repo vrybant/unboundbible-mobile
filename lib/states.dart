@@ -12,7 +12,7 @@ class BibleState {
   final int chapter;
 
   List<String> get content {
-    return tools!.get_Chapter;
+    return tools!.get_Chapter(book, chapter);
   }
 
   List<String> get titles {

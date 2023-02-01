@@ -17,9 +17,9 @@ class Tools {
     currBible = bibles[0];
   }
 
-  List<String> get get_Chapter {
+  List<String> get_Chapter(int book, int chapter) {
     List<String> result = [];
-    final text = currBible!.getChapter(currVerse);
+    final text = currBible!.getChapter(book, chapter);
 
     for (var i = 0; i < text.length; i++) {
       final line = " <l>${i + 1}</l> ${text[i]}\n";

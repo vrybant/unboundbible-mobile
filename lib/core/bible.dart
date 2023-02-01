@@ -144,14 +144,14 @@ class Bible extends Module {
     }
   }
 
-  List<String> getChapter(Verse verse) {
+  List<String> getChapter(int book, int chapter) {
     List<String> result = [];
-    var id = encodeID(verse.book).toString();
+    var id = encodeID(book).toString();
     // var nt = isNewTestament(verse.book);
 
     try {
       final query = "SELECT * FROM ${z.bible} WHERE ${z.book}=? AND ${z.chapter}=?";
-      final maps = database!.select(query, ['$id', '${verse.chapter}']);
+      final maps = database!.select(query, ['$id', '${chapter}']);
 
       List.generate(maps.length, (i) {
         final line = maps[i][z.text];
