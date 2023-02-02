@@ -11,6 +11,7 @@ class Verse {
   int chapter = 1;
   int number = 1;
   int count = 1;
+  Verse(this.book, this.chapter, this.number, this.count);
 }
 
 class Book {
@@ -174,9 +175,9 @@ class Bible extends Module {
     return result;
   }
 
-  int chaptersCount(Verse verse) {
+  int chaptersCount(int book) {
     var result = 0;
-    final id = encodeID(verse.book);
+    final id = encodeID(book);
     try {
       final query = "SELECT MAX(${z.chapter}) AS Count FROM ${z.bible} WHERE ${z.book} = ?";
       final map = database!.select(query, ['$id']);

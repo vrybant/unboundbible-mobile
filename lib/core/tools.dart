@@ -5,7 +5,6 @@ import 'lib.dart';
 
 Tools? tools = null;
 Bible? currBible;
-Verse currVerse = Verse();
 
 class Tools {
   List<Bible> bibles = [];
@@ -59,8 +58,9 @@ class Tools {
     return 0;
   }
 
-  String get getCurrInfo {
-    return currBible!.verseToStr(currVerse, truncated: true);
+  String getCurrInfo(int book, int chapter) {
+    final verse = Verse(book, chapter, 1, 1);
+    return currBible!.verseToStr(verse, truncated: true);
   }
 
   //currBible!.loadDatabase();

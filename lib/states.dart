@@ -20,11 +20,11 @@ class BibleState {
   }
 
   String get infoString {
-    return tools!.getCurrInfo;
+    return tools!.getCurrInfo(book, chapter);
   }
 
   int get chaptersCount {
-    return currBible!.chaptersCount(currVerse);
+    return currBible!.chaptersCount(book);
   }
 
   BibleState copyWith({

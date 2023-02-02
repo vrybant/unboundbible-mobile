@@ -30,16 +30,19 @@ class TitlesPage extends ConsumerWidget {
           return Container(
             color: Colors.white,
             child: ListTile(
-              dense: true,
-              title: Text(line, style: TextStyle(fontSize: 24.0)),
-              onTap: () => ref.context.go('/chapters'),
-              leading: Radio<int>(
-                  value: index,
-                  groupValue: groupIndex,
-                  onChanged: (value) {
-                    ref.watch(bibleProvider.notifier).updateBook(value! + 1);
-                  }),
-            ),
+                dense: true,
+                title: Text(line, style: TextStyle(fontSize: 24.0)),
+                onTap: () {
+                  ref.read(bibleProvider.notifier).update(book: index + 1);
+                  ref.context.go('/chapters');
+                }
+                //   leading: Radio<int>(
+                //       value: index,
+                //       groupValue: groupIndex,
+                //       onChanged: (value) {
+                //         ref.watch(bibleProvider.notifier).updateBook(value! + 1);
+                //       }),
+                ),
           );
         });
   }
