@@ -30,11 +30,13 @@ final GoRouter _router = GoRouter(
       routes: [
         GoRoute(
           path: 'titles',
-          builder: (_, state) => TitlesPage(),
-        ),
-        GoRoute(
-          path: 'chapters',
-          builder: (_, state) => ChaptersPage(),
+          builder: (context, state) => TitlesPage(),
+          routes: [
+            GoRoute(
+              path: 'chapters',
+              builder: (context, state) => ChaptersPage(),
+            ),
+          ],
         ),
       ],
     ),

@@ -30,7 +30,7 @@ class MainPage extends ConsumerWidget {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
-            label: 'Книга',
+            label: 'Поиск',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),

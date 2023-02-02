@@ -21,8 +21,8 @@ class TitlesPage extends ConsumerWidget {
 
   Widget _buildList(WidgetRef ref) {
     final lines = ref.watch(bibleProvider).titles;
-    final currBook = ref.watch(bibleProvider).book;
-    final groupIndex = currBook - 1;
+    // final currBook = ref.watch(bibleProvider).book;
+    // final groupIndex = currBook - 1;
     return ListView.builder(
         itemCount: lines.length,
         itemBuilder: (BuildContext content, int index) {
@@ -34,7 +34,7 @@ class TitlesPage extends ConsumerWidget {
                 title: Text(line, style: TextStyle(fontSize: 24.0)),
                 onTap: () {
                   ref.read(bibleProvider.notifier).update(book: index + 1);
-                  ref.context.go('/chapters');
+                  ref.context.go('/titles/chapters');
                 }
                 //   leading: Radio<int>(
                 //       value: index,
