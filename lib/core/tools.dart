@@ -4,10 +4,10 @@ import 'bible.dart';
 import 'lib.dart';
 
 Tools? tools = null;
-Bible? currBible;
 
 class Tools {
   List<Bible> bibles = [];
+  Bible? currBible;
 
   Tools() {
     bibles = Bibles.create();
@@ -58,9 +58,17 @@ class Tools {
     return 0;
   }
 
-  String getCurrInfo(int book, int chapter) {
+  String getInfo(int book, int chapter) {
     final verse = Verse(book, chapter, 1, 1);
     return currBible!.verseToStr(verse, truncated: true);
+  }
+
+  List<String> getTitles() {
+    return currBible!.getTitles();
+  }
+
+  int chaptersCount(int book) {
+    return currBible!.chaptersCount(book);
   }
 
   //currBible!.loadDatabase();

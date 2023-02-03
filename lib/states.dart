@@ -16,15 +16,15 @@ class BibleState {
   }
 
   List<String> get titles {
-    return currBible!.getTitles();
+    return tools!.getTitles();
   }
 
   String get infoString {
-    return tools!.getCurrInfo(book, chapter);
+    return tools!.getInfo(book, chapter);
   }
 
   int get chaptersCount {
-    return currBible!.chaptersCount(book);
+    return tools!.chaptersCount(book);
   }
 
   BibleState copyWith({
