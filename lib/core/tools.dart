@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'extensions.dart';
 import 'bible.dart';
 import 'lib.dart';
@@ -78,6 +79,32 @@ class Tools {
 
 }
 
+Future readPreferences() async {
+  final prefs = await SharedPreferences.getInstance();
+
+  final int? counter = prefs.getInt('counter');
+  final bool? repeatt = prefs.getBool('repeat');
+  final double? decimal = prefs.getDouble('decimal');
+  final String? action = prefs.getString('action');
+  final List<String>? items = prefs.getStringList('items');
+
+  print(counter);
+  print(repeatt);
+  print(decimal);
+  print(action);
+  print(items);
+}
+
+Future savePreferences() async {
+  final prefs = await SharedPreferences.getInstance();
+
+  await prefs.setInt('counter', 10);
+  await prefs.setBool('repeat', true);
+  await prefs.setDouble('decimal', 1.5);
+  await prefs.setString('action', 'Start');
+  await prefs.setStringList('items', <String>['Earth', 'Moon', 'Sun']);
+}
+
 Future initialization() async {
   await initVariables();
 
@@ -86,6 +113,9 @@ Future initialization() async {
       await installDatabasesFromAssets();
     }
   }
+
+  await savePreferences();
+  await readPreferences();
 
   tools = Tools();
 }

@@ -9,13 +9,14 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  path: ^1.8.2
-  path_provider: ^2.0.11
-  sqlite3_flutter_libs: ^0.5.12
-  sqlite3: ^1.9.1
   desktop_window: ^0.4.0
   flutter_riverpod: ^2.1.3
   go_router: ^6.0.2
+  path: ^1.8.2
+  path_provider: ^2.0.11
+  shared_preferences: ^2.0.18 
+  sqlite3: ^1.9.1
+  sqlite3_flutter_libs: ^0.5.12
 
 dev_dependencies:
   flutter_test:
