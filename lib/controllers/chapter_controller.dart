@@ -1,11 +1,13 @@
 import 'package:mobx/mobx.dart';
 import 'package:unboundbible/core/tools.dart';
 
-part 'main_controller.g.dart';
+part 'chapter_controller.g.dart';
 
-class MainController = MainControllerBase with _$MainController;
+final chapterController = ChapterController();
 
-abstract class MainControllerBase with Store {
+class ChapterController = ChapterControllerBase with _$ChapterController;
+
+abstract class ChapterControllerBase with Store {
   @observable
   int book = 1;
 
@@ -29,5 +31,12 @@ abstract class MainControllerBase with Store {
   }) {
     this.book = book ?? this.book;
     this.chapter = chapter ?? 1;
+  }
+
+  @action
+  void refresh() {
+    final temp = book;
+    this.book = 0;
+    this.book = temp;
   }
 }

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:unboundbible/controllers/shelf_controller.dart';
 
-final shelfController = ShelfController();
-
 class ShelfPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

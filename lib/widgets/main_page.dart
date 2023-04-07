@@ -5,8 +5,6 @@ import 'package:unboundbible/widgets/search.dart';
 import 'package:unboundbible/widgets/shelf_page.dart';
 import 'package:unboundbible/controllers/bar_controller.dart';
 
-final barController = BarController();
-
 class MainPage extends StatelessWidget {
   final List<Widget> pages = [
     BiblePage(),

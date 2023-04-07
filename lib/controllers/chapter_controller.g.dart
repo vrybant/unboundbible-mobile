@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'main_controller.dart';
+part of 'chapter_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,24 +8,24 @@ part of 'main_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$MainController on MainControllerBase, Store {
+mixin _$ChapterController on ChapterControllerBase, Store {
   Computed<String>? _$infoStringComputed;
 
   @override
   String get infoString =>
       (_$infoStringComputed ??= Computed<String>(() => super.infoString,
-              name: 'MainControllerBase.infoString'))
+              name: 'ChapterControllerBase.infoString'))
           .value;
   Computed<List<String>>? _$contentComputed;
 
   @override
   List<String> get content =>
       (_$contentComputed ??= Computed<List<String>>(() => super.content,
-              name: 'MainControllerBase.content'))
+              name: 'ChapterControllerBase.content'))
           .value;
 
   late final _$bookAtom =
-      Atom(name: 'MainControllerBase.book', context: context);
+      Atom(name: 'ChapterControllerBase.book', context: context);
 
   @override
   int get book {
@@ -41,7 +41,7 @@ mixin _$MainController on MainControllerBase, Store {
   }
 
   late final _$chapterAtom =
-      Atom(name: 'MainControllerBase.chapter', context: context);
+      Atom(name: 'ChapterControllerBase.chapter', context: context);
 
   @override
   int get chapter {
@@ -56,17 +56,28 @@ mixin _$MainController on MainControllerBase, Store {
     });
   }
 
-  late final _$MainControllerBaseActionController =
-      ActionController(name: 'MainControllerBase', context: context);
+  late final _$ChapterControllerBaseActionController =
+      ActionController(name: 'ChapterControllerBase', context: context);
 
   @override
   void update({int? book, int? chapter}) {
-    final _$actionInfo = _$MainControllerBaseActionController.startAction(
-        name: 'MainControllerBase.update');
+    final _$actionInfo = _$ChapterControllerBaseActionController.startAction(
+        name: 'ChapterControllerBase.update');
     try {
       return super.update(book: book, chapter: chapter);
     } finally {
-      _$MainControllerBaseActionController.endAction(_$actionInfo);
+      _$ChapterControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void refresh() {
+    final _$actionInfo = _$ChapterControllerBaseActionController.startAction(
+        name: 'ChapterControllerBase.refresh');
+    try {
+      return super.refresh();
+    } finally {
+      _$ChapterControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 

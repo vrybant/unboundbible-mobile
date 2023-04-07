@@ -2,6 +2,8 @@ import 'package:mobx/mobx.dart';
 
 part 'bar_controller.g.dart';
 
+final barController = BarController();
+
 class BarController = BarBase with _$BarController;
 
 abstract class BarBase with Store {
