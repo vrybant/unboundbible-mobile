@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:unboundbible/providers.dart';
 
-class ChaptersPage extends ConsumerWidget {
+class ChaptersPage extends StatelessWidget {
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Center(
@@ -15,12 +13,12 @@ class ChaptersPage extends ConsumerWidget {
         ),
         body: Container(
           color: Colors.white,
-          child: _buildList(ref),
+          child: _buildList(context),
         ));
   }
 
-  Widget _buildList(WidgetRef ref) {
-    final count = ref.watch(bibleProvider).chaptersCount;
+  Widget _buildList(BuildContext context) {
+    final count = 0; // ref.watch(bibleProvider).chaptersCount;
     return ListView.builder(
         itemCount: count,
         itemBuilder: (BuildContext content, int index) {
@@ -30,10 +28,10 @@ class ChaptersPage extends ConsumerWidget {
             child: ListTile(
               dense: true,
               title: Text(' $number', style: TextStyle(fontSize: 24.0)),
-              onTap: () {
-                ref.watch(bibleProvider.notifier).update(chapter: number);
-                ref.context.go('/');
-              },
+              // onTap: () {
+              //   ref.watch(bibleProvider.notifier).update(chapter: number);
+              //   ref.context.go('/');
+              // },
             ),
           );
         });

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:unboundbible/providers.dart';
 
-class TitlesPage extends ConsumerWidget {
+class TitlesPage extends StatelessWidget {
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Center(
@@ -15,12 +13,12 @@ class TitlesPage extends ConsumerWidget {
         ),
         body: Container(
           color: Colors.white,
-          child: _buildList(ref),
+          child: _buildList(context),
         ));
   }
 
-  Widget _buildList(WidgetRef ref) {
-    final lines = ref.watch(bibleProvider).titles;
+  Widget _buildList(BuildContext context) {
+    final lines = []; // ref.watch(bibleProvider).titles;
     // final currBook = ref.watch(bibleProvider).book;
     // final groupIndex = currBook - 1;
     return ListView.builder(
@@ -30,19 +28,19 @@ class TitlesPage extends ConsumerWidget {
           return Container(
             color: Colors.white,
             child: ListTile(
-                dense: true,
-                title: Text(line, style: TextStyle(fontSize: 24.0)),
-                onTap: () {
-                  ref.read(bibleProvider.notifier).update(book: index + 1);
-                  ref.context.go('/titles/chapters');
-                }
-                //   leading: Radio<int>(
-                //       value: index,
-                //       groupValue: groupIndex,
-                //       onChanged: (value) {
-                //         ref.watch(bibleProvider.notifier).updateBook(value! + 1);
-                //       }),
-                ),
+              dense: true,
+              title: Text(line, style: TextStyle(fontSize: 24.0)),
+              // onTap: () {
+              //   ref.read(bibleProvider.notifier).update(book: index + 1);
+              //   ref.context.go('/titles/chapters');
+              // }
+              //   leading: Radio<int>(
+              //       value: index,
+              //       groupValue: groupIndex,
+              //       onChanged: (value) {
+              //         ref.watch(bibleProvider.notifier).updateBook(value! + 1);
+              //       }),
+            ),
           );
         });
   }

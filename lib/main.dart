@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:unboundbible/core/tools.dart';
@@ -18,9 +17,7 @@ void main() async {
     await DesktopWindow.setWindowSize(Size(400, 700));
   }
 
-  runApp(
-    const ProviderScope(child: UnboundBible()),
-  );
+  runApp(UnboundBible());
 }
 
 final GoRouter _router = GoRouter(

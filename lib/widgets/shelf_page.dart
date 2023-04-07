@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:unboundbible/providers.dart';
 
-class ShelfPage extends ConsumerWidget {
+class ShelfPage extends StatelessWidget {
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Center(
@@ -14,13 +12,13 @@ class ShelfPage extends ConsumerWidget {
         ),
         body: Container(
           color: Colors.white,
-          child: _buildList(ref),
+          child: _buildList(context),
         ));
   }
 
-  Widget _buildList(WidgetRef ref) {
-    final lines = ref.watch(shelfProvider.notifier).list;
-    final groupIndex = ref.watch(shelfProvider);
+  Widget _buildList(BuildContext context) {
+    final lines = []; // ref.watch(shelfProvider.notifier).list;
+    final groupIndex = 0; // ref.watch(shelfProvider);
     return ListView.builder(
         itemCount: lines.length,
         itemBuilder: (BuildContext content, int index) {
@@ -31,13 +29,13 @@ class ShelfPage extends ConsumerWidget {
               dense: true,
               title: Text(line, style: TextStyle(fontSize: 24.0)),
 //            onTap: () => selectBible(index),
-              leading: Radio<int>(
-                value: index,
-                groupValue: groupIndex,
-                onChanged: (value) {
-                  ref.watch(shelfProvider.notifier).update(index);
-                },
-              ),
+              // leading: Radio<int>(
+              //   value: index,
+              //   groupValue: groupIndex,
+              //   onChanged: (value) {
+              //     ref.watch(shelfProvider.notifier).update(index);
+              //   },
+              // ),
             ),
           );
         });

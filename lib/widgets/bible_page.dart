@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:unboundbible/providers.dart';
 
-class BiblePage extends ConsumerWidget {
+class BiblePage extends StatelessWidget {
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final info = ref.watch(bibleProvider).infoString;
+  Widget build(BuildContext context) {
+    //final info = ref.watch(bibleProvider).infoString;
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -15,7 +13,7 @@ class BiblePage extends ConsumerWidget {
               textStyle: const TextStyle(fontSize: 20),
               foregroundColor: Colors.white,
             ),
-            child: Text(info),
+            child: Text("info"), // ***
             onPressed: () {
               context.go('/titles');
             },
@@ -25,13 +23,13 @@ class BiblePage extends ConsumerWidget {
       ),
       body: Container(
         color: Colors.white,
-        child: _buildList(ref),
+        child: _buildList(context),
       ),
     );
   }
 
-  Widget _buildList(WidgetRef ref) {
-    final lines = ref.watch(bibleProvider).content;
+  Widget _buildList(BuildContext context) {
+    final lines = []; // ref.watch(bibleProvider).content;
     return ListView.builder(
       key: ObjectKey(lines.hashCode),
       itemCount: lines.length,
