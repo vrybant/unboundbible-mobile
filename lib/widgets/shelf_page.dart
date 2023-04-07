@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:unboundbible/controllers/shelf_ctrl.dart';
+import 'package:unboundbible/controllers/shelf_controller.dart';
 
-final shelfCtrl = ShelfCtrl();
+final shelfController = ShelfController();
 
 class ShelfPage extends StatelessWidget {
   @override
@@ -24,8 +24,8 @@ class ShelfPage extends StatelessWidget {
   Widget _listView(BuildContext context) {
     return Observer(
       builder: (_) {
-        final lines = shelfCtrl.list;
-        final groupIndex = shelfCtrl.index;
+        final lines = shelfController.list;
+        final groupIndex = shelfController.index;
         return ListView.builder(
           itemCount: lines.length,
           itemBuilder: (_, int index) {
@@ -39,7 +39,7 @@ class ShelfPage extends StatelessWidget {
                   value: index,
                   groupValue: groupIndex,
                   onChanged: (_) {
-                    shelfCtrl.update(index);
+                    shelfController.update(index);
                   },
                 ),
               ),

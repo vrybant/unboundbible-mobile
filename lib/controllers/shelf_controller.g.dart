@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'controller.dart';
+part of 'shelf_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,40 +8,41 @@ part of 'controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$BarIndex on BarIndexBase, Store {
-  late final _$valueAtom = Atom(name: 'BarIndexBase.value', context: context);
+mixin _$ShelfController on ShelfControllerBase, Store {
+  late final _$indexAtom =
+      Atom(name: 'ShelfControllerBase.index', context: context);
 
   @override
-  int get value {
-    _$valueAtom.reportRead();
-    return super.value;
+  int get index {
+    _$indexAtom.reportRead();
+    return super.index;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.reportWrite(value, super.value, () {
-      super.value = value;
+  set index(int value) {
+    _$indexAtom.reportWrite(value, super.index, () {
+      super.index = value;
     });
   }
 
-  late final _$BarIndexBaseActionController =
-      ActionController(name: 'BarIndexBase', context: context);
+  late final _$ShelfControllerBaseActionController =
+      ActionController(name: 'ShelfControllerBase', context: context);
 
   @override
   void update(int value) {
-    final _$actionInfo =
-        _$BarIndexBaseActionController.startAction(name: 'BarIndexBase.update');
+    final _$actionInfo = _$ShelfControllerBaseActionController.startAction(
+        name: 'ShelfControllerBase.update');
     try {
       return super.update(value);
     } finally {
-      _$BarIndexBaseActionController.endAction(_$actionInfo);
+      _$ShelfControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   String toString() {
     return '''
-value: ${value}
+index: ${index}
     ''';
   }
 }

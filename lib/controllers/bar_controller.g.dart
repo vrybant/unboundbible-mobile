@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'shelf_ctrl.dart';
+part of 'bar_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,8 +8,8 @@ part of 'shelf_ctrl.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$ShelfCtrl on ShelfCtrlBase, Store {
-  late final _$indexAtom = Atom(name: 'ShelfCtrlBase.index', context: context);
+mixin _$BarController on BarBase, Store {
+  late final _$indexAtom = Atom(name: 'BarBase.index', context: context);
 
   @override
   int get index {
@@ -24,17 +24,17 @@ mixin _$ShelfCtrl on ShelfCtrlBase, Store {
     });
   }
 
-  late final _$ShelfCtrlBaseActionController =
-      ActionController(name: 'ShelfCtrlBase', context: context);
+  late final _$BarBaseActionController =
+      ActionController(name: 'BarBase', context: context);
 
   @override
-  void update(int index) {
-    final _$actionInfo = _$ShelfCtrlBaseActionController.startAction(
-        name: 'ShelfCtrlBase.update');
+  void update(int value) {
+    final _$actionInfo =
+        _$BarBaseActionController.startAction(name: 'BarBase.update');
     try {
-      return super.update(index);
+      return super.update(value);
     } finally {
-      _$ShelfCtrlBaseActionController.endAction(_$actionInfo);
+      _$BarBaseActionController.endAction(_$actionInfo);
     }
   }
 

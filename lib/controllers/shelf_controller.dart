@@ -1,11 +1,11 @@
 import 'package:mobx/mobx.dart';
 import 'package:unboundbible/core/tools.dart';
 
-part 'shelf_ctrl.g.dart';
+part 'shelf_controller.g.dart';
 
-class ShelfCtrl = ShelfCtrlBase with _$ShelfCtrl;
+class ShelfController = ShelfControllerBase with _$ShelfController;
 
-abstract class ShelfCtrlBase with Store {
+abstract class ShelfControllerBase with Store {
   @observable
   int index = tools!.getCurrBibleIndex();
 
@@ -14,8 +14,8 @@ abstract class ShelfCtrlBase with Store {
   }
 
   @action
-  void update(int index) {
-    this.index = index;
+  void update(int value) {
+    index = value;
     tools!.setCurrBible(index);
   }
 }
