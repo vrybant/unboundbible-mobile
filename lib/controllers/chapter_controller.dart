@@ -15,14 +15,10 @@ abstract class ChapterControllerBase with Store {
   int chapter = 1;
 
   @computed
-  String get infoString {
-    return tools!.getInfo(book, chapter);
-  }
+  String get infoString => tools!.getInfo(book, chapter);
 
   @computed
-  List<String> get content {
-    return tools!.get_Chapter(book, chapter);
-  }
+  List<String> get content => tools!.get_Chapter(book, chapter);
 
   @action
   void update({
@@ -36,7 +32,7 @@ abstract class ChapterControllerBase with Store {
   @action
   void refresh() {
     final temp = book;
-    this.book = 0;
+    this.book = -1;
     this.book = temp;
   }
 }

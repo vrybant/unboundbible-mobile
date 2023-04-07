@@ -12,9 +12,7 @@ abstract class ShelfControllerBase with Store {
   @observable
   int index = tools!.getCurrBibleIndex();
 
-  List<String> get list {
-    return tools!.get_Shelf();
-  }
+  List<String> get list => tools!.get_Shelf();
 
   @action
   void update(int value) {
