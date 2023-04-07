@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'counter.dart';
+part of 'controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,8 +8,8 @@ part of 'counter.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$Counter on CounterBase, Store {
-  late final _$valueAtom = Atom(name: 'CounterBase.value', context: context);
+mixin _$BarIndex on BarIndexBase, Store {
+  late final _$valueAtom = Atom(name: 'BarIndexBase.value', context: context);
 
   @override
   int get value {
@@ -24,17 +24,17 @@ mixin _$Counter on CounterBase, Store {
     });
   }
 
-  late final _$CounterBaseActionController =
-      ActionController(name: 'CounterBase', context: context);
+  late final _$BarIndexBaseActionController =
+      ActionController(name: 'BarIndexBase', context: context);
 
   @override
   void update(int value) {
     final _$actionInfo =
-        _$CounterBaseActionController.startAction(name: 'CounterBase.update');
+        _$BarIndexBaseActionController.startAction(name: 'BarIndexBase.update');
     try {
       return super.update(value);
     } finally {
-      _$CounterBaseActionController.endAction(_$actionInfo);
+      _$BarIndexBaseActionController.endAction(_$actionInfo);
     }
   }
 

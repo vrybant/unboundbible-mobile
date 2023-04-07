@@ -1,10 +1,10 @@
 import 'package:mobx/mobx.dart';
 
-part 'counter.g.dart';
+part 'controller.g.dart';
 
-class Counter = CounterBase with _$Counter;
+class BarIndex = BarIndexBase with _$BarIndex;
 
-abstract class CounterBase with Store {
+abstract class BarIndexBase with Store {
   @observable
   int value = 0;
 
