@@ -28,11 +28,11 @@ mixin _$Counter on CounterBase, Store {
       ActionController(name: 'CounterBase', context: context);
 
   @override
-  void increment() {
-    final _$actionInfo = _$CounterBaseActionController.startAction(
-        name: 'CounterBase.increment');
+  void update(int value) {
+    final _$actionInfo =
+        _$CounterBaseActionController.startAction(name: 'CounterBase.update');
     try {
-      return super.increment();
+      return super.update(value);
     } finally {
       _$CounterBaseActionController.endAction(_$actionInfo);
     }

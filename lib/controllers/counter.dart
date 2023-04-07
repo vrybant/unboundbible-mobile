@@ -9,7 +9,7 @@ abstract class CounterBase with Store {
   int value = 0;
 
   @action
-  void increment() {
-    value++;
+  void update(int value) {
+    this.value = value;
   }
 }

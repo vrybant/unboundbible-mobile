@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:unboundbible/widgets/bible_page.dart';
 import 'package:unboundbible/widgets/search.dart';
 import 'package:unboundbible/widgets/shelf_page.dart';
+import 'package:unboundbible/controllers/counter.dart';
+
+final counter = Counter();
 
 class MainPage extends StatelessWidget {
   final List<Widget> pages = [
@@ -13,39 +17,39 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int selectedIndex = 0; //ref.watch(navigationIndexProvider);
-    return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.blue,
-        iconSize: 28,
-        selectedFontSize: 12,
-//      onTap: (value) => ref.read(navigationIndexProvider.notifier).state = value,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Библия',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Поиск',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'Глава',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Перевод',
-          ),
-        ],
-        currentIndex: selectedIndex,
-        selectedItemColor: Colors.amber[800],
-//      onTap: _onTap,
-      ),
-      body: IndexedStack(
-        index: selectedIndex,
-        children: pages,
+    return Observer(
+      builder: (_) => Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.blue,
+          iconSize: 28,
+          selectedFontSize: 12,
+          onTap: (value) => counter.update(value),
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Библия',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.business),
+              label: 'Поиск',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.school),
+              label: 'Глава',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Перевод',
+            ),
+          ],
+          currentIndex: counter.value,
+          selectedItemColor: Colors.amber[800],
+        ),
+        body: IndexedStack(
+          index: counter.value,
+          children: pages,
+        ),
       ),
     );
   }

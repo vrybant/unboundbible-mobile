@@ -13,7 +13,7 @@ class BiblePage extends StatelessWidget {
               textStyle: const TextStyle(fontSize: 20),
               foregroundColor: Colors.white,
             ),
-            child: Text("info"), // ***
+            child: Text("Bible"),
             onPressed: () {
               context.go('/titles');
             },
