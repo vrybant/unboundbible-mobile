@@ -4,8 +4,6 @@ import 'extensions.dart';
 import 'bible.dart';
 import 'lib.dart';
 
-Tools? tools = null;
-
 class Tools {
   List<Bible> bibles = [];
   Bible? currBible;
@@ -64,19 +62,14 @@ class Tools {
     return currBible!.verseToStr(verse, truncated: true);
   }
 
-  List<String> getTitles() {
-    return currBible!.getTitles();
-  }
+  List<String> getTitles() => currBible!.getTitles();
 
-  int chaptersCount(int book) {
-    return currBible!.chaptersCount(book);
-  }
+  int chaptersCount(int book) => currBible!.chaptersCount(book);
 
   //currBible!.loadDatabase();
 /*  if (!currBible!.goodLink(currVerse)) {
       currVerse = currBible!.firstVerse;
     } */
-
 }
 
 Future readPreferences() async {
@@ -116,6 +109,4 @@ Future initialization() async {
 
   await savePreferences();
   await readPreferences();
-
-  tools = Tools();
 }

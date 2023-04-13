@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:get_it/get_it.dart';
+
 import 'package:unboundbible/controllers/chapter_controller.dart';
 import 'package:unboundbible/core/tools.dart';
 
@@ -20,11 +22,11 @@ class TitlesPage extends StatelessWidget {
   }
 
   Widget _listView(BuildContext context) {
-    final lines = tools?.getTitles();
+    final lines = GetIt.I<Tools>().getTitles();
     return ListView.builder(
-      itemCount: lines?.length,
+      itemCount: lines.length,
       itemBuilder: (BuildContext content, int index) {
-        var line = lines![index];
+        var line = lines[index];
         return Container(
           color: Colors.white,
           child: ListTile(

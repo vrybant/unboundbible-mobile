@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:desktop_window/desktop_window.dart';
+import 'package:get_it/get_it.dart';
+
 import 'package:unboundbible/core/tools.dart';
 import 'package:unboundbible/widgets/chapters_page.dart';
 import 'package:unboundbible/widgets/main_page.dart';
@@ -12,6 +14,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await initialization();
+  GetIt.I.registerSingleton<Tools>(Tools());
 
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await DesktopWindow.setWindowSize(Size(400, 700));

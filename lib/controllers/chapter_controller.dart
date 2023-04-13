@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:get_it/get_it.dart';
 import 'package:unboundbible/core/tools.dart';
 
 part 'chapter_controller.g.dart';
@@ -15,10 +16,10 @@ abstract class ChapterControllerBase with Store {
   int chapter = 1;
 
   @computed
-  String get infoString => tools!.getInfo(book, chapter);
+  String get infoString => GetIt.I<Tools>().getInfo(book, chapter);
 
   @computed
-  List<String> get content => tools!.get_Chapter(book, chapter);
+  List<String> get content => GetIt.I<Tools>().get_Chapter(book, chapter);
 
   @action
   void update({

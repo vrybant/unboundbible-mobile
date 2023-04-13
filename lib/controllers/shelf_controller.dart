@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:get_it/get_it.dart';
 import 'package:unboundbible/core/tools.dart';
 import 'package:unboundbible/controllers/chapter_controller.dart';
 
@@ -10,14 +11,14 @@ class ShelfController = ShelfControllerBase with _$ShelfController;
 
 abstract class ShelfControllerBase with Store {
   @observable
-  int index = tools!.getCurrBibleIndex();
+  int index = GetIt.I<Tools>().getCurrBibleIndex();
 
-  List<String> get list => tools!.get_Shelf();
+  List<String> get list => GetIt.I<Tools>().get_Shelf();
 
   @action
   void update(int value) {
     index = value;
-    tools!.setCurrBible(index);
+    GetIt.I<Tools>().setCurrBible(index);
     chapterController.refresh();
   }
 }
