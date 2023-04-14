@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:unboundbible/controllers/chapter_controller.dart';
+import 'package:unboundbible/core/tools.dart';
 
 class ChaptersPage extends StatelessWidget {
   @override
@@ -13,27 +17,32 @@ class ChaptersPage extends StatelessWidget {
         ),
         body: Container(
           color: Colors.white,
-          child: _buildList(context),
+          child: _listView(context),
         ));
   }
 
-  Widget _buildList(BuildContext context) {
-    final count = 0; // ref.watch(bibleProvider).chaptersCount;
-    return ListView.builder(
-        itemCount: count,
-        itemBuilder: (BuildContext content, int index) {
-          final number = index + 1;
-          return Container(
-            color: Colors.white,
-            child: ListTile(
-              dense: true,
-              title: Text(' $number', style: TextStyle(fontSize: 24.0)),
-              // onTap: () {
-              //   ref.watch(bibleProvider.notifier).update(chapter: number);
-              //   ref.context.go('/');
-              // },
-            ),
-          );
-        });
+  Widget _listView(BuildContext context) {
+    return Observer(
+      builder: (_) {
+        final count = chapterController.chaptersCount;
+        return ListView.builder(
+          itemCount: count,
+          itemBuilder: (BuildContext content, int index) {
+            final number = index + 1;
+            return Container(
+              color: Colors.white,
+              child: ListTile(
+                dense: true,
+                title: Text(' $number', style: TextStyle(fontSize: 24.0)),
+                onTap: () {
+                  chapterController.update(chapter: number);
+                  context.go('/');
+                },
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 }

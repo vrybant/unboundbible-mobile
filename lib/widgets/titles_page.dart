@@ -34,7 +34,7 @@ class TitlesPage extends StatelessWidget {
             title: Text(line, style: TextStyle(fontSize: 24.0)),
             onTap: () {
               chapterController.update(book: index + 1);
-              context.go('/');
+              context.go('/titles/chapters');
             },
           ),
         );

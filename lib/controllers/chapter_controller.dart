@@ -21,6 +21,9 @@ abstract class ChapterControllerBase with Store {
   @computed
   List<String> get content => GetIt.I<Tools>().get_Chapter(book, chapter);
 
+  @computed
+  int get chaptersCount => GetIt.I<Tools>().chaptersCount(book);
+
   @action
   void update({
     int? book,
