@@ -1,7 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:unboundbible/core/tools.dart';
-import 'package:unboundbible/controllers/chapter_controller.dart';
+import 'package:unboundbible/controllers/main_controller.dart';
 
 part 'shelf_controller.g.dart';
 
@@ -19,6 +19,6 @@ abstract class ShelfControllerBase with Store {
   void update(int value) {
     index = value;
     GetIt.I<Tools>().setCurrBible(index);
-    chapterController.refresh();
+    mainController.refresh();
   }
 }

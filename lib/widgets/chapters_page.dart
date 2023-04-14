@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:unboundbible/controllers/chapter_controller.dart';
-import 'package:unboundbible/core/tools.dart';
+import 'package:unboundbible/controllers/main_controller.dart';
 
 class ChaptersPage extends StatelessWidget {
   @override
@@ -24,7 +22,7 @@ class ChaptersPage extends StatelessWidget {
   Widget _listView(BuildContext context) {
     return Observer(
       builder: (_) {
-        final count = chapterController.chaptersCount;
+        final count = mainController.chaptersCount;
         return ListView.builder(
           itemCount: count,
           itemBuilder: (BuildContext content, int index) {
@@ -35,7 +33,7 @@ class ChaptersPage extends StatelessWidget {
                 dense: true,
                 title: Text(' $number', style: TextStyle(fontSize: 24.0)),
                 onTap: () {
-                  chapterController.update(chapter: number);
+                  mainController.update(chapter: number);
                   context.go('/');
                 },
               ),

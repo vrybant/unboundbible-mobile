@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
-import 'package:unboundbible/controllers/chapter_controller.dart';
+import 'package:unboundbible/controllers/main_controller.dart';
 
 class BiblePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Observer(
       builder: (_) {
-        final info = chapterController.infoString;
+        final info = mainController.infoString;
         return Scaffold(
           appBar: AppBar(
             title: Center(
@@ -37,7 +37,7 @@ class BiblePage extends StatelessWidget {
   Widget _listView(BuildContext context) {
     return Observer(
       builder: (_) {
-        final lines = chapterController.content;
+        final lines = mainController.content;
         return ListView.builder(
           key: ObjectKey(lines.hashCode),
           itemCount: lines.length,
