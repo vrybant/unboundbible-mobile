@@ -7,16 +7,16 @@ class ChaptersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Center(
-            child: Text("Глава"),
-          ),
-          backgroundColor: Colors.blueAccent,
-        ),
-        body: Container(
-          color: Colors.white,
-          child: _listView(context),
-        ));
+      appBar: AppBar(
+        title: Text("Главы"),
+        centerTitle: true,
+        backgroundColor: Colors.blueAccent,
+      ),
+      body: Container(
+        color: Colors.white,
+        child: _listView(context),
+      ),
+    );
   }
 
   Widget _listView(BuildContext context) {
@@ -31,7 +31,7 @@ class ChaptersPage extends StatelessWidget {
               color: Colors.white,
               child: ListTile(
                 dense: true,
-                title: Text(' $number', style: TextStyle(fontSize: 24.0)),
+                title: Text(' Глава $number', style: TextStyle(fontSize: 24.0)),
                 onTap: () {
                   mainController.update(chapter: number);
                   context.go('/');

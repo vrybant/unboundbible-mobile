@@ -10,9 +10,15 @@ class TitlesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Center(
-            child: Text("Книга"),
-          ),
+          title: Text("Книги"),
+          // actions: <Widget>[
+          //   IconButton(
+          //     icon: const Icon(Icons.arrow_drop_down_circle),
+          //     tooltip: 'Show Tooltip',
+          //     onPressed: () {},
+          //   ),
+          // ],
+          centerTitle: true,
           backgroundColor: Colors.blueAccent,
         ),
         body: Container(
