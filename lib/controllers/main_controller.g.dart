@@ -23,13 +23,6 @@ mixin _$MainController on MainControllerBase, Store {
       (_$contentComputed ??= Computed<List<String>>(() => super.content,
               name: 'MainControllerBase.content'))
           .value;
-  Computed<int>? _$chaptersCountComputed;
-
-  @override
-  int get chaptersCount =>
-      (_$chaptersCountComputed ??= Computed<int>(() => super.chaptersCount,
-              name: 'MainControllerBase.chaptersCount'))
-          .value;
 
   late final _$bookAtom =
       Atom(name: 'MainControllerBase.book', context: context);
@@ -94,8 +87,7 @@ mixin _$MainController on MainControllerBase, Store {
 book: ${book},
 chapter: ${chapter},
 infoString: ${infoString},
-content: ${content},
-chaptersCount: ${chaptersCount}
+content: ${content}
     ''';
   }
 }

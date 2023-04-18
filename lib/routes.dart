@@ -13,13 +13,13 @@ final GoRouter appRoutes = GoRouter(
       routes: [
         GoRoute(
           path: 'titles',
-          builder: (context, state) => TitlesPage(),
+          builder: (BuildContext context, GoRouterState state) => TitlesPage(),
           routes: [
             GoRoute(
-              path: 'chapters/:title',
-              builder: (context, state) {
-                final title = state.params['title']!;
-                return ChaptersPage();
+              path: 'chapters',
+              builder: (BuildContext context, GoRouterState state) {
+                final book = state.extra! as int;
+                return ChaptersPage(book: book);
               },
             ),
           ],

@@ -21,8 +21,7 @@ abstract class MainControllerBase with Store {
   @computed
   List<String> get content => GetIt.I<Tools>().get_Chapter(book, chapter);
 
-  @computed
-  int get chaptersCount => GetIt.I<Tools>().chaptersCount(book);
+  int chaptersCount(int book) => GetIt.I<Tools>().chaptersCount(book);
 
   @action
   void update({

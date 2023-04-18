@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:get_it/get_it.dart';
 
-import 'package:unboundbible/controllers/main_controller.dart';
 import 'package:unboundbible/core/tools.dart';
 
 class TitlesPage extends StatelessWidget {
@@ -39,8 +38,8 @@ class TitlesPage extends StatelessWidget {
             dense: true,
             title: Text(line, style: TextStyle(fontSize: 24.0)),
             onTap: () {
-              mainController.update(book: index + 1);
-              context.go('/titles/chapters');
+              final book = index + 1;
+              context.go('/titles/chapters', extra: book);
             },
           ),
         );
