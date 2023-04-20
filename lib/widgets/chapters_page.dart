@@ -8,9 +8,10 @@ class ChaptersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final title = mainController.getTitle(book);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Главы"),
+        title: Text(title),
         centerTitle: true,
         backgroundColor: Colors.blueAccent,
       ),

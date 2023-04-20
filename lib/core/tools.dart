@@ -57,6 +57,8 @@ class Tools {
     return 0;
   }
 
+  String getTitle(int book) => currBible!.getTitle(book);
+
   String getInfo(int book, int chapter) {
     final verse = Verse(book, chapter, 1, 1);
     return currBible!.verseToStr(verse, truncated: true);

@@ -193,6 +193,12 @@ class Bible extends Module {
     return null;
   }
 
+  String getTitle(int n) {
+    final book = bookByNum(n);
+    if (book == null) return '';
+    return book.title;
+  }
+
   String verseToStr(Verse verse, {bool full = true, bool truncated = false}) {
     var book = bookByNum(verse.book);
     if (book == null) return '';

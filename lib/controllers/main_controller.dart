@@ -22,6 +22,7 @@ abstract class MainControllerBase with Store {
   List<String> get content => GetIt.I<Tools>().get_Chapter(book, chapter);
 
   int chaptersCount(int book) => GetIt.I<Tools>().chaptersCount(book);
+  String getTitle(int book) => GetIt.I<Tools>().getTitle(book);
 
   @action
   void update({
