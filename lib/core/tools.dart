@@ -75,19 +75,19 @@ class Tools {
 }
 
 Future readPreferences() async {
-  final prefs = await SharedPreferences.getInstance();
+  // final prefs = await SharedPreferences.getInstance();
 
-  final int? counter = prefs.getInt('counter');
-  final bool? repeatt = prefs.getBool('repeat');
-  final double? decimal = prefs.getDouble('decimal');
-  final String? action = prefs.getString('action');
-  final List<String>? items = prefs.getStringList('items');
+  // final int? counter = prefs.getInt('counter');
+  // final bool? repeatt = prefs.getBool('repeat');
+  // final double? decimal = prefs.getDouble('decimal');
+  // final String? action = prefs.getString('action');
+  // final List<String>? items = prefs.getStringList('items');
 
-  print(counter);
-  print(repeatt);
-  print(decimal);
-  print(action);
-  print(items);
+  // print(counter);
+  // print(repeatt);
+  // print(decimal);
+  // print(action);
+  // print(items);
 }
 
 Future savePreferences() async {

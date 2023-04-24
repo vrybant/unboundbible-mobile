@@ -3,8 +3,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 //import 'package:go_router/go_router.dart';
 import 'package:unboundbible/controllers/main_controller.dart';
 
-// https://flutterassets.com/search-bar-in-flutter/
-
 class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);
 
@@ -48,6 +46,7 @@ class SearchPage extends StatelessWidget {
             child: Icon(Icons.search_rounded),
           ),
         ),
+        onSubmitted: (value) => print(value),
       ),
     );
   }
