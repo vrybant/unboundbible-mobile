@@ -173,15 +173,12 @@ class Bible extends Module {
   }
 
   List<String> Search(String string) {
+    if (string.isEmpty) return [];
     List<String> result = [];
-    print(string);
 
     try {
       final query = "SELECT * FROM ${z.bible} WHERE ${z.text} LIKE '%${string}%' ";
       final maps = database!.select(query);
-
-      print(query);
-      print(maps.length);
 
       List.generate(
         maps.length,

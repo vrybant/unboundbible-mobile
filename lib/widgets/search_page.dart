@@ -51,22 +51,18 @@ class SearchPage extends StatelessWidget {
   }
 
   Widget _listView(BuildContext context) {
-    return Observer(
-      builder: (_) {
-        final lines = searchController.content;
-        return ListView.builder(
-          key: ObjectKey(lines.hashCode),
-          itemCount: lines.length,
-          itemBuilder: (BuildContext content, int index) {
-            var line = lines[index];
-            return Container(
-              color: Colors.white,
-              child: ListTile(
-                title: Text(line, style: TextStyle(fontSize: 24.0)),
-                onTap: () {},
-              ),
-            );
-          },
+    final lines = searchController.content;
+    return ListView.builder(
+      key: ObjectKey(lines.hashCode),
+      itemCount: lines.length,
+      itemBuilder: (BuildContext content, int index) {
+        var line = lines[index];
+        return Container(
+          color: Colors.white,
+          child: ListTile(
+            title: Text(line, style: TextStyle(fontSize: 24.0)),
+            onTap: () {},
+          ),
         );
       },
     );

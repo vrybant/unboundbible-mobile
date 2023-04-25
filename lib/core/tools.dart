@@ -30,7 +30,7 @@ class Tools {
     final text = currBible!.Search(string);
 
     for (var i = 0; i < text.length; i++) {
-      final line = " <l>${i + 1}</l> ${text[i]}\n";
+      final line = "${text[i]}\n<l>${i + 1}</l>";
       result.add(line.removeTags());
     }
 
