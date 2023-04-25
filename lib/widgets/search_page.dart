@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-//import 'package:go_router/go_router.dart';
-import 'package:unboundbible/controllers/main_controller.dart';
+import 'package:unboundbible/controllers/search_controller.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -46,7 +45,7 @@ class SearchPage extends StatelessWidget {
             child: Icon(Icons.search_rounded),
           ),
         ),
-        onSubmitted: (value) => print(value),
+        onSubmitted: (value) => searchController.update(value),
       ),
     );
   }
@@ -54,19 +53,18 @@ class SearchPage extends StatelessWidget {
   Widget _listView(BuildContext context) {
     return Observer(
       builder: (_) {
-        final lines = mainController.content;
+        final lines = searchController.content;
         return ListView.builder(
           key: ObjectKey(lines.hashCode),
-          itemCount: 2, //lines.length,
+          itemCount: lines.length,
           itemBuilder: (BuildContext content, int index) {
             var line = lines[index];
             return Container(
               color: Colors.white,
               child: ListTile(
-                  title: Text(line, style: TextStyle(fontSize: 24.0)),
-                  onTap: () {
-//                ref.context.push('/details');
-                  }),
+                title: Text(line, style: TextStyle(fontSize: 24.0)),
+                onTap: () {},
+              ),
             );
           },
         );

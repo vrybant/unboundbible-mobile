@@ -25,6 +25,18 @@ class Tools {
     return result;
   }
 
+  List<String> get_Search(String string) {
+    List<String> result = [];
+    final text = currBible!.Search(string);
+
+    for (var i = 0; i < text.length; i++) {
+      final line = " <l>${i + 1}</l> ${text[i]}\n";
+      result.add(line.removeTags());
+    }
+
+    return result;
+  }
+
   List<String> get_Shelf() {
     List<String> result = [];
 

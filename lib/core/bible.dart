@@ -154,14 +154,46 @@ class Bible extends Module {
       final query = "SELECT * FROM ${z.bible} WHERE ${z.book}=? AND ${z.chapter}=?";
       final maps = database!.select(query, ['$id', '${chapter}']);
 
-      List.generate(maps.length, (i) {
-        final line = maps[i][z.text];
+      List.generate(
+        maps.length,
+        (i) {
+          final line = maps[i][z.text];
 
-        if (line != null) {
-          var text = line; // = preparation(line, format: format, nt: nt, purge: false)
-          result.add(text);
-        }
-      });
+          if (line != null) {
+            var text = line; // = preparation(line, format: format, nt: nt, purge: false)
+            result.add(text);
+          }
+        },
+      );
+    } catch (e) {
+      debugPrint("$e");
+    }
+
+    return result;
+  }
+
+  List<String> Search(String string) {
+    List<String> result = [];
+    print(string);
+
+    try {
+      final query = "SELECT * FROM ${z.bible} WHERE ${z.text} LIKE '%${string}%' ";
+      final maps = database!.select(query);
+
+      print(query);
+      print(maps.length);
+
+      List.generate(
+        maps.length,
+        (i) {
+          final line = maps[i][z.text];
+
+          if (line != null) {
+            var text = line;
+            result.add(text);
+          }
+        },
+      );
     } catch (e) {
       debugPrint("$e");
     }
