@@ -36,8 +36,8 @@ class Tools {
     List<String> result = [];
     final text = currBible!.Search(string);
 
-    for (string in text) {
-      final list = string.split('~');
+    for (var item in text) {
+      final list = item.split('~');
       if (list.length < 4) continue;
       final link = currBible!.verseToStr(_arrayToVerse(list));
       final line = "${list[3]}\n<l>$link</l>\n";
