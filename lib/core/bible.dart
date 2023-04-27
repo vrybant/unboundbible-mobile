@@ -183,10 +183,13 @@ class Bible extends Module {
       List.generate(
         maps.length,
         (i) {
-          final line = maps[i][z.text];
+          final book = maps[i][z.book];
+          final chapter = maps[i][z.chapter];
+          final verse = maps[i][z.verse];
+          final line = maps[i][z.text]; // to-do: preparation
 
           if (line != null) {
-            var text = line;
+            final text = "$book~$chapter~$verse~$line";
             result.add(text);
           }
         },
@@ -234,13 +237,12 @@ class Bible extends Module {
 
     final title = full ? book.title : book.abbr;
     final space = title.contains('.') ? '' : ' ';
-
     var result = '${title}${space}${verse.chapter}';
-    if ((truncated) || (verse.number != 0)) return result;
 
-    result += ':${verse.number}';
-    if (verse.count > 1) result += '- ${verse.number + verse.count - 1}';
-
+    if (!truncated) {
+      result += ':${verse.number}';
+      if (verse.count > 1) result += '- ${verse.number + verse.count - 1}';
+    }
     return result;
   }
 }

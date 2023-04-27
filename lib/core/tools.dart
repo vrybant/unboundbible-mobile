@@ -25,12 +25,22 @@ class Tools {
     return result;
   }
 
+  Verse _arrayToVerse(List<String> a) {
+    final book = int.tryParse(a[0]) ?? 0;
+    final chapter = int.tryParse(a[1]) ?? 0;
+    final number = int.tryParse(a[2]) ?? 0;
+    return Verse(book, chapter, number, 1);
+  }
+
   List<String> get_Search(String string) {
     List<String> result = [];
     final text = currBible!.Search(string);
 
-    for (var i = 0; i < text.length; i++) {
-      final line = "${text[i]}\n<l>${i + 1}</l>";
+    for (string in text) {
+      final list = string.split('~');
+      if (list.length < 4) continue;
+      final link = currBible!.verseToStr(_arrayToVerse(list));
+      final line = "${list[3]}\n<l>$link</l>\n";
       result.add(line.removeTags());
     }
 
