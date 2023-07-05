@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:unboundbible/widgets/bible_page.dart';
-import 'package:unboundbible/widgets/search_page.dart';
-import 'package:unboundbible/widgets/shelf_page.dart';
-import 'package:unboundbible/widgets/options_page.dart';
+import 'package:unboundbible/screens/bible.dart';
+import 'package:unboundbible/screens/search.dart';
+import 'package:unboundbible/screens/shelf.dart';
+import 'package:unboundbible/screens/options.dart';
 import 'package:unboundbible/controllers/bar_controller.dart';
 
 class MainPage extends StatelessWidget {

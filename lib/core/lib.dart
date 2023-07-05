@@ -6,6 +6,8 @@ import 'package:path_provider/path_provider.dart';
 import 'extensions.dart';
 import 'utils.dart';
 
+var isCupertino = true;
+
 String? databasesPath = null;
 
 String get locale {
