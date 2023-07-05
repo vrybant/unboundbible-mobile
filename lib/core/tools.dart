@@ -125,7 +125,7 @@ Future savePreferences() async {
 Future initialization() async {
   await initVariables();
 
-  if (Platform.isAndroid) {
+  if (Platform.isAndroid || Platform.isIOS || Platform.isMacOS) {
     if (!await Directory(databasesPath!).exists()) {
       await installDatabasesFromAssets();
     }
