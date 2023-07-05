@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:unboundbible/screens/bible.dart';
@@ -6,7 +7,7 @@ import 'package:unboundbible/screens/shelf.dart';
 import 'package:unboundbible/screens/options.dart';
 import 'package:unboundbible/controllers/bar_controller.dart';
 
-class MainPage extends StatelessWidget {
+class HomePage extends StatelessWidget {
   final List<Widget> pages = [
     BiblePage(),
     SearchPage(),

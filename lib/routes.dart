@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:unboundbible/screens/chapters.dart';
-import 'package:unboundbible/screens/main.dart';
+import 'package:unboundbible/screens/home.dart';
 import 'package:unboundbible/screens/titles.dart';
 
 final GoRouter appRoutes = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (BuildContext context, GoRouterState state) => MainPage(),
+      builder: (BuildContext context, GoRouterState state) => HomePage(),
       routes: [
         GoRoute(
           path: 'titles',
