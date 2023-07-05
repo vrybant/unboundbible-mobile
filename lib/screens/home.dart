@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+
+import 'package:unboundbible/core/lib.dart';
 import 'package:unboundbible/screens/bible.dart';
 import 'package:unboundbible/screens/search.dart';
 import 'package:unboundbible/screens/shelf.dart';
@@ -15,37 +17,47 @@ class HomePage extends StatelessWidget {
     OptionsPage(),
   ];
 
+  final List<BottomNavigationBarItem> _navigationItems = [
+    BottomNavigationBarItem(
+      icon: isCupertino ? Icon(CupertinoIcons.home) : Icon(Icons.home),
+      label: 'Библия',
+    ),
+    BottomNavigationBarItem(
+      icon: isCupertino ? Icon(CupertinoIcons.search) : Icon(Icons.search),
+      label: 'Поиск',
+    ),
+    BottomNavigationBarItem(
+      // icon: Icon(Icons.school),
+      icon: isCupertino ? Icon(CupertinoIcons.book) : Icon(Icons.bookmark_border),
+      label: 'Перевод',
+    ),
+    BottomNavigationBarItem(
+      icon: isCupertino ? Icon(CupertinoIcons.settings) : Icon(Icons.settings),
+      label: 'Настройки',
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Observer(
       builder: (_) => Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.blue,
-          iconSize: 28,
-          selectedFontSize: 12,
-          onTap: (value) => barController.update(value),
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Библия',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.business),
-              label: 'Поиск',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.school),
-              label: 'Перевод',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Настройки',
-            ),
-          ],
-          currentIndex: barController.index,
-          selectedItemColor: Colors.amber[800],
-        ),
+        bottomNavigationBar: isCupertino
+            ? CupertinoTabBar(
+                onTap: (value) => barController.update(value),
+                iconSize: 22,
+                items: _navigationItems,
+                currentIndex: barController.index,
+              )
+            : BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
+                backgroundColor: Colors.blue,
+                iconSize: 26,
+                selectedFontSize: 12,
+                onTap: (value) => barController.update(value),
+                items: _navigationItems,
+                currentIndex: barController.index,
+                selectedItemColor: Colors.amber[800],
+              ),
         body: IndexedStack(
           index: barController.index,
           children: pages,
