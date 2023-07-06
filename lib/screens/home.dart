@@ -27,7 +27,6 @@ class HomePage extends StatelessWidget {
       label: 'Поиск',
     ),
     BottomNavigationBarItem(
-      // icon: Icon(Icons.school),
       icon: isCupertino ? Icon(CupertinoIcons.book) : Icon(Icons.bookmark_border),
       label: 'Перевод',
     ),

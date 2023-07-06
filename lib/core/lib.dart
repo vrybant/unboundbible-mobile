@@ -6,7 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'extensions.dart';
 import 'utils.dart';
 
-var isCupertino = true;
+var isCupertino = true; // Platform.isIOS || Platform.isMacOS
 
 String? databasesPath = null;
 
