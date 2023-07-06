@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:unboundbible/controllers/main_controller.dart';
@@ -9,13 +11,13 @@ class BiblePage extends StatelessWidget {
     return Observer(
       builder: (_) {
         final info = mainController.infoString;
-        return Scaffold(
-          appBar: AppBar(
+        return PlatformScaffold(
+          appBar: PlatformAppBar(
             title: Center(
               child: TextButton(
                 style: TextButton.styleFrom(
                   textStyle: const TextStyle(fontSize: 20),
-                  foregroundColor: Colors.white,
+                  foregroundColor: Colors.red,
                 ),
                 child: Text(info),
                 onPressed: () {
@@ -23,7 +25,11 @@ class BiblePage extends StatelessWidget {
                 },
               ),
             ),
-            backgroundColor: Colors.blueAccent,
+            material: (_, __) {
+              return MaterialAppBarData(
+                backgroundColor: Colors.blueAccent,
+              );
+            },
           ),
           body: Container(
             color: Colors.white,
