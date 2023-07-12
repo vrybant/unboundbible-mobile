@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:unboundbible/controllers/main_controller.dart';
+import 'package:unboundbible/adaptive.dart';
 
 class BiblePage extends StatelessWidget {
   @override
@@ -10,6 +12,9 @@ class BiblePage extends StatelessWidget {
       builder: (_) {
         final info = mainController.infoString;
         return Scaffold(
+          // appBar: CupertinoNavigationBar(
+          //   middle: const Text('CupertinoNavigationBar Sample'),
+          // ),
           appBar: AppBar(
             title: Center(
               child: TextButton(
@@ -23,7 +28,8 @@ class BiblePage extends StatelessWidget {
                 },
               ),
             ),
-            backgroundColor: Colors.blueAccent,
+            backgroundColor:
+                isCupertino ? CupertinoColors.secondarySystemBackground : Colors.blueAccent,
           ),
           body: Container(
             color: Colors.white,
