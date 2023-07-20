@@ -1,12 +1,15 @@
-import 'dart:io';
+import 'dart:io' show Platform;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:get_it/get_it.dart';
+
 import 'package:unboundbible/routes.dart';
 import 'package:unboundbible/core/tools.dart';
-import 'package:unboundbible/adaptive.dart';
+
+// https://docs.flutter.dev/resources/platform-adaptations
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,21 +31,25 @@ class UnboundBible extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return isCupertino
-        ? CupertinoApp.router(
-            routerConfig: appRoutes,
-            title: _title,
-            theme: CupertinoThemeData(brightness: Brightness.light),
-            debugShowCheckedModeBanner: false,
-          )
-        : MaterialApp.router(
-            routerConfig: appRoutes,
-            title: _title,
-            theme: ThemeData(
-              useMaterial3: true,
-              colorSchemeSeed: isCupertino ? CupertinoColors.systemGrey : const Color(0xff6750a4),
-            ),
-            debugShowCheckedModeBanner: false,
-          );
+    return PlatformProvider(
+      initialPlatform: TargetPlatform.iOS,
+      settings: PlatformSettingsData(
+        iosUsesMaterialWidgets: true,
+        iosUseZeroPaddingForAppbarPlatformIcon: true,
+      ),
+      builder: (context) => PlatformTheme(
+        themeMode: ThemeMode.dark, // initial brightness
+        builder: (context) => PlatformApp.router(
+          localizationsDelegates: <LocalizationsDelegate<dynamic>>[
+            DefaultMaterialLocalizations.delegate,
+            DefaultWidgetsLocalizations.delegate,
+            DefaultCupertinoLocalizations.delegate,
+          ],
+          routerConfig: appRoutes,
+          title: _title,
+          debugShowCheckedModeBanner: false,
+        ),
+      ),
+    );
   }
 }

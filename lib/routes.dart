@@ -1,11 +1,12 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:unboundbible/screens/chapters.dart';
 import 'package:unboundbible/screens/home.dart';
-import 'package:unboundbible/screens/titles.dart';
+import 'package:unboundbible/widgets/titles.dart';
 
 final GoRouter appRoutes = GoRouter(
+  initialLocation: '/',
   routes: [
     GoRoute(
       path: '/',

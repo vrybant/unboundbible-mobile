@@ -1,40 +1,44 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:unboundbible/controllers/main_controller.dart';
-import 'package:unboundbible/adaptive.dart';
 
 class BiblePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Observer(
-      builder: (_) {
+      builder: (BuildContext context) {
         final info = mainController.infoString;
-        return Scaffold(
-          // appBar: CupertinoNavigationBar(
-          //   middle: const Text('CupertinoNavigationBar Sample'),
-          // ),
-          appBar: AppBar(
-            title: Center(
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  textStyle: const TextStyle(fontSize: 20),
-                  foregroundColor: Colors.white,
-                ),
+        return PlatformScaffold(
+          appBar: PlatformAppBar(
+            title: PlatformTextButton(
+              child: Center(
                 child: Text(info),
-                onPressed: () {
-                  context.go('/titles');
-                },
               ),
+              onPressed: () => context.go('/titles'),
+              padding: const EdgeInsets.all(8),
+              cupertino: (_, __) {
+                return CupertinoTextButtonData(
+                  minSize: 30,
+                );
+              },
+              material: (_, __) {
+                return MaterialTextButtonData(
+                  style: TextButton.styleFrom(
+                    textStyle: const TextStyle(fontSize: 20),
+                    foregroundColor: Colors.white,
+                  ),
+                );
+              },
             ),
-            backgroundColor:
-                isCupertino ? CupertinoColors.secondarySystemBackground : Colors.blueAccent,
+            cupertino: (_, __) {
+              return CupertinoNavigationBarData(
+                transitionBetweenRoutes: false,
+              );
+            },
           ),
-          body: Container(
-            color: Colors.white,
-            child: _listView(context),
-          ),
+          body: _listView(context),
         );
       },
     );
@@ -42,7 +46,7 @@ class BiblePage extends StatelessWidget {
 
   Widget _listView(BuildContext context) {
     return Observer(
-      builder: (_) {
+      builder: (BuildContext context) {
         final lines = mainController.content;
         return ListView.builder(
           key: ObjectKey(lines.hashCode),
@@ -51,10 +55,10 @@ class BiblePage extends StatelessWidget {
             var line = lines[index];
             return Container(
               color: Colors.white,
-              child: ListTile(
+              child: PlatformListTile(
                   title: Text(line, style: TextStyle(fontSize: 24.0)),
                   onTap: () {
-//                ref.context.push('/details');
+//                context.push('/details');
                   }),
             );
           },
