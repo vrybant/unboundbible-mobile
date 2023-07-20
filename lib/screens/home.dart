@@ -19,19 +19,19 @@ class HomePage extends StatelessWidget {
   List<BottomNavigationBarItem> _navigationItems(BuildContext context) => [
         BottomNavigationBarItem(
           icon: Icon(PlatformIcons(context).home),
-          label: 'Библия',
+          label: 'Bible', // Библия
         ),
         BottomNavigationBarItem(
           icon: Icon(PlatformIcons(context).search),
-          label: 'Поиск',
+          label: 'Search', // Поиск
         ),
         BottomNavigationBarItem(
           icon: Icon(PlatformIcons(context).book),
-          label: 'Перевод',
+          label: 'Modules', // Перевод
         ),
         BottomNavigationBarItem(
           icon: Icon(PlatformIcons(context).settings),
-          label: 'Настройки',
+          label: 'Options', // Настройки
         ),
       ];
 
