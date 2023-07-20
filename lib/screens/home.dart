@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -54,21 +53,16 @@ class HomePage extends StatelessWidget {
           //   the back button, but does required transitionBetweenRoutes set to false (see above)
           useCupertinoTabView: false,
         ),
-
-        /*
-        bottomNavBar: PlatformNavBar(
-          cupertino: (_, __) => CupertinoTabBarData(
-            iconSize: 22,
-          ),
-          material: (_, __) => MaterialNavBarData(
-            iconSize: 26,
-            selectedFontSize: 12,
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: Colors.blue,
-            selectedItemColor: Colors.amber[800],
-          ),
+        cupertinoTabs: (context, platform) => CupertinoTabBarData(
+          iconSize: 22,
         ),
-        */
+        materialTabs: (_, __) => MaterialNavBarData(
+          iconSize: 26,
+          selectedFontSize: 12,
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: Colors.amber[800],
+//        backgroundColor: Colors.blue,
+        ),
       ),
     );
   }
