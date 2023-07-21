@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:get_it/get_it.dart';
 
@@ -8,8 +7,8 @@ import 'package:unboundbible/core/tools.dart';
 class TitlesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return PlatformScaffold(
-        appBar: PlatformAppBar(
+    return Scaffold(
+        appBar: AppBar(
           title: Text("Книги"),
           // actions: <Widget>[
           //   IconButton(
@@ -18,12 +17,8 @@ class TitlesPage extends StatelessWidget {
           //     onPressed: () {},
           //   ),
           // ],
-          material: (_, __) {
-            return MaterialAppBarData(
-              centerTitle: true,
-              backgroundColor: Colors.blueAccent,
-            );
-          },
+          centerTitle: true,
+          backgroundColor: Colors.blueAccent,
         ),
         body: Container(
           color: Colors.white,

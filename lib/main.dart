@@ -1,15 +1,11 @@
 import 'dart:io' show Platform;
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:get_it/get_it.dart';
 
 import 'package:unboundbible/routes.dart';
 import 'package:unboundbible/core/tools.dart';
-
-// https://docs.flutter.dev/resources/platform-adaptations
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,25 +27,14 @@ class UnboundBible extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PlatformProvider(
-      initialPlatform: TargetPlatform.iOS,
-      settings: PlatformSettingsData(
-        iosUsesMaterialWidgets: true,
-        iosUseZeroPaddingForAppbarPlatformIcon: true,
+    return MaterialApp.router(
+      routerConfig: appRoutes,
+      title: _title,
+      theme: ThemeData(
+//      useMaterial3: true,
+        colorSchemeSeed: const Color(0xff6750a4),
       ),
-      builder: (context) => PlatformTheme(
-        themeMode: ThemeMode.dark, // initial brightness
-        builder: (context) => PlatformApp.router(
-          localizationsDelegates: <LocalizationsDelegate<dynamic>>[
-            DefaultMaterialLocalizations.delegate,
-            DefaultWidgetsLocalizations.delegate,
-            DefaultCupertinoLocalizations.delegate,
-          ],
-          routerConfig: appRoutes,
-          title: _title,
-          debugShowCheckedModeBanner: false,
-        ),
-      ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

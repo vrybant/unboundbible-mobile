@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class ColorsListPage extends StatelessWidget {
   @override
@@ -27,7 +26,7 @@ class ColorsListPage extends StatelessWidget {
           int materialIndex = materialIndices[index];
           return Container(
             color: Colors.grey,
-            child: PlatformListTile(
+            child: ListTile(
               title: Text('$materialIndex', style: TextStyle(fontSize: 24.0)),
               trailing: Icon(Icons.chevron_right),
 //            onTap: () => onPush?.call(materialIndex),
