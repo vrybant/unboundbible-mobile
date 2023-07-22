@@ -4,18 +4,17 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 class ColorsListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "ColorsList",
+    return PlatformScaffold(
+        appBar: PlatformAppBar(
+          title: Text(
+            "ColorsList",
+          ),
+          backgroundColor: Colors.green,
         ),
-        backgroundColor: Colors.green,
-      ),
-      body: Container(
-        color: Colors.white,
-        child: _buildList(),
-      ),
-    );
+        body: Container(
+          color: Colors.white,
+          child: _buildList(),
+        ));
   }
 
   final List<int> materialIndices = [901, 800, 700, 600, 500, 400, 300, 200, 100, 50, 25, 5];

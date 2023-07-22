@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:unboundbible/controllers/main_controller.dart';
@@ -9,19 +10,34 @@ class BiblePage extends StatelessWidget {
     return Observer(
       builder: (BuildContext context) {
         final info = mainController.infoString;
-        return Scaffold(
-          appBar: AppBar(
-            title: TextButton(
+        return PlatformScaffold(
+          appBar: PlatformAppBar(
+            title: PlatformTextButton(
               child: Center(
                 child: Text(info),
-              ),
-              style: TextButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 20),
-                foregroundColor: Colors.white,
+                child: Text('ListTile'),
               ),
               onPressed: () => context.go('/titles'),
+              padding: const EdgeInsets.all(8),
+              cupertino: (_, __) {
+                return CupertinoTextButtonData(
+                  minSize: 30,
+                );
+              },
+              material: (_, __) {
+                return MaterialTextButtonData(
+                  style: TextButton.styleFrom(
+                    textStyle: const TextStyle(fontSize: 20),
+                    foregroundColor: Colors.white,
+                  ),
+                );
+              },
             ),
-            backgroundColor: Colors.blueAccent,
+            cupertino: (_, __) {
+              return CupertinoNavigationBarData(
+                transitionBetweenRoutes: false,
+              );
+            },
           ),
           body: _listView(context),
         );
@@ -40,7 +56,7 @@ class BiblePage extends StatelessWidget {
             var line = lines[index];
             return Container(
               color: Colors.white,
-              child: ListTile(
+              child: PlatformListTile(
                 title: Text(line, style: TextStyle(fontSize: 24.0)),
 //              onTap: () => context.push('/details'),
               ),

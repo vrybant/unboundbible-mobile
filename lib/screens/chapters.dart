@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:unboundbible/controllers/main_controller.dart';
 
@@ -9,11 +10,20 @@ class ChaptersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final title = mainController.getTitle(book);
-    return Scaffold(
-      appBar: AppBar(
+    return PlatformScaffold(
+      appBar: PlatformAppBar(
         title: Text(title),
-        centerTitle: true,
-        backgroundColor: Colors.blueAccent,
+        material: (_, __) {
+          return MaterialAppBarData(
+            centerTitle: true,
+            backgroundColor: Colors.blueAccent,
+          );
+        },
+        cupertino: (_, __) {
+          return CupertinoNavigationBarData(
+            transitionBetweenRoutes: false,
+          );
+        },
       ),
       body: Container(
         color: Colors.white,
@@ -30,13 +40,17 @@ class ChaptersPage extends StatelessWidget {
         final number = index + 1;
         return Container(
           color: Colors.white,
-          child: ListTile(
+          child: PlatformListTile(
             title: Text(' Глава $number', style: TextStyle(fontSize: 24.0)),
             onTap: () {
               mainController.update(book: book, chapter: number);
               context.go('/');
             },
-            dense: true,
+            material: (_, __) {
+              return MaterialListTileData(
+                dense: true,
+              );
+            },
           ),
         );
       },
