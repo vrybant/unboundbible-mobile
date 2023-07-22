@@ -15,7 +15,6 @@ class BiblePage extends StatelessWidget {
             title: PlatformTextButton(
               child: Center(
                 child: Text(info),
-                child: Text('ListTile'),
               ),
               onPressed: () => context.go('/titles'),
               padding: const EdgeInsets.all(8),
