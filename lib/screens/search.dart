@@ -24,8 +24,8 @@ class SearchPage extends StatelessWidget {
             },
             material: (_, __) {
               return MaterialAppBarData(
-                backgroundColor: Colors.blueAccent,
-              );
+//              backgroundColor: Colors.blueAccent,
+                  );
             },
           ),
           body: Container(

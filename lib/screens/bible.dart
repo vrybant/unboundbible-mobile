@@ -55,7 +55,7 @@ class BiblePage extends StatelessWidget {
             var line = lines[index];
             return Container(
               color: Colors.white,
-              child: PlatformListTile(
+              child: ListTile(
                 title: Text(line, style: TextStyle(fontSize: 24.0)),
 //              onTap: () => context.push('/details'),
               ),

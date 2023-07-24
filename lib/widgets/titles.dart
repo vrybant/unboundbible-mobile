@@ -21,7 +21,7 @@ class TitlesPage extends StatelessWidget {
           material: (_, __) {
             return MaterialAppBarData(
               centerTitle: true,
-              backgroundColor: Colors.blueAccent,
+//            backgroundColor: Colors.blueAccent,
             );
           },
         ),
