@@ -7,11 +7,10 @@ import 'package:desktop_window/desktop_window.dart';
 import 'package:get_it/get_it.dart';
 
 import 'package:unboundbible/routes.dart';
+import 'package:unboundbible/themes.dart';
 import 'package:unboundbible/core/tools.dart';
 
 // https://docs.flutter.dev/resources/platform-adaptations
-
-ThemeMode? theme_Mode = ThemeMode.light; // initial brightness
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,43 +32,21 @@ class UnboundBible extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final materialLightTheme = ThemeData.light();
-    final materialDarkTheme = ThemeData.dark();
-
-    const darkDefaultCupertinoTheme = CupertinoThemeData(brightness: Brightness.dark);
-    final cupertinoDarkTheme = MaterialBasedCupertinoThemeData(
-      materialTheme: materialDarkTheme.copyWith(
-        cupertinoOverrideTheme: CupertinoThemeData(
-          brightness: Brightness.dark,
-          barBackgroundColor: darkDefaultCupertinoTheme.barBackgroundColor,
-          textTheme: CupertinoTextThemeData(
-            primaryColor: Colors.white,
-            navActionTextStyle: darkDefaultCupertinoTheme.textTheme.navActionTextStyle.copyWith(
-              color: const Color(0xF0F9F9F9),
-            ),
-            navLargeTitleTextStyle: darkDefaultCupertinoTheme.textTheme.navLargeTitleTextStyle
-                .copyWith(color: const Color(0xF0F9F9F9)),
-          ),
-        ),
-      ),
-    );
-    final cupertinoLightTheme = MaterialBasedCupertinoThemeData(materialTheme: materialLightTheme);
-
     return PlatformProvider(
-      //initialPlatform: TargetPlatform.iOS,
+      initialPlatform: TargetPlatform.iOS,
       settings: PlatformSettingsData(
         iosUsesMaterialWidgets: true,
         iosUseZeroPaddingForAppbarPlatformIcon: true,
       ),
       builder: (context) => PlatformTheme(
         themeMode: theme_Mode,
-        materialLightTheme: materialLightTheme,
-        materialDarkTheme: materialDarkTheme,
+        materialLightTheme: lightTheme,
+        materialDarkTheme: darkTheme,
         cupertinoLightTheme: cupertinoLightTheme,
         cupertinoDarkTheme: cupertinoDarkTheme,
         matchCupertinoSystemChromeBrightness: true,
         onThemeModeChanged: (themeMode) {
-          theme_Mode = theme_Mode; /* you can save to storage */
+          theme_Mode = themeMode; /* you can save to storage */
         },
         builder: (context) => PlatformApp.router(
           localizationsDelegates: <LocalizationsDelegate<dynamic>>[

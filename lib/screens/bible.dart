@@ -37,6 +37,12 @@ class BiblePage extends StatelessWidget {
                 transitionBetweenRoutes: false,
               );
             },
+            material: (_, __) {
+              return MaterialAppBarData(
+                elevation: 2,
+                shadowColor: Theme.of(context).shadowColor,
+              );
+            },
           ),
           body: _listView(context),
         );
