@@ -18,23 +18,23 @@ class HomePage extends StatelessWidget {
   ];
 
   List<BottomNavigationBarItem> _navigationItems(BuildContext context) {
-    final t = AppLocalizations.of(context)!;
+    final l = AppLocalizations.of(context)!;
     return [
       BottomNavigationBarItem(
         icon: Icon(PlatformIcons(context).home),
-        label: t.bible,
+        label: l.bible,
       ),
       BottomNavigationBarItem(
         icon: Icon(PlatformIcons(context).search),
-        label: t.search,
+        label: l.search,
       ),
       BottomNavigationBarItem(
         icon: Icon(PlatformIcons(context).book),
-        label: t.modules,
+        label: l.modules,
       ),
       BottomNavigationBarItem(
         icon: Icon(PlatformIcons(context).settings),
-        label: t.options,
+        label: l.options,
       ),
     ];
   }
