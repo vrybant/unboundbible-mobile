@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -16,24 +17,27 @@ class HomePage extends StatelessWidget {
     OptionsPage(),
   ];
 
-  List<BottomNavigationBarItem> _navigationItems(BuildContext context) => [
-        BottomNavigationBarItem(
-          icon: Icon(PlatformIcons(context).home),
-          label: 'Bible', // Библия
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(PlatformIcons(context).search),
-          label: 'Search', // Поиск
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(PlatformIcons(context).book),
-          label: 'Modules', // Перевод
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(PlatformIcons(context).settings),
-          label: 'Options', // Настройки
-        ),
-      ];
+  List<BottomNavigationBarItem> _navigationItems(BuildContext context) {
+    final t = AppLocalizations.of(context)!;
+    return [
+      BottomNavigationBarItem(
+        icon: Icon(PlatformIcons(context).home),
+        label: t.bible,
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(PlatformIcons(context).search),
+        label: t.search,
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(PlatformIcons(context).book),
+        label: t.modules,
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(PlatformIcons(context).settings),
+        label: t.options,
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {

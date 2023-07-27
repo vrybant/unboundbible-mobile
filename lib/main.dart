@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:get_it/get_it.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:unboundbible/routes.dart';
 import 'package:unboundbible/themes.dart';
 import 'package:unboundbible/core/tools.dart';
 
+// https://docs.flutter.dev/accessibility-and-localization/internationalization
 // https://docs.flutter.dev/resources/platform-adaptations
 
 void main() async {
@@ -49,11 +51,9 @@ class UnboundBible extends StatelessWidget {
           theme_Mode = themeMode; /* you can save to storage */
         },
         builder: (context) => PlatformApp.router(
-          localizationsDelegates: <LocalizationsDelegate<dynamic>>[
-            DefaultMaterialLocalizations.delegate,
-            DefaultWidgetsLocalizations.delegate,
-            DefaultCupertinoLocalizations.delegate,
-          ],
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          locale: Locale('ru'),
           routerConfig: appRoutes,
           title: _title,
           debugShowCheckedModeBanner: false,
