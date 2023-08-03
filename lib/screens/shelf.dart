@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:unboundbible/controllers/shelf_controller.dart';
 
@@ -10,21 +9,12 @@ class ShelfPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(
       builder: (BuildContext context) {
-        return PlatformScaffold(
-          appBar: PlatformAppBar(
+        return Scaffold(
+          appBar: AppBar(
             title: Center(
-              child: PlatformText("Перевод"),
+              child: Text("Перевод"),
             ),
-            cupertino: (context, platform) {
-              return CupertinoNavigationBarData(
-                transitionBetweenRoutes: false,
-              );
-            },
-            material: (_, __) {
-              return MaterialAppBarData(
-                backgroundColor: Colors.blueAccent,
-              );
-            },
+            backgroundColor: Colors.blueAccent,
           ),
           body: Container(
             color: Colors.white,
@@ -46,8 +36,8 @@ class ShelfPage extends StatelessWidget {
             var line = lines[index];
             return Container(
               color: Colors.white,
-              child: PlatformListTile(
-//                dense: true,
+              child: ListTile(
+                dense: true,
                 title: Text(line, style: TextStyle(fontSize: 24.0)),
                 leading: Radio<int>(
                   value: index,

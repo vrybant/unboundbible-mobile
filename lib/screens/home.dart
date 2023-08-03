@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:unboundbible/screens/bible.dart';
 import 'package:unboundbible/screens/search.dart';
 import 'package:unboundbible/screens/shelf.dart';
@@ -21,19 +19,19 @@ class HomePage extends StatelessWidget {
     final l = AppLocalizations.of(context)!;
     return [
       BottomNavigationBarItem(
-        icon: Icon(PlatformIcons(context).home),
+        icon: Icon(Icons.home),
         label: l.bible,
       ),
       BottomNavigationBarItem(
-        icon: Icon(PlatformIcons(context).search),
+        icon: Icon(Icons.search),
         label: l.search,
       ),
       BottomNavigationBarItem(
-        icon: Icon(PlatformIcons(context).book),
+        icon: Icon(Icons.book),
         label: l.modules,
       ),
       BottomNavigationBarItem(
-        icon: Icon(PlatformIcons(context).settings),
+        icon: Icon(Icons.settings),
         label: l.options,
       ),
     ];
@@ -41,31 +39,21 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _tabController = PlatformTabController(initialIndex: barController.index);
     return Observer(
-      builder: (_) => PlatformTabScaffold(
-        iosContentPadding: true,
-        tabController: _tabController,
-        bodyBuilder: (context, index) => IndexedStack(
-          index: barController.index,
-          children: pages,
-        ),
-        itemChanged: (value) => barController.update(value),
-        items: _navigationItems(context),
-        cupertino: (_, __) => CupertinoTabScaffoldData(
-          //   Having this property as false (default true) forces it not to use CupertinoTabView which will show
-          //   the back button, but does required transitionBetweenRoutes set to false (see above)
-          useCupertinoTabView: false,
-        ),
-        cupertinoTabs: (context, platform) => CupertinoTabBarData(
-          iconSize: 22,
-        ),
-        materialTabs: (_, __) => MaterialNavBarData(
+      builder: (_) => Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.blue,
           iconSize: 26,
           selectedFontSize: 12,
-          type: BottomNavigationBarType.fixed,
+          onTap: (value) => barController.update(value),
+          items: _navigationItems(context),
+          currentIndex: barController.index,
           selectedItemColor: Colors.amber[800],
-//        backgroundColor: Colors.blue,
+        ),
+        body: IndexedStack(
+          index: barController.index,
+          children: pages,
         ),
       ),
     );

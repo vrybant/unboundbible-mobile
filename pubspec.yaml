@@ -22,7 +22,6 @@ dependencies:
   shared_preferences: ^2.0.18 
   sqlite3: ^2.0.0
   sqlite3_flutter_libs: ^0.5.15
-  flutter_platform_widgets: ^3.3.5
 
 dev_dependencies:
   flutter_test:
