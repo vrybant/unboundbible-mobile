@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:unboundbible/locator.dart';
 import 'package:unboundbible/stores/shelf_store.dart';
 
 class ShelfPage extends StatelessWidget {
-  const ShelfPage({Key? key}) : super(key: key);
+  final store = locator<ShelfStore>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +29,8 @@ class ShelfPage extends StatelessWidget {
   Widget _listView(BuildContext context) {
     return Observer(
       builder: (_) {
-        final lines = shelfStore.list;
-        final groupIndex = shelfStore.index;
+        final lines = store.content;
+        final groupIndex = store.index;
         return ListView.builder(
           itemCount: lines.length,
           itemBuilder: (_, int index) {
@@ -43,7 +44,7 @@ class ShelfPage extends StatelessWidget {
                   value: index,
                   groupValue: groupIndex,
                   onChanged: (_) {
-                    shelfStore.update(index);
+                    store.update(index);
                   },
                 ),
               ),

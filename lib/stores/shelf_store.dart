@@ -5,15 +5,13 @@ import 'package:unboundbible/stores/bible_store.dart';
 
 part 'shelf_store.g.dart';
 
-final shelfStore = ShelfStore();
-
 class ShelfStore = ShelfStoreBase with _$ShelfStore;
 
 abstract class ShelfStoreBase with Store {
   @observable
   int index = locator<Tools>().getCurrBibleIndex();
 
-  List<String> get list => locator<Tools>().get_Shelf();
+  List<String> get content => locator<Tools>().get_Shelf();
 
   @action
   void update(int value) {
