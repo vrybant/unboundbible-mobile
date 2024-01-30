@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:unboundbible/locator.dart';
 import 'package:unboundbible/stores/bible_store.dart';
 
 class BiblePage extends StatelessWidget {
-  final store = GetIt.I<BibleStore>();
+  final store = locator<BibleStore>();
 
   @override
   Widget build(BuildContext context) {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:get_it/get_it.dart';
 
 import 'package:unboundbible/core/tools.dart';
+import 'package:unboundbible/locator.dart';
 
 class TitlesPage extends StatelessWidget {
   @override
@@ -27,7 +27,7 @@ class TitlesPage extends StatelessWidget {
   }
 
   Widget _listView(BuildContext context) {
-    final lines = GetIt.I<Tools>().getTitles();
+    final lines = locator<Tools>().getTitles();
     return ListView.builder(
       itemCount: lines.length,
       itemBuilder: (BuildContext content, int index) {

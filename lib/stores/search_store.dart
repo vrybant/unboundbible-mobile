@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
-import 'package:get_it/get_it.dart';
 import 'package:unboundbible/core/tools.dart';
+import 'package:unboundbible/locator.dart';
 
 part 'search_store.g.dart';
 
@@ -13,7 +13,7 @@ abstract class SearchStoreBase with Store {
   String string = '';
 
   @computed
-  List<String> get content => GetIt.I<Tools>().get_Search(string);
+  List<String> get content => locator<Tools>().get_Search(string);
 
   @action
   void update(String string) {

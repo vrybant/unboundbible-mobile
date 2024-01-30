@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:unboundbible/locator.dart';
 import 'package:unboundbible/stores/bible_store.dart';
 
 class ChaptersPage extends StatelessWidget {
@@ -9,7 +9,7 @@ class ChaptersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final store = GetIt.I<BibleStore>();
+    final store = locator<BibleStore>();
     final title = store.getTitle(book);
     return Scaffold(
       appBar: AppBar(
@@ -25,7 +25,7 @@ class ChaptersPage extends StatelessWidget {
   }
 
   Widget _listView(BuildContext context) {
-    final store = GetIt.I<BibleStore>();
+    final store = locator<BibleStore>();
     final count = store.chaptersCount(book);
     return ListView.builder(
       itemCount: count,

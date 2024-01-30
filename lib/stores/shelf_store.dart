@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
-import 'package:get_it/get_it.dart';
 import 'package:unboundbible/core/tools.dart';
+import 'package:unboundbible/locator.dart';
 import 'package:unboundbible/stores/bible_store.dart';
 
 part 'shelf_store.g.dart';
@@ -11,15 +11,15 @@ class ShelfStore = ShelfStoreBase with _$ShelfStore;
 
 abstract class ShelfStoreBase with Store {
   @observable
-  int index = GetIt.I<Tools>().getCurrBibleIndex();
+  int index = locator<Tools>().getCurrBibleIndex();
 
-  List<String> get list => GetIt.I<Tools>().get_Shelf();
+  List<String> get list => locator<Tools>().get_Shelf();
 
   @action
   void update(int value) {
     index = value;
-    GetIt.I<Tools>().setCurrBible(index);
-    final bibleStore = GetIt.I<BibleStore>();
+    locator<Tools>().setCurrBible(index);
+    final bibleStore = locator<BibleStore>();
     bibleStore.refresh();
   }
 }
