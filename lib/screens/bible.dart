@@ -11,12 +11,11 @@ class BiblePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(
       builder: (BuildContext context) {
-        final info = store.infoString;
         return Scaffold(
           appBar: AppBar(
             title: TextButton(
               child: Center(
-                child: Text(info),
+                child: Text(store.infoString),
               ),
               style: TextButton.styleFrom(
                 textStyle: const TextStyle(fontSize: 20),

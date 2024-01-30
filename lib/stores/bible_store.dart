@@ -13,11 +13,11 @@ abstract class BibleStoreBase with Store {
   @observable
   int chapter = 1;
 
-  @computed
-  String get infoString => locator<Tools>().getInfo(book, chapter);
+  @observable
+  List<String> content = locator<Tools>().get_Chapter(1, 1); // !!!
 
   @computed
-  List<String> get content => locator<Tools>().get_Chapter(book, chapter);
+  String get infoString => locator<Tools>().getInfo(book, chapter);
 
   int chaptersCount(int book) => locator<Tools>().chaptersCount(book);
   String getTitle(int book) => locator<Tools>().getTitle(book);
@@ -29,12 +29,11 @@ abstract class BibleStoreBase with Store {
   }) {
     this.book = book ?? this.book;
     this.chapter = chapter ?? 1;
+    refresh();
   }
 
   @action
   void refresh() {
-    final temp = book;
-    this.book = -1;
-    this.book = temp;
+    content = locator<Tools>().get_Chapter(book, chapter);
   }
 }

@@ -16,13 +16,6 @@ mixin _$BibleStore on BibleStoreBase, Store {
       (_$infoStringComputed ??= Computed<String>(() => super.infoString,
               name: 'BibleStoreBase.infoString'))
           .value;
-  Computed<List<String>>? _$contentComputed;
-
-  @override
-  List<String> get content =>
-      (_$contentComputed ??= Computed<List<String>>(() => super.content,
-              name: 'BibleStoreBase.content'))
-          .value;
 
   late final _$bookAtom = Atom(name: 'BibleStoreBase.book', context: context);
 
@@ -52,6 +45,22 @@ mixin _$BibleStore on BibleStoreBase, Store {
   set chapter(int value) {
     _$chapterAtom.reportWrite(value, super.chapter, () {
       super.chapter = value;
+    });
+  }
+
+  late final _$contentAtom =
+      Atom(name: 'BibleStoreBase.content', context: context);
+
+  @override
+  List<String> get content {
+    _$contentAtom.reportRead();
+    return super.content;
+  }
+
+  @override
+  set content(List<String> value) {
+    _$contentAtom.reportWrite(value, super.content, () {
+      super.content = value;
     });
   }
 
@@ -85,8 +94,8 @@ mixin _$BibleStore on BibleStoreBase, Store {
     return '''
 book: ${book},
 chapter: ${chapter},
-infoString: ${infoString},
-content: ${content}
+content: ${content},
+infoString: ${infoString}
     ''';
   }
 }
