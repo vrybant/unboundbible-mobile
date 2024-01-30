@@ -4,8 +4,6 @@ import 'package:unboundbible/locator.dart';
 
 part 'search_store.g.dart';
 
-final searchStore = SearchStore();
-
 class SearchStore = SearchStoreBase with _$SearchStore;
 
 abstract class SearchStoreBase with Store {

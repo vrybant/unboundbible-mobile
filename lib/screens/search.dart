@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:unboundbible/locator.dart';
 import 'package:unboundbible/stores/search_store.dart';
 
 // import 'package:flutter/material.dart' show SearchBar;
 
 class SearchPage extends StatelessWidget {
-  const SearchPage({Key? key}) : super(key: key);
+  final store = locator<SearchStore>();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class SearchPage extends StatelessWidget {
       child: TextField(
         textAlignVertical: TextAlignVertical.bottom,
         cursorColor: Colors.grey,
-        onSubmitted: (value) => searchStore.update(value),
+        onSubmitted: (value) => store.update(value),
         decoration: InputDecoration(
           fillColor: Colors.white,
           filled: true,
@@ -52,7 +53,7 @@ class SearchPage extends StatelessWidget {
   }
 
   Widget _listView(BuildContext context) {
-    final lines = searchStore.content;
+    final lines = store.content;
     return ListView.builder(
       key: ObjectKey(lines.hashCode),
       itemCount: lines.length,
