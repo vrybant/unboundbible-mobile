@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'search_controller.dart';
+part of 'search_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,17 +8,17 @@ part of 'search_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$SearchController on SearchControllerBase, Store {
+mixin _$SearchStore on SearchStoreBase, Store {
   Computed<List<String>>? _$contentComputed;
 
   @override
   List<String> get content =>
       (_$contentComputed ??= Computed<List<String>>(() => super.content,
-              name: 'SearchControllerBase.content'))
+              name: 'SearchStoreBase.content'))
           .value;
 
   late final _$stringAtom =
-      Atom(name: 'SearchControllerBase.string', context: context);
+      Atom(name: 'SearchStoreBase.string', context: context);
 
   @override
   String get string {
@@ -33,17 +33,17 @@ mixin _$SearchController on SearchControllerBase, Store {
     });
   }
 
-  late final _$SearchControllerBaseActionController =
-      ActionController(name: 'SearchControllerBase', context: context);
+  late final _$SearchStoreBaseActionController =
+      ActionController(name: 'SearchStoreBase', context: context);
 
   @override
   void update(String string) {
-    final _$actionInfo = _$SearchControllerBaseActionController.startAction(
-        name: 'SearchControllerBase.update');
+    final _$actionInfo = _$SearchStoreBaseActionController.startAction(
+        name: 'SearchStoreBase.update');
     try {
       return super.update(string);
     } finally {
-      _$SearchControllerBaseActionController.endAction(_$actionInfo);
+      _$SearchStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 

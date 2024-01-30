@@ -2,13 +2,13 @@ import 'package:mobx/mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:unboundbible/core/tools.dart';
 
-part 'main_controller.g.dart';
+part 'main_store.g.dart';
 
-final mainController = MainController();
+final bibleStore = BibleStore();
 
-class MainController = MainControllerBase with _$MainController;
+class BibleStore = BibleStoreBase with _$BibleStore;
 
-abstract class MainControllerBase with Store {
+abstract class BibleStoreBase with Store {
   @observable
   int book = 1;
 

@@ -5,7 +5,7 @@ import 'package:unboundbible/screens/bible.dart';
 import 'package:unboundbible/screens/search.dart';
 import 'package:unboundbible/screens/shelf.dart';
 import 'package:unboundbible/screens/options.dart';
-import 'package:unboundbible/controllers/bar_controller.dart';
+import 'package:unboundbible/stores/bar_store.dart';
 
 class HomePage extends StatelessWidget {
   final List<Widget> pages = [
@@ -46,13 +46,13 @@ class HomePage extends StatelessWidget {
           backgroundColor: Colors.blue,
           iconSize: 26,
           selectedFontSize: 12,
-          onTap: (value) => barController.update(value),
+          onTap: (value) => barStore.update(value),
           items: _navigationItems(context),
-          currentIndex: barController.index,
+          currentIndex: barStore.index,
           selectedItemColor: Colors.amber[800],
         ),
         body: IndexedStack(
-          index: barController.index,
+          index: barStore.index,
           children: pages,
         ),
       ),

@@ -2,13 +2,13 @@ import 'package:mobx/mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:unboundbible/core/tools.dart';
 
-part 'search_controller.g.dart';
+part 'search_store.g.dart';
 
-final searchController = SearchController();
+final searchStore = SearchStore();
 
-class SearchController = SearchControllerBase with _$SearchController;
+class SearchStore = SearchStoreBase with _$SearchStore;
 
-abstract class SearchControllerBase with Store {
+abstract class SearchStoreBase with Store {
   @observable
   String string = '';
 

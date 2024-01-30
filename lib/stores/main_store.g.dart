@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'main_controller.dart';
+part of 'main_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,24 +8,21 @@ part of 'main_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$MainController on MainControllerBase, Store {
+mixin _$BibleStore on BibleStoreBase, Store {
   Computed<String>? _$infoStringComputed;
 
   @override
-  String get infoString =>
-      (_$infoStringComputed ??= Computed<String>(() => super.infoString,
-              name: 'MainControllerBase.infoString'))
-          .value;
+  String get infoString => (_$infoStringComputed ??=
+          Computed<String>(() => super.infoString, name: 'BibleStoreBase.infoString'))
+      .value;
   Computed<List<String>>? _$contentComputed;
 
   @override
-  List<String> get content =>
-      (_$contentComputed ??= Computed<List<String>>(() => super.content,
-              name: 'MainControllerBase.content'))
-          .value;
+  List<String> get content => (_$contentComputed ??=
+          Computed<List<String>>(() => super.content, name: 'BibleStoreBase.content'))
+      .value;
 
-  late final _$bookAtom =
-      Atom(name: 'MainControllerBase.book', context: context);
+  late final _$bookAtom = Atom(name: 'BibleStoreBase.book', context: context);
 
   @override
   int get book {
@@ -40,8 +37,7 @@ mixin _$MainController on MainControllerBase, Store {
     });
   }
 
-  late final _$chapterAtom =
-      Atom(name: 'MainControllerBase.chapter', context: context);
+  late final _$chapterAtom = Atom(name: 'BibleStoreBase.chapter', context: context);
 
   @override
   int get chapter {
@@ -56,28 +52,28 @@ mixin _$MainController on MainControllerBase, Store {
     });
   }
 
-  late final _$MainControllerBaseActionController =
-      ActionController(name: 'MainControllerBase', context: context);
+  late final _$BibleStoreBaseActionController =
+      ActionController(name: 'BibleStoreBase', context: context);
 
   @override
   void update({int? book, int? chapter}) {
-    final _$actionInfo = _$MainControllerBaseActionController.startAction(
-        name: 'MainControllerBase.update');
+    final _$actionInfo =
+        _$BibleStoreBaseActionController.startAction(name: 'BibleStoreBase.update');
     try {
       return super.update(book: book, chapter: chapter);
     } finally {
-      _$MainControllerBaseActionController.endAction(_$actionInfo);
+      _$BibleStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void refresh() {
-    final _$actionInfo = _$MainControllerBaseActionController.startAction(
-        name: 'MainControllerBase.refresh');
+    final _$actionInfo =
+        _$BibleStoreBaseActionController.startAction(name: 'BibleStoreBase.refresh');
     try {
       return super.refresh();
     } finally {
-      _$MainControllerBaseActionController.endAction(_$actionInfo);
+      _$BibleStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
