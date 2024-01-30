@@ -29,7 +29,7 @@ abstract class BibleStoreBase with Store {
   }) {
     this.book = book ?? this.book;
     this.chapter = chapter ?? 1;
-    refresh();
+    this.refresh();
   }
 
   @action

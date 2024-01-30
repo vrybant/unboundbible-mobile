@@ -19,7 +19,6 @@ abstract class ShelfStoreBase with Store {
   void update(int value) {
     index = value;
     locator<Tools>().setCurrBible(index);
-    final bibleStore = locator<BibleStore>();
-    bibleStore.refresh();
+    locator<BibleStore>().refresh();
   }
 }
