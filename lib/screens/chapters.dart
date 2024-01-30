@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:unboundbible/stores/main_store.dart';
+import 'package:unboundbible/stores/bible_store.dart';
 
 class ChaptersPage extends StatelessWidget {
   const ChaptersPage({Key? key, required this.book}) : super(key: key);
@@ -8,7 +9,8 @@ class ChaptersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final title = bibleStore.getTitle(book);
+    final store = GetIt.I<BibleStore>();
+    final title = store.getTitle(book);
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
@@ -23,7 +25,8 @@ class ChaptersPage extends StatelessWidget {
   }
 
   Widget _listView(BuildContext context) {
-    final count = bibleStore.chaptersCount(book);
+    final store = GetIt.I<BibleStore>();
+    final count = store.chaptersCount(book);
     return ListView.builder(
       itemCount: count,
       itemBuilder: (BuildContext content, int index) {
@@ -33,7 +36,7 @@ class ChaptersPage extends StatelessWidget {
           child: ListTile(
             title: Text(' Глава $number', style: TextStyle(fontSize: 24.0)),
             onTap: () {
-              bibleStore.update(book: book, chapter: number);
+              store.update(book: book, chapter: number);
               context.go('/');
             },
             dense: true,

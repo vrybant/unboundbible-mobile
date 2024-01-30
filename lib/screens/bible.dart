@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:unboundbible/stores/main_store.dart';
+import 'package:unboundbible/stores/bible_store.dart';
 
 class BiblePage extends StatelessWidget {
+  final store = GetIt.I<BibleStore>();
+
   @override
   Widget build(BuildContext context) {
     return Observer(
       builder: (BuildContext context) {
-        final info = bibleStore.infoString;
+        final info = store.infoString;
         return Scaffold(
           appBar: AppBar(
             title: TextButton(
@@ -32,7 +35,7 @@ class BiblePage extends StatelessWidget {
   Widget _listView(BuildContext context) {
     return Observer(
       builder: (BuildContext context) {
-        final lines = bibleStore.content;
+        final lines = store.content;
         return ListView.builder(
           key: ObjectKey(lines.hashCode),
           itemCount: lines.length,

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'main_store.dart';
+part of 'bible_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -12,15 +12,17 @@ mixin _$BibleStore on BibleStoreBase, Store {
   Computed<String>? _$infoStringComputed;
 
   @override
-  String get infoString => (_$infoStringComputed ??=
-          Computed<String>(() => super.infoString, name: 'BibleStoreBase.infoString'))
-      .value;
+  String get infoString =>
+      (_$infoStringComputed ??= Computed<String>(() => super.infoString,
+              name: 'BibleStoreBase.infoString'))
+          .value;
   Computed<List<String>>? _$contentComputed;
 
   @override
-  List<String> get content => (_$contentComputed ??=
-          Computed<List<String>>(() => super.content, name: 'BibleStoreBase.content'))
-      .value;
+  List<String> get content =>
+      (_$contentComputed ??= Computed<List<String>>(() => super.content,
+              name: 'BibleStoreBase.content'))
+          .value;
 
   late final _$bookAtom = Atom(name: 'BibleStoreBase.book', context: context);
 
@@ -37,7 +39,8 @@ mixin _$BibleStore on BibleStoreBase, Store {
     });
   }
 
-  late final _$chapterAtom = Atom(name: 'BibleStoreBase.chapter', context: context);
+  late final _$chapterAtom =
+      Atom(name: 'BibleStoreBase.chapter', context: context);
 
   @override
   int get chapter {
@@ -57,8 +60,8 @@ mixin _$BibleStore on BibleStoreBase, Store {
 
   @override
   void update({int? book, int? chapter}) {
-    final _$actionInfo =
-        _$BibleStoreBaseActionController.startAction(name: 'BibleStoreBase.update');
+    final _$actionInfo = _$BibleStoreBaseActionController.startAction(
+        name: 'BibleStoreBase.update');
     try {
       return super.update(book: book, chapter: chapter);
     } finally {
@@ -68,8 +71,8 @@ mixin _$BibleStore on BibleStoreBase, Store {
 
   @override
   void refresh() {
-    final _$actionInfo =
-        _$BibleStoreBaseActionController.startAction(name: 'BibleStoreBase.refresh');
+    final _$actionInfo = _$BibleStoreBaseActionController.startAction(
+        name: 'BibleStoreBase.refresh');
     try {
       return super.refresh();
     } finally {

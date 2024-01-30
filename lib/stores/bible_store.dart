@@ -2,9 +2,7 @@ import 'package:mobx/mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:unboundbible/core/tools.dart';
 
-part 'main_store.g.dart';
-
-final bibleStore = BibleStore();
+part 'bible_store.g.dart';
 
 class BibleStore = BibleStoreBase with _$BibleStore;
 
