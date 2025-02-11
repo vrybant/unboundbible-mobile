@@ -13,21 +13,21 @@ dependencies:
   intl: any
   cupertino_icons: ^1.0.2
   desktop_window: ^0.4.0
-  go_router: ^9.0.2
-  path: ^1.8.2
+  go_router: ^14.2.7
+  path: ^1.9.1
   path_provider: ^2.0.11
-  mobx: ^2.1.4
+  mobx: ^2.3.3+2
   flutter_mobx: ^2.0.6+5
-  get_it: ^7.6.7
+  get_it: ^8.0.0
   shared_preferences: ^2.0.18 
-  sqlite3: ^2.0.0
-  sqlite3_flutter_libs: ^0.5.15
+  sqlite3: ^2.4.6
+  sqlite3_flutter_libs: ^0.5.24
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.1
+  flutter_lints: ^5.0.0
   build_runner: ^2.3.3
   mobx_codegen: ^2.1.1
 
