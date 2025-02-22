@@ -3,7 +3,7 @@ description: Unbound Bible Flutter Edition
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.15.0 <3.0.0"
+  sdk: ^3.7.0
 
 dependencies:
   flutter:
@@ -11,10 +11,10 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: any
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.8
   desktop_window: ^0.4.0
   go_router: ^14.2.7
-  path: ^1.9.1
+  path: ^1.9.0
   path_provider: ^2.0.11
   mobx: ^2.3.3+2
   flutter_mobx: ^2.0.6+5
@@ -32,7 +32,6 @@ dev_dependencies:
   mobx_codegen: ^2.1.1
 
 flutter:
-  generate: true
   uses-material-design: true
   assets:
     - assets/databases/
